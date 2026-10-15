@@ -15,8 +15,8 @@ Read that file before editing the project. It contains the Cold Start block, arc
   `E:\SteamLibrary\steamapps\common\Godot Engine\godot.windows.opt.tools.64.exe`
 - MCP: `Godot MCP Native 1.0.8`
 - MCP URL: `http://localhost:9080/mcp`
-- Current stage: M0 through M4 are complete.
-- Next implementation target: M5 behavior recording, old-self replay AI, and host-face reveal.
+- Current stage: M0 through M5 are complete.
+- Next implementation target: M6 夺愿神 boss and the six-node vertical slice.
 
 ## Non-Negotiable Scope
 
@@ -66,6 +66,9 @@ Headless validation:
 & "E:\SteamLibrary\steamapps\common\Godot Engine\godot.windows.opt.tools.64.exe" --headless --path "E:\twelfe" --script res://tests/combat/burrow_state_test.gd
 & "E:\SteamLibrary\steamapps\common\Godot Engine\godot.windows.opt.tools.64.exe" --headless --path "E:\twelfe" --script res://tests/combat/burrow_cost_test.gd
 & "E:\SteamLibrary\steamapps\common\Godot Engine\godot.windows.opt.tools.64.exe" --headless --path "E:\twelfe" --script res://tests/combat/emergence_combo_test.gd
+& "E:\SteamLibrary\steamapps\common\Godot Engine\godot.windows.opt.tools.64.exe" --headless --path "E:\twelfe" --script res://tests/combat/dodge_test.gd
+& "E:\SteamLibrary\steamapps\common\Godot Engine\godot.windows.opt.tools.64.exe" --headless --path "E:\twelfe" --script res://tests/old_self/behavior_recorder_test.gd
+& "E:\SteamLibrary\steamapps\common\Godot Engine\godot.windows.opt.tools.64.exe" --headless --path "E:\twelfe" --script res://tests/old_self/old_self_profile_test.gd
 ```
 
 Update the task board and decision log in the full design document after every completed milestone.

@@ -8,6 +8,7 @@ const STATE_FALL: StringName = &"fall"
 const STATE_GUARD: StringName = &"guard"
 const STATE_PARRY: StringName = &"parry"
 const STATE_BURROW: StringName = &"burrow"
+const STATE_DODGE: StringName = &"dodge"
 const STATE_ATTACK: StringName = &"attack"
 const STATE_HIT: StringName = &"hit"
 const STATE_DEAD: StringName = &"dead"
@@ -48,6 +49,10 @@ const INPUT_SWITCH: StringName = &"input_switch"
 @export_range(0.5, 3.0, 0.05) var burrow_speed_multiplier: float = 1.1
 @export_range(0, 120, 1) var burrow_cooldown_frames: int = 24
 @export_range(0.0, 128.0, 1.0) var burrow_depth: float = 36.0
+@export_range(0.0, 100.0, 0.1) var dodge_qi_cost: float = 20.0
+@export_range(0.0, 1000.0, 1.0) var dodge_speed: float = 390.0
+@export_range(1, 60, 1) var dodge_duration_frames: int = 18
+@export_range(1, 40, 1) var dodge_invulnerable_frames: int = 10
 @export var weapons: Array[WeaponData] = []
 
 @onready var state_machine: ActorStateMachine = $StateMachine
@@ -72,6 +77,7 @@ var buffered_input: StringName = INPUT_NONE
 var air_actions_remaining: int = 3
 var _parry_is_emergency: bool = false
 var burrow_cooldown_remaining: int = 0
+var behavior_recorder: BehaviorRecorder
 
 
 func _ready() -> void:
@@ -97,6 +103,8 @@ func _physics_process(delta: float) -> void:
 			_process_parry()
 		STATE_BURROW:
 			_process_burrow(delta)
+		STATE_DODGE:
+			_process_dodge(delta)
 		STATE_ATTACK:
 			_process_attack(delta)
 		STATE_HIT:
@@ -124,6 +132,10 @@ func _process_ground_and_air(delta: float) -> void:
 
 	if Input.is_action_just_pressed(&"burrow") and _can_start_burrow():
 		_start_burrow()
+		return
+
+	if Input.is_action_just_pressed(&"dodge"):
+		_start_dodge(input_axis)
 		return
 
 	if Input.is_action_just_pressed(&"switch_weapon") and is_on_floor():
@@ -194,6 +206,16 @@ func _process_burrow(delta: float) -> void:
 
 	if not qi.consume(burrow_qi_per_second * delta):
 		_exit_burrow(false)
+
+
+func _process_dodge(delta: float) -> void:
+	if state_machine.frames_in_state >= dodge_duration_frames:
+		state_machine.transition_to(STATE_IDLE if is_on_floor() else STATE_FALL)
+		return
+
+	var trailing_frames := maxi(dodge_duration_frames - dodge_invulnerable_frames, 1)
+	if state_machine.frames_in_state >= trailing_frames:
+		velocity.x = move_toward(velocity.x, 0.0, 1500.0 * delta)
 
 
 func _process_attack(delta: float) -> void:
@@ -317,6 +339,9 @@ func _start_attack(data: AttackData, mode: StringName, is_chain: bool) -> bool:
 		qi.restore(data.qi_cost)
 		return false
 
+	if behavior_recorder != null:
+		behavior_recorder.record_attack(data, _distance_to_nearest_enemy())
+
 	current_attack_data = data
 	attack_mode = mode
 	buffered_input = INPUT_NONE
@@ -325,6 +350,37 @@ func _start_attack(data: AttackData, mode: StringName, is_chain: bool) -> bool:
 	if not is_chain and mode != ATTACK_COUNTER:
 		counter_index = 0
 	return true
+
+
+func _start_dodge(input_axis: float) -> bool:
+	if state_machine.is_state(STATE_DODGE) or state_machine.is_state(STATE_DEAD):
+		return false
+	if not qi.consume(dodge_qi_cost):
+		return false
+
+	var direction := 0
+	if not is_zero_approx(input_axis):
+		direction = 1 if input_axis > 0.0 else -1
+	else:
+		direction = facing_direction
+
+	facing_direction = direction
+	velocity = Vector2(dodge_speed * float(direction), 0.0)
+	state_machine.transition_to(STATE_DODGE)
+	if behavior_recorder != null:
+		behavior_recorder.record_dodge(direction)
+	return true
+
+
+func _distance_to_nearest_enemy() -> float:
+	var nearest := 9999.0
+	for group: StringName in [&"training_dummy", &"enemy"]:
+		for node: Node in get_tree().get_nodes_in_group(group):
+			var target := node as Node2D
+			if target == null:
+				continue
+			nearest = minf(nearest, global_position.distance_to(target.global_position))
+	return nearest
 
 
 func _start_parry(is_emergency: bool) -> void:
@@ -461,6 +517,8 @@ func receive_hit(attacker: Node, attack_data: AttackData, direction: int) -> Hur
 		if attack_data.attack_type != AttackData.AttackType.ANTI_BURROW:
 			return HurtboxComponent.ReceiveResult.IGNORED
 		_exit_burrow(false)
+	if state_machine.is_state(STATE_DODGE) and state_machine.frames_in_state < dodge_invulnerable_frames:
+		return HurtboxComponent.ReceiveResult.IGNORED
 
 	if state_machine.is_state(STATE_PARRY) and state_machine.frames_in_state < parry_active_frames:
 		if attack_data.attack_type != AttackData.AttackType.UNBLOCKABLE:
