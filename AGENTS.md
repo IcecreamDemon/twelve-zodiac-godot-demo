@@ -1,0 +1,57 @@
+# 十二神相录 Demo - Agent Handoff
+
+## Read First
+
+Full design and live status:
+
+`E:\game plant\docs\superpowers\specs\2026-10-15-zodiac-demo-design.md`
+
+Read that file before editing the project. It contains the Cold Start block, architecture, exact combat rules, task board, open decisions, and decision log.
+
+## Project State
+
+- Godot: `4.7.2.stable.steam.ed1daf0bf`
+- Editor:
+  `E:\SteamLibrary\steamapps\common\Godot Engine\godot.windows.opt.tools.64.exe`
+- MCP: `Godot MCP Native 1.0.8`
+- MCP URL: `http://localhost:9080/mcp`
+- Current stage: technical design completed; implementation has not started.
+- Next implementation target: create the Combat Lab.
+
+## Non-Negotiable Scope
+
+- One playable character: 鼠光.
+- One borrowed body: 许安.
+- One region: 无雨乡.
+- Six fixed nodes.
+- Two weapons: short blade and spear.
+- Three humanoid enemies: 天兵, 镇守, 法吏.
+- One old-self fight and one `夺愿神` boss.
+- Do not build the other eleven playable zodiac characters or the full four-region campaign.
+
+## Technical Rules
+
+- Use Godot 4.7 and GDScript.
+- Target 1920x1080 with `canvas_items` stretching.
+- Use `CharacterBody2D` for actors.
+- Use keyboard-first InputMap actions; do not hard-code physical keys in gameplay code.
+- Use frame counts for attack timing, not raw `delta`.
+- Store tuning values in resources or configuration objects.
+- Keep combat components isolated: health, posture, qi, shi, hitbox, hurtbox, state machine.
+- Do not introduce third-party combat or behavior-tree plugins for the first milestone.
+
+## Verification
+
+Editor:
+
+```powershell
+& "E:\SteamLibrary\steamapps\common\Godot Engine\godot.windows.opt.tools.64.exe" --editor --path "E:\twelfe"
+```
+
+Headless validation:
+
+```powershell
+& "E:\SteamLibrary\steamapps\common\Godot Engine\godot.windows.opt.tools.64.exe" --headless --path "E:\twelfe" --quit
+```
+
+Update the task board and decision log in the full design document after every completed milestone.
