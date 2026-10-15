@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="AttackData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/attack_data.gd" id="1_s0h3i"]
+
+[resource]
+script = ExtResource("1_s0h3i")
+attack_id = &"spear_air_light"
+animation_name = &"spear_air_light"
+startup_frames = 5
+active_frames = 4
+recovery_frames = 9
+damage = 8.0
+hitbox_offset = Vector2(62, -48)
+hitbox_size = Vector2(102, 54)
+knockback = Vector2(80, 0)
+hitstun_frames = 11
+juggle_cost = 1
+is_air_attack = true

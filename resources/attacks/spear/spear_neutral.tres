@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="AttackData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/attack_data.gd" id="1_mc3vp"]
+
+[resource]
+script = ExtResource("1_mc3vp")
+attack_id = &"spear_neutral"
+animation_name = &"spear_neutral"
+startup_frames = 8
+active_frames = 5
+recovery_frames = 16
+damage = 12.0
+posture_damage = 15.0
+hitbox_offset = Vector2(90, -42)
+hitbox_size = Vector2(132, 52)
+knockback = Vector2(150, 0)
+hitstun_frames = 15
+shi_gain_on_hit = 12.0
+qi_cost = 1.0

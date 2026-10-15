@@ -66,7 +66,8 @@ func _try_hit(area: Area2D) -> void:
 		return
 
 	var hurtbox := area as HurtboxComponent
-	if hurtbox.receive_attack(get_parent(), attack_data, direction):
+	var result := hurtbox.receive_attack(get_parent(), attack_data, direction)
+	if result != HurtboxComponent.ReceiveResult.IGNORED:
 		_hit_targets[area] = true
 		hit_confirmed.emit(hurtbox.get_parent(), attack_data)
 

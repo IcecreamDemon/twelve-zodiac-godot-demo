@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="AttackData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/attack_data.gd" id="1_o1ta8"]
+
+[resource]
+script = ExtResource("1_o1ta8")
+attack_id = &"spear_ground_finisher"
+animation_name = &"spear_ground_finisher"
+startup_frames = 12
+active_frames = 5
+recovery_frames = 20
+damage = 24.0
+posture_damage = 30.0
+hitbox_offset = Vector2(48, -22)
+hitbox_size = Vector2(96, 52)
+knockback = Vector2(80, -80)
+hitstun_frames = 24
+knockdown_frames = 36
+reaction_type = 2
+is_ground_finisher = true
+shi_gain_on_hit = 20.0
+qi_cost = 2.0

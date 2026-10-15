@@ -1,0 +1,196 @@
+[gd_resource type="Resource" script_class="WeaponData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/attack_data.gd" id="1_u7l32"]
+[ext_resource type="Script" path="res://scripts/data/weapon_data.gd" id="2_17uv3"]
+
+[sub_resource type="Resource" id="Resource_oqcxr"]
+script = ExtResource("1_u7l32")
+attack_id = &"spear_air_light"
+animation_name = &"spear_air_light"
+startup_frames = 5
+active_frames = 4
+recovery_frames = 9
+damage = 8.0
+hitbox_offset = Vector2(62, -48)
+hitbox_size = Vector2(102, 54)
+knockback = Vector2(80, 0)
+hitstun_frames = 11
+juggle_cost = 1
+is_air_attack = true
+
+[sub_resource type="Resource" id="Resource_udw87"]
+script = ExtResource("1_u7l32")
+attack_id = &"spear_air_slam"
+animation_name = &"spear_air_slam"
+startup_frames = 12
+active_frames = 8
+recovery_frames = 20
+damage = 21.0
+posture_damage = 26.0
+guard_qi_damage = 22.0
+hitbox_offset = Vector2(0, -20)
+hitbox_size = Vector2(104, 86)
+hitstun_frames = 10
+knockdown_frames = 34
+reaction_type = 2
+juggle_cost = 2
+is_air_attack = true
+shi_gain_on_hit = 18.0
+qi_cost = 2.0
+
+[sub_resource type="Resource" id="Resource_f4riw"]
+script = ExtResource("1_u7l32")
+attack_id = &"spear_counter"
+animation_name = &"spear_counter"
+startup_frames = 3
+recovery_frames = 5
+damage = 18.0
+posture_damage = 24.0
+hitbox_offset = Vector2(92, -42)
+hitbox_size = Vector2(72, 54)
+knockback = Vector2(70, 0)
+hitstun_frames = 8
+shi_gain_on_hit = 8.0
+
+[sub_resource type="Resource" id="Resource_nnn7d"]
+script = ExtResource("1_u7l32")
+attack_id = &"spear_forward"
+animation_name = &"spear_forward"
+startup_frames = 10
+active_frames = 6
+recovery_frames = 18
+damage = 14.0
+posture_damage = 18.0
+hitbox_offset = Vector2(108, -42)
+hitbox_size = Vector2(150, 54)
+knockback = Vector2(230, 0)
+hitstun_frames = 18
+shi_gain_on_hit = 12.0
+qi_cost = 2.0
+
+[sub_resource type="Resource" id="Resource_neqh5"]
+script = ExtResource("1_u7l32")
+attack_id = &"spear_ground_finisher"
+animation_name = &"spear_ground_finisher"
+startup_frames = 12
+active_frames = 5
+recovery_frames = 20
+damage = 24.0
+posture_damage = 30.0
+hitbox_offset = Vector2(48, -22)
+hitbox_size = Vector2(96, 52)
+knockback = Vector2(80, -80)
+hitstun_frames = 24
+knockdown_frames = 36
+reaction_type = 2
+is_ground_finisher = true
+shi_gain_on_hit = 20.0
+qi_cost = 2.0
+
+[sub_resource type="Resource" id="Resource_6usac"]
+script = ExtResource("1_u7l32")
+attack_id = &"spear_heavy"
+animation_name = &"spear_heavy"
+startup_frames = 15
+active_frames = 5
+recovery_frames = 20
+damage = 20.0
+posture_damage = 28.0
+guard_qi_damage = 24.0
+hitbox_offset = Vector2(92, -42)
+hitbox_size = Vector2(142, 58)
+knockback = Vector2(230, -70)
+hitstun_frames = 20
+knockdown_frames = 32
+reaction_type = 2
+shi_gain_on_hit = 18.0
+qi_cost = 3.0
+
+[sub_resource type="Resource" id="Resource_n5vns"]
+script = ExtResource("1_u7l32")
+attack_id = &"spear_l1"
+animation_name = &"spear_l1"
+startup_frames = 7
+active_frames = 4
+damage = 8.0
+hitbox_offset = Vector2(68, -42)
+hitbox_size = Vector2(104, 48)
+knockback = Vector2(110, 0)
+qi_cost = 1.0
+
+[sub_resource type="Resource" id="Resource_dwth8"]
+script = ExtResource("1_u7l32")
+attack_id = &"spear_l2"
+animation_name = &"spear_l2"
+startup_frames = 7
+active_frames = 5
+recovery_frames = 12
+damage = 9.0
+posture_damage = 11.0
+hitbox_offset = Vector2(76, -42)
+hitbox_size = Vector2(116, 50)
+hitstun_frames = 13
+qi_cost = 1.0
+
+[sub_resource type="Resource" id="Resource_152jx"]
+script = ExtResource("1_u7l32")
+attack_id = &"spear_neutral"
+animation_name = &"spear_neutral"
+startup_frames = 8
+active_frames = 5
+recovery_frames = 16
+damage = 12.0
+posture_damage = 15.0
+hitbox_offset = Vector2(90, -42)
+hitbox_size = Vector2(132, 52)
+knockback = Vector2(150, 0)
+hitstun_frames = 15
+shi_gain_on_hit = 12.0
+qi_cost = 1.0
+
+[sub_resource type="Resource" id="Resource_m420y"]
+script = ExtResource("1_u7l32")
+attack_id = &"spear_switch"
+animation_name = &"spear_switch"
+active_frames = 4
+recovery_frames = 12
+damage = 7.0
+hitbox_offset = Vector2(54, -42)
+hitbox_size = Vector2(88, 50)
+knockback = Vector2(-90, 0)
+hitstun_frames = 10
+shi_gain_on_hit = 8.0
+qi_cost = 1.0
+
+[sub_resource type="Resource" id="Resource_pb3fy"]
+script = ExtResource("1_u7l32")
+attack_id = &"spear_up"
+animation_name = &"spear_up"
+startup_frames = 9
+active_frames = 5
+recovery_frames = 18
+posture_damage = 12.0
+hitbox_offset = Vector2(48, -78)
+hitbox_size = Vector2(94, 92)
+knockback = Vector2(90, -390)
+launch_velocity = Vector2(100, -450)
+hitstun_frames = 22
+reaction_type = 1
+juggle_cost = 1
+shi_gain_on_hit = 12.0
+qi_cost = 2.0
+
+[resource]
+script = ExtResource("2_17uv3")
+weapon_id = &"spear"
+display_name = "守关长枪"
+light_chain = Array[ExtResource("1_u7l32")]([SubResource("Resource_n5vns"), SubResource("Resource_dwth8")])
+neutral_finisher = SubResource("Resource_152jx")
+forward_finisher = SubResource("Resource_nnn7d")
+up_finisher = SubResource("Resource_pb3fy")
+heavy_finisher = SubResource("Resource_6usac")
+switch_attack = SubResource("Resource_m420y")
+counter_chain = Array[ExtResource("1_u7l32")]([SubResource("Resource_f4riw")])
+air_light = SubResource("Resource_oqcxr")
+air_slam = SubResource("Resource_udw87")
+ground_finisher = SubResource("Resource_neqh5")

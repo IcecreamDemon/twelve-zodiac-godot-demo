@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="AttackData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/attack_data.gd" id="1_vnvwb"]
+
+[resource]
+script = ExtResource("1_vnvwb")
+attack_id = &"short_air_light"
+animation_name = &"short_air_light"
+startup_frames = 4
+active_frames = 4
+recovery_frames = 8
+damage = 7.0
+posture_damage = 8.0
+hitbox_offset = Vector2(44, -48)
+hitbox_size = Vector2(68, 56)
+knockback = Vector2(70, 0)
+hitstun_frames = 10
+juggle_cost = 1
+is_air_attack = true

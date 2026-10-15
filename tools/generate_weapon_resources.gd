@@ -1,0 +1,369 @@
+extends SceneTree
+
+const ATTACK_DATA_SCRIPT := preload("res://scripts/data/attack_data.gd")
+const WEAPON_DATA_SCRIPT := preload("res://scripts/data/weapon_data.gd")
+
+const SHORT_BLADE_DIR := "res://resources/attacks/short_blade/"
+const SPEAR_DIR := "res://resources/attacks/spear/"
+
+
+func _initialize() -> void:
+	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path("res://resources/weapons/"))
+	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(SHORT_BLADE_DIR))
+	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(SPEAR_DIR))
+
+	var short_blade := _build_short_blade()
+	var spear := _build_spear()
+
+	ResourceSaver.save(short_blade, "res://resources/weapons/short_blade.tres")
+	ResourceSaver.save(spear, "res://resources/weapons/spear.tres")
+	print("WEAPON RESOURCE GENERATION PASS")
+	quit(0)
+
+
+func _build_short_blade() -> WeaponData:
+	var weapon := WEAPON_DATA_SCRIPT.new()
+	weapon.weapon_id = &"short_blade"
+	weapon.display_name = "残锋短刃"
+	weapon.light_chain = [
+		_save_attack("short_l1", "short_blade", {
+			"startup_frames": 5,
+			"active_frames": 4,
+			"recovery_frames": 8,
+			"damage": 7.0,
+			"posture_damage": 8.0,
+			"hitbox_offset": Vector2(42.0, -44.0),
+			"hitbox_size": Vector2(66.0, 52.0),
+			"knockback": Vector2(80.0, 0.0),
+			"hitstun_frames": 10,
+			"shi_gain_on_hit": 10.0,
+			"qi_cost": 1.0,
+		}),
+		_save_attack("short_l2", "short_blade", {
+			"startup_frames": 5,
+			"active_frames": 4,
+			"recovery_frames": 10,
+			"damage": 8.0,
+			"posture_damage": 9.0,
+			"hitbox_offset": Vector2(46.0, -44.0),
+			"hitbox_size": Vector2(72.0, 54.0),
+			"knockback": Vector2(90.0, 0.0),
+			"hitstun_frames": 11,
+			"shi_gain_on_hit": 10.0,
+			"qi_cost": 1.0,
+		}),
+	]
+	weapon.neutral_finisher = _save_attack("short_neutral", "short_blade", {
+		"startup_frames": 6,
+		"active_frames": 4,
+		"recovery_frames": 14,
+		"damage": 10.0,
+		"posture_damage": 12.0,
+		"hitbox_offset": Vector2(48.0, -44.0),
+		"hitbox_size": Vector2(78.0, 56.0),
+		"knockback": Vector2(120.0, 0.0),
+		"hitstun_frames": 14,
+		"shi_gain_on_hit": 12.0,
+		"qi_cost": 1.0,
+	})
+	weapon.forward_finisher = _save_attack("short_forward", "short_blade", {
+		"startup_frames": 7,
+		"active_frames": 5,
+		"recovery_frames": 16,
+		"damage": 12.0,
+		"posture_damage": 14.0,
+		"hitbox_offset": Vector2(62.0, -42.0),
+		"hitbox_size": Vector2(92.0, 56.0),
+		"knockback": Vector2(180.0, 0.0),
+		"hitstun_frames": 16,
+		"shi_gain_on_hit": 12.0,
+		"qi_cost": 1.0,
+	})
+	weapon.up_finisher = _save_attack("short_up", "short_blade", {
+		"startup_frames": 7,
+		"active_frames": 4,
+		"recovery_frames": 16,
+		"damage": 9.0,
+		"posture_damage": 10.0,
+		"hitbox_offset": Vector2(36.0, -74.0),
+		"hitbox_size": Vector2(68.0, 76.0),
+		"knockback": Vector2(90.0, -380.0),
+		"launch_velocity": Vector2(110.0, -430.0),
+		"reaction_type": 1,
+		"juggle_cost": 1,
+		"hitstun_frames": 20,
+		"shi_gain_on_hit": 12.0,
+		"qi_cost": 2.0,
+	})
+	weapon.heavy_finisher = _save_attack("short_heavy", "short_blade", {
+		"startup_frames": 13,
+		"active_frames": 5,
+		"recovery_frames": 18,
+		"damage": 18.0,
+		"posture_damage": 24.0,
+		"guard_qi_damage": 18.0,
+		"hitbox_offset": Vector2(52.0, -46.0),
+		"hitbox_size": Vector2(90.0, 64.0),
+		"knockback": Vector2(180.0, -80.0),
+		"reaction_type": 2,
+		"knockdown_frames": 30,
+		"hitstun_frames": 18,
+		"shi_gain_on_hit": 18.0,
+		"qi_cost": 3.0,
+	})
+	weapon.switch_attack = _save_attack("short_switch", "short_blade", {
+		"startup_frames": 4,
+		"active_frames": 3,
+		"recovery_frames": 7,
+		"damage": 6.0,
+		"posture_damage": 8.0,
+		"hitbox_offset": Vector2(38.0, -44.0),
+		"hitbox_size": Vector2(62.0, 50.0),
+		"knockback": Vector2(70.0, 0.0),
+		"hitstun_frames": 9,
+		"shi_gain_on_hit": 8.0,
+		"qi_cost": 1.0,
+	})
+	weapon.counter_chain = [
+		_counter_attack("short_counter_1", "short_blade", 5.0, 6.0, Vector2(48.0, -44.0)),
+		_counter_attack("short_counter_2", "short_blade", 6.0, 7.0, Vector2(40.0, -48.0)),
+		_counter_attack("short_counter_3", "short_blade", 8.0, 10.0, Vector2(54.0, -42.0)),
+	]
+	weapon.air_light = _save_attack("short_air_light", "short_blade", {
+		"startup_frames": 4,
+		"active_frames": 4,
+		"recovery_frames": 8,
+		"damage": 7.0,
+		"posture_damage": 8.0,
+		"hitbox_offset": Vector2(44.0, -48.0),
+		"hitbox_size": Vector2(68.0, 56.0),
+		"knockback": Vector2(70.0, 0.0),
+		"hitstun_frames": 10,
+		"juggle_cost": 1,
+		"is_air_attack": true,
+		"shi_gain_on_hit": 10.0,
+	})
+	weapon.air_slam = _save_attack("short_air_slam", "short_blade", {
+		"startup_frames": 11,
+		"active_frames": 8,
+		"recovery_frames": 18,
+		"damage": 20.0,
+		"posture_damage": 24.0,
+		"guard_qi_damage": 20.0,
+		"hitbox_offset": Vector2(0.0, -20.0),
+		"hitbox_size": Vector2(98.0, 82.0),
+		"knockback": Vector2(120.0, 0.0),
+		"reaction_type": 2,
+		"knockdown_frames": 34,
+		"juggle_cost": 2,
+		"is_air_attack": true,
+		"shi_gain_on_hit": 18.0,
+		"qi_cost": 2.0,
+	})
+	weapon.ground_finisher = _ground_finisher("short_ground_finisher", "short_blade", 22.0)
+	return weapon
+
+
+func _build_spear() -> WeaponData:
+	var weapon := WEAPON_DATA_SCRIPT.new()
+	weapon.weapon_id = &"spear"
+	weapon.display_name = "守关长枪"
+	weapon.light_chain = [
+		_save_attack("spear_l1", "spear", {
+			"startup_frames": 7,
+			"active_frames": 4,
+			"recovery_frames": 10,
+			"damage": 8.0,
+			"posture_damage": 10.0,
+			"hitbox_offset": Vector2(68.0, -42.0),
+			"hitbox_size": Vector2(104.0, 48.0),
+			"knockback": Vector2(110.0, 0.0),
+			"hitstun_frames": 12,
+			"shi_gain_on_hit": 10.0,
+			"qi_cost": 1.0,
+		}),
+		_save_attack("spear_l2", "spear", {
+			"startup_frames": 7,
+			"active_frames": 5,
+			"recovery_frames": 12,
+			"damage": 9.0,
+			"posture_damage": 11.0,
+			"hitbox_offset": Vector2(76.0, -42.0),
+			"hitbox_size": Vector2(116.0, 50.0),
+			"knockback": Vector2(120.0, 0.0),
+			"hitstun_frames": 13,
+			"shi_gain_on_hit": 10.0,
+			"qi_cost": 1.0,
+		}),
+	]
+	weapon.neutral_finisher = _save_attack("spear_neutral", "spear", {
+		"startup_frames": 8,
+		"active_frames": 5,
+		"recovery_frames": 16,
+		"damage": 12.0,
+		"posture_damage": 15.0,
+		"hitbox_offset": Vector2(90.0, -42.0),
+		"hitbox_size": Vector2(132.0, 52.0),
+		"knockback": Vector2(150.0, 0.0),
+		"hitstun_frames": 15,
+		"shi_gain_on_hit": 12.0,
+		"qi_cost": 1.0,
+	})
+	weapon.forward_finisher = _save_attack("spear_forward", "spear", {
+		"startup_frames": 10,
+		"active_frames": 6,
+		"recovery_frames": 18,
+		"damage": 14.0,
+		"posture_damage": 18.0,
+		"hitbox_offset": Vector2(108.0, -42.0),
+		"hitbox_size": Vector2(150.0, 54.0),
+		"knockback": Vector2(230.0, 0.0),
+		"hitstun_frames": 18,
+		"shi_gain_on_hit": 12.0,
+		"qi_cost": 2.0,
+	})
+	weapon.up_finisher = _save_attack("spear_up", "spear", {
+		"startup_frames": 9,
+		"active_frames": 5,
+		"recovery_frames": 18,
+		"damage": 10.0,
+		"posture_damage": 12.0,
+		"hitbox_offset": Vector2(48.0, -78.0),
+		"hitbox_size": Vector2(94.0, 92.0),
+		"knockback": Vector2(90.0, -390.0),
+		"launch_velocity": Vector2(100.0, -450.0),
+		"reaction_type": 1,
+		"juggle_cost": 1,
+		"hitstun_frames": 22,
+		"shi_gain_on_hit": 12.0,
+		"qi_cost": 2.0,
+	})
+	weapon.heavy_finisher = _save_attack("spear_heavy", "spear", {
+		"startup_frames": 15,
+		"active_frames": 5,
+		"recovery_frames": 20,
+		"damage": 20.0,
+		"posture_damage": 28.0,
+		"guard_qi_damage": 24.0,
+		"hitbox_offset": Vector2(92.0, -42.0),
+		"hitbox_size": Vector2(142.0, 58.0),
+		"knockback": Vector2(230.0, -70.0),
+		"reaction_type": 2,
+		"knockdown_frames": 32,
+		"hitstun_frames": 20,
+		"shi_gain_on_hit": 18.0,
+		"qi_cost": 3.0,
+	})
+	weapon.switch_attack = _save_attack("spear_switch", "spear", {
+		"startup_frames": 6,
+		"active_frames": 4,
+		"recovery_frames": 12,
+		"damage": 7.0,
+		"posture_damage": 10.0,
+		"hitbox_offset": Vector2(54.0, -42.0),
+		"hitbox_size": Vector2(88.0, 50.0),
+		"knockback": Vector2(-90.0, 0.0),
+		"hitstun_frames": 10,
+		"shi_gain_on_hit": 8.0,
+		"qi_cost": 1.0,
+	})
+	weapon.counter_chain = [
+		_counter_attack("spear_counter", "spear", 18.0, 24.0, Vector2(92.0, -42.0)),
+	]
+	weapon.air_light = _save_attack("spear_air_light", "spear", {
+		"startup_frames": 5,
+		"active_frames": 4,
+		"recovery_frames": 9,
+		"damage": 8.0,
+		"posture_damage": 10.0,
+		"hitbox_offset": Vector2(62.0, -48.0),
+		"hitbox_size": Vector2(102.0, 54.0),
+		"knockback": Vector2(80.0, 0.0),
+		"hitstun_frames": 11,
+		"juggle_cost": 1,
+		"is_air_attack": true,
+		"shi_gain_on_hit": 10.0,
+	})
+	weapon.air_slam = _save_attack("spear_air_slam", "spear", {
+		"startup_frames": 12,
+		"active_frames": 8,
+		"recovery_frames": 20,
+		"damage": 21.0,
+		"posture_damage": 26.0,
+		"guard_qi_damage": 22.0,
+		"hitbox_offset": Vector2(0.0, -20.0),
+		"hitbox_size": Vector2(104.0, 86.0),
+		"knockback": Vector2(120.0, 0.0),
+		"reaction_type": 2,
+		"knockdown_frames": 34,
+		"juggle_cost": 2,
+		"is_air_attack": true,
+		"shi_gain_on_hit": 18.0,
+		"qi_cost": 2.0,
+	})
+	weapon.ground_finisher = _ground_finisher("spear_ground_finisher", "spear", 24.0)
+	return weapon
+
+
+func _save_attack(
+	attack_id: String,
+	weapon_dir: String,
+	overrides: Dictionary,
+) -> AttackData:
+	var attack: AttackData = ATTACK_DATA_SCRIPT.new()
+	attack.attack_id = StringName(attack_id)
+	attack.animation_name = StringName(attack_id)
+	attack.damage = 0.0
+	attack.posture_damage = 0.0
+	attack.hitstun_frames = 10
+	attack.shi_gain_on_hit = 0.0
+	for property_name: String in overrides:
+		attack.set(property_name, overrides[property_name])
+
+	var directory := SHORT_BLADE_DIR if weapon_dir == "short_blade" else SPEAR_DIR
+	ResourceSaver.save(attack, "%s%s.tres" % [directory, attack_id])
+	return attack
+
+
+func _counter_attack(
+	attack_id: String,
+	weapon_dir: String,
+	damage: float,
+	posture_damage: float,
+	hitbox_offset: Vector2,
+) -> AttackData:
+	return _save_attack(attack_id, weapon_dir, {
+		"startup_frames": 3,
+		"active_frames": 3,
+		"recovery_frames": 5,
+		"damage": damage,
+		"posture_damage": posture_damage,
+		"hitbox_offset": hitbox_offset,
+		"hitbox_size": Vector2(72.0, 54.0),
+		"knockback": Vector2(70.0, 0.0),
+		"hitstun_frames": 8,
+		"shi_gain_on_hit": 8.0,
+	})
+
+
+func _ground_finisher(
+	attack_id: String,
+	weapon_dir: String,
+	damage: float,
+) -> AttackData:
+	return _save_attack(attack_id, weapon_dir, {
+		"startup_frames": 12,
+		"active_frames": 5,
+		"recovery_frames": 20,
+		"damage": damage,
+		"posture_damage": 30.0,
+		"hitbox_offset": Vector2(48.0, -22.0),
+		"hitbox_size": Vector2(96.0, 52.0),
+		"knockback": Vector2(80.0, -80.0),
+		"reaction_type": 2,
+		"knockdown_frames": 36,
+		"is_ground_finisher": true,
+		"hitstun_frames": 24,
+		"shi_gain_on_hit": 20.0,
+		"qi_cost": 2.0,
+	})

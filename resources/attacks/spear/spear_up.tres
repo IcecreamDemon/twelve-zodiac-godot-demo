@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="AttackData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/attack_data.gd" id="1_lkm50"]
+
+[resource]
+script = ExtResource("1_lkm50")
+attack_id = &"spear_up"
+animation_name = &"spear_up"
+startup_frames = 9
+active_frames = 5
+recovery_frames = 18
+posture_damage = 12.0
+hitbox_offset = Vector2(48, -78)
+hitbox_size = Vector2(94, 92)
+knockback = Vector2(90, -390)
+launch_velocity = Vector2(100, -450)
+hitstun_frames = 22
+reaction_type = 1
+juggle_cost = 1
+shi_gain_on_hit = 12.0
+qi_cost = 2.0

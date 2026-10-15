@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="AttackData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/attack_data.gd" id="1_dc0ra"]
+
+[resource]
+script = ExtResource("1_dc0ra")
+attack_id = &"short_heavy"
+animation_name = &"short_heavy"
+startup_frames = 13
+active_frames = 5
+recovery_frames = 18
+damage = 18.0
+posture_damage = 24.0
+guard_qi_damage = 18.0
+hitbox_offset = Vector2(52, -46)
+hitbox_size = Vector2(90, 64)
+knockback = Vector2(180, -80)
+hitstun_frames = 18
+knockdown_frames = 30
+reaction_type = 2
+shi_gain_on_hit = 18.0
+qi_cost = 3.0

@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="AttackData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/attack_data.gd" id="1_8h6uo"]
+
+[resource]
+script = ExtResource("1_8h6uo")
+attack_id = &"short_air_slam"
+animation_name = &"short_air_slam"
+startup_frames = 11
+active_frames = 8
+recovery_frames = 18
+damage = 20.0
+posture_damage = 24.0
+guard_qi_damage = 20.0
+hitbox_offset = Vector2(0, -20)
+hitbox_size = Vector2(98, 82)
+hitstun_frames = 10
+knockdown_frames = 34
+reaction_type = 2
+juggle_cost = 2
+is_air_attack = true
+shi_gain_on_hit = 18.0
+qi_cost = 2.0

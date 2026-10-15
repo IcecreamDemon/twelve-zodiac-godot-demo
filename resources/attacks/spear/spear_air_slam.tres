@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="AttackData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/attack_data.gd" id="1_xcrgk"]
+
+[resource]
+script = ExtResource("1_xcrgk")
+attack_id = &"spear_air_slam"
+animation_name = &"spear_air_slam"
+startup_frames = 12
+active_frames = 8
+recovery_frames = 20
+damage = 21.0
+posture_damage = 26.0
+guard_qi_damage = 22.0
+hitbox_offset = Vector2(0, -20)
+hitbox_size = Vector2(104, 86)
+hitstun_frames = 10
+knockdown_frames = 34
+reaction_type = 2
+juggle_cost = 2
+is_air_attack = true
+shi_gain_on_hit = 18.0
+qi_cost = 2.0

@@ -1,0 +1,225 @@
+[gd_resource type="Resource" script_class="WeaponData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/attack_data.gd" id="1_hp4w2"]
+[ext_resource type="Script" path="res://scripts/data/weapon_data.gd" id="2_rrjjh"]
+
+[sub_resource type="Resource" id="Resource_xwto1"]
+script = ExtResource("1_hp4w2")
+attack_id = &"short_air_light"
+animation_name = &"short_air_light"
+startup_frames = 4
+active_frames = 4
+recovery_frames = 8
+damage = 7.0
+posture_damage = 8.0
+hitbox_offset = Vector2(44, -48)
+hitbox_size = Vector2(68, 56)
+knockback = Vector2(70, 0)
+hitstun_frames = 10
+juggle_cost = 1
+is_air_attack = true
+
+[sub_resource type="Resource" id="Resource_1qhda"]
+script = ExtResource("1_hp4w2")
+attack_id = &"short_air_slam"
+animation_name = &"short_air_slam"
+startup_frames = 11
+active_frames = 8
+recovery_frames = 18
+damage = 20.0
+posture_damage = 24.0
+guard_qi_damage = 20.0
+hitbox_offset = Vector2(0, -20)
+hitbox_size = Vector2(98, 82)
+hitstun_frames = 10
+knockdown_frames = 34
+reaction_type = 2
+juggle_cost = 2
+is_air_attack = true
+shi_gain_on_hit = 18.0
+qi_cost = 2.0
+
+[sub_resource type="Resource" id="Resource_l1dyp"]
+script = ExtResource("1_hp4w2")
+attack_id = &"short_counter_1"
+animation_name = &"short_counter_1"
+startup_frames = 3
+recovery_frames = 5
+damage = 5.0
+posture_damage = 6.0
+hitbox_offset = Vector2(48, -44)
+hitbox_size = Vector2(72, 54)
+knockback = Vector2(70, 0)
+hitstun_frames = 8
+shi_gain_on_hit = 8.0
+
+[sub_resource type="Resource" id="Resource_1hjdr"]
+script = ExtResource("1_hp4w2")
+attack_id = &"short_counter_2"
+animation_name = &"short_counter_2"
+startup_frames = 3
+recovery_frames = 5
+damage = 6.0
+posture_damage = 7.0
+hitbox_offset = Vector2(40, -48)
+hitbox_size = Vector2(72, 54)
+knockback = Vector2(70, 0)
+hitstun_frames = 8
+shi_gain_on_hit = 8.0
+
+[sub_resource type="Resource" id="Resource_k3rpg"]
+script = ExtResource("1_hp4w2")
+attack_id = &"short_counter_3"
+animation_name = &"short_counter_3"
+startup_frames = 3
+recovery_frames = 5
+damage = 8.0
+hitbox_offset = Vector2(54, -42)
+hitbox_size = Vector2(72, 54)
+knockback = Vector2(70, 0)
+hitstun_frames = 8
+shi_gain_on_hit = 8.0
+
+[sub_resource type="Resource" id="Resource_7xewg"]
+script = ExtResource("1_hp4w2")
+attack_id = &"short_forward"
+animation_name = &"short_forward"
+startup_frames = 7
+active_frames = 5
+recovery_frames = 16
+damage = 12.0
+posture_damage = 14.0
+hitbox_offset = Vector2(62, -42)
+hitbox_size = Vector2(92, 56)
+knockback = Vector2(180, 0)
+hitstun_frames = 16
+shi_gain_on_hit = 12.0
+qi_cost = 1.0
+
+[sub_resource type="Resource" id="Resource_xg22i"]
+script = ExtResource("1_hp4w2")
+attack_id = &"short_ground_finisher"
+animation_name = &"short_ground_finisher"
+startup_frames = 12
+active_frames = 5
+recovery_frames = 20
+damage = 22.0
+posture_damage = 30.0
+hitbox_offset = Vector2(48, -22)
+hitbox_size = Vector2(96, 52)
+knockback = Vector2(80, -80)
+hitstun_frames = 24
+knockdown_frames = 36
+reaction_type = 2
+is_ground_finisher = true
+shi_gain_on_hit = 20.0
+qi_cost = 2.0
+
+[sub_resource type="Resource" id="Resource_yg23l"]
+script = ExtResource("1_hp4w2")
+attack_id = &"short_heavy"
+animation_name = &"short_heavy"
+startup_frames = 13
+active_frames = 5
+recovery_frames = 18
+damage = 18.0
+posture_damage = 24.0
+guard_qi_damage = 18.0
+hitbox_offset = Vector2(52, -46)
+hitbox_size = Vector2(90, 64)
+knockback = Vector2(180, -80)
+hitstun_frames = 18
+knockdown_frames = 30
+reaction_type = 2
+shi_gain_on_hit = 18.0
+qi_cost = 3.0
+
+[sub_resource type="Resource" id="Resource_dqg1f"]
+script = ExtResource("1_hp4w2")
+attack_id = &"short_l1"
+animation_name = &"short_l1"
+startup_frames = 5
+active_frames = 4
+recovery_frames = 8
+damage = 7.0
+posture_damage = 8.0
+hitbox_offset = Vector2(42, -44)
+hitbox_size = Vector2(66, 52)
+knockback = Vector2(80, 0)
+hitstun_frames = 10
+qi_cost = 1.0
+
+[sub_resource type="Resource" id="Resource_4j0fv"]
+script = ExtResource("1_hp4w2")
+attack_id = &"short_l2"
+animation_name = &"short_l2"
+startup_frames = 5
+active_frames = 4
+damage = 8.0
+posture_damage = 9.0
+hitbox_offset = Vector2(46, -44)
+hitbox_size = Vector2(72, 54)
+knockback = Vector2(90, 0)
+hitstun_frames = 11
+qi_cost = 1.0
+
+[sub_resource type="Resource" id="Resource_dn085"]
+script = ExtResource("1_hp4w2")
+attack_id = &"short_neutral"
+animation_name = &"short_neutral"
+active_frames = 4
+recovery_frames = 14
+posture_damage = 12.0
+hitbox_offset = Vector2(48, -44)
+hitbox_size = Vector2(78, 56)
+hitstun_frames = 14
+shi_gain_on_hit = 12.0
+qi_cost = 1.0
+
+[sub_resource type="Resource" id="Resource_2jb5o"]
+script = ExtResource("1_hp4w2")
+attack_id = &"short_switch"
+animation_name = &"short_switch"
+startup_frames = 4
+recovery_frames = 7
+damage = 6.0
+posture_damage = 8.0
+hitbox_offset = Vector2(38, -44)
+hitbox_size = Vector2(62, 50)
+knockback = Vector2(70, 0)
+hitstun_frames = 9
+shi_gain_on_hit = 8.0
+qi_cost = 1.0
+
+[sub_resource type="Resource" id="Resource_epesr"]
+script = ExtResource("1_hp4w2")
+attack_id = &"short_up"
+animation_name = &"short_up"
+startup_frames = 7
+active_frames = 4
+recovery_frames = 16
+damage = 9.0
+hitbox_offset = Vector2(36, -74)
+hitbox_size = Vector2(68, 76)
+knockback = Vector2(90, -380)
+launch_velocity = Vector2(110, -430)
+hitstun_frames = 20
+reaction_type = 1
+juggle_cost = 1
+shi_gain_on_hit = 12.0
+qi_cost = 2.0
+
+[resource]
+script = ExtResource("2_rrjjh")
+weapon_id = &"short_blade"
+display_name = "残锋短刃"
+light_chain = Array[ExtResource("1_hp4w2")]([SubResource("Resource_dqg1f"), SubResource("Resource_4j0fv")])
+neutral_finisher = SubResource("Resource_dn085")
+forward_finisher = SubResource("Resource_7xewg")
+up_finisher = SubResource("Resource_epesr")
+heavy_finisher = SubResource("Resource_yg23l")
+switch_attack = SubResource("Resource_2jb5o")
+counter_chain = Array[ExtResource("1_hp4w2")]([SubResource("Resource_l1dyp"), SubResource("Resource_1hjdr"), SubResource("Resource_k3rpg")])
+air_light = SubResource("Resource_xwto1")
+air_slam = SubResource("Resource_1qhda")
+ground_finisher = SubResource("Resource_xg22i")

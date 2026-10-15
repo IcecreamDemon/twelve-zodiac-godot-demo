@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="AttackData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/attack_data.gd" id="1_ba5hl"]
+
+[resource]
+script = ExtResource("1_ba5hl")
+attack_id = &"spear_l1"
+animation_name = &"spear_l1"
+startup_frames = 7
+active_frames = 4
+damage = 8.0
+hitbox_offset = Vector2(68, -42)
+hitbox_size = Vector2(104, 48)
+knockback = Vector2(110, 0)
+qi_cost = 1.0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3]
+[gd_scene load_steps=11 format=3]
 
 [ext_resource type="Script" path="res://scripts/actors/player/player_controller.gd" id="1_player"]
 [ext_resource type="Script" path="res://scripts/actors/actor_state_machine.gd" id="2_state"]
@@ -7,7 +7,8 @@
 [ext_resource type="Script" path="res://scripts/components/qi_component.gd" id="5_qi"]
 [ext_resource type="Script" path="res://scripts/components/shi_component.gd" id="6_shi"]
 [ext_resource type="Script" path="res://scripts/combat/hitbox_component.gd" id="7_hitbox"]
-[ext_resource type="Resource" path="res://resources/attacks/test_slash.tres" id="8_attack"]
+[ext_resource type="Resource" path="res://resources/weapons/short_blade.tres" id="8_weapon"]
+[ext_resource type="Resource" path="res://resources/weapons/spear.tres" id="9_weapon"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_body"]
 size = Vector2(46, 84)
@@ -17,7 +18,7 @@ size = Vector2(72, 54)
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_player")
-light_attack = ExtResource("8_attack")
+weapons = Array[Resource]([ExtResource("8_weapon"), ExtResource("9_weapon")])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -42)

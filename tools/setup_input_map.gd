@@ -12,6 +12,7 @@ const ACTION_KEYS: Dictionary = {
 	&"switch_weapon": KEY_Q,
 	&"heavy_technique": KEY_E,
 	&"burrow": KEY_F,
+	&"aim_up": KEY_W,
 }
 
 

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="AttackData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/attack_data.gd" id="1_d6egg"]
+
+[resource]
+script = ExtResource("1_d6egg")
+attack_id = &"short_neutral"
+animation_name = &"short_neutral"
+active_frames = 4
+recovery_frames = 14
+posture_damage = 12.0
+hitbox_offset = Vector2(48, -44)
+hitbox_size = Vector2(78, 56)
+hitstun_frames = 14
+shi_gain_on_hit = 12.0
+qi_cost = 1.0

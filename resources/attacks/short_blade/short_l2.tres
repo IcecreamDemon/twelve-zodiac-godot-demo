@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="AttackData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/attack_data.gd" id="1_0i4wq"]
+
+[resource]
+script = ExtResource("1_0i4wq")
+attack_id = &"short_l2"
+animation_name = &"short_l2"
+startup_frames = 5
+active_frames = 4
+damage = 8.0
+posture_damage = 9.0
+hitbox_offset = Vector2(46, -44)
+hitbox_size = Vector2(72, 54)
+knockback = Vector2(90, 0)
+hitstun_frames = 11
+qi_cost = 1.0

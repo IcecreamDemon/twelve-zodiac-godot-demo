@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="AttackData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/attack_data.gd" id="1_yhasm"]
+
+[resource]
+script = ExtResource("1_yhasm")
+attack_id = &"short_up"
+animation_name = &"short_up"
+startup_frames = 7
+active_frames = 4
+recovery_frames = 16
+damage = 9.0
+hitbox_offset = Vector2(36, -74)
+hitbox_size = Vector2(68, 76)
+knockback = Vector2(90, -380)
+launch_velocity = Vector2(110, -430)
+hitstun_frames = 20
+reaction_type = 1
+juggle_cost = 1
+shi_gain_on_hit = 12.0
+qi_cost = 2.0

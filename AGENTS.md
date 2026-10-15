@@ -15,8 +15,8 @@ Read that file before editing the project. It contains the Cold Start block, arc
   `E:\SteamLibrary\steamapps\common\Godot Engine\godot.windows.opt.tools.64.exe`
 - MCP: `Godot MCP Native 1.0.8`
 - MCP URL: `http://localhost:9080/mcp`
-- Current stage: M0 baseline and M1 Combat Lab are complete.
-- Next implementation target: M2 combo branches, defense, parry, hit reactions, air attacks, and juggle limits.
+- Current stage: M0, M1, and M2 are complete.
+- Next implementation target: M3 humanoid enemy AI for 天兵, 镇守, and 法吏.
 
 ## Non-Negotiable Scope
 
@@ -54,6 +54,10 @@ Headless validation:
 & "E:\SteamLibrary\steamapps\common\Godot Engine\godot.windows.opt.tools.64.exe" --headless --path "E:\twelfe" --quit
 & "E:\SteamLibrary\steamapps\common\Godot Engine\godot.windows.opt.tools.64.exe" --headless --path "E:\twelfe" --script res://tests/smoke_test.gd
 & "E:\SteamLibrary\steamapps\common\Godot Engine\godot.windows.opt.tools.64.exe" --headless --path "E:\twelfe" --script res://tests/combat/attack_timing_test.gd
+& "E:\SteamLibrary\steamapps\common\Godot Engine\godot.windows.opt.tools.64.exe" --headless --path "E:\twelfe" --script res://tests/combat/combo_branch_test.gd
+& "E:\SteamLibrary\steamapps\common\Godot Engine\godot.windows.opt.tools.64.exe" --headless --path "E:\twelfe" --script res://tests/combat/parry_and_guard_test.gd
+& "E:\SteamLibrary\steamapps\common\Godot Engine\godot.windows.opt.tools.64.exe" --headless --path "E:\twelfe" --script res://tests/combat/hit_reaction_test.gd
+& "E:\SteamLibrary\steamapps\common\Godot Engine\godot.windows.opt.tools.64.exe" --headless --path "E:\twelfe" --script res://tests/combat/air_attack_test.gd
 ```
 
 Update the task board and decision log in the full design document after every completed milestone.

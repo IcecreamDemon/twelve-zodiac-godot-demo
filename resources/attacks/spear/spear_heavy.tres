@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="AttackData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/attack_data.gd" id="1_fp8g5"]
+
+[resource]
+script = ExtResource("1_fp8g5")
+attack_id = &"spear_heavy"
+animation_name = &"spear_heavy"
+startup_frames = 15
+active_frames = 5
+recovery_frames = 20
+damage = 20.0
+posture_damage = 28.0
+guard_qi_damage = 24.0
+hitbox_offset = Vector2(92, -42)
+hitbox_size = Vector2(142, 58)
+knockback = Vector2(230, -70)
+hitstun_frames = 20
+knockdown_frames = 32
+reaction_type = 2
+shi_gain_on_hit = 18.0
+qi_cost = 3.0

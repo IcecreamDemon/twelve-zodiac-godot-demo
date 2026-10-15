@@ -25,8 +25,13 @@ enum ReactionType {
 @export var hitbox_offset: Vector2 = Vector2(42.0, 0.0)
 @export var hitbox_size: Vector2 = Vector2(64.0, 48.0)
 @export var knockback: Vector2 = Vector2(120.0, 0.0)
+@export var launch_velocity: Vector2 = Vector2(120.0, -420.0)
 @export_range(0, 120, 1) var hitstun_frames: int = 12
+@export_range(0, 240, 1) var knockdown_frames: int = 28
 @export var reaction_type: ReactionType = ReactionType.STUN
+@export_range(0, 5, 1) var juggle_cost: int = 0
+@export var is_air_attack: bool = false
+@export var is_ground_finisher: bool = false
 @export_range(0.0, 100.0, 0.1) var shi_gain_on_hit: float = 10.0
 @export_range(0.0, 100.0, 0.1) var shi_cost: float = 0.0
 @export_range(0.0, 100.0, 0.1) var qi_cost: float = 0.0

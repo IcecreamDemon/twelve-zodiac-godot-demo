@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="AttackData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/attack_data.gd" id="1_bqkei"]
+
+[resource]
+script = ExtResource("1_bqkei")
+attack_id = &"short_switch"
+animation_name = &"short_switch"
+startup_frames = 4
+recovery_frames = 7
+damage = 6.0
+posture_damage = 8.0
+hitbox_offset = Vector2(38, -44)
+hitbox_size = Vector2(62, 50)
+knockback = Vector2(70, 0)
+hitstun_frames = 9
+shi_gain_on_hit = 8.0
+qi_cost = 1.0
