@@ -7,6 +7,7 @@ const STATE_JUMP: StringName = &"jump"
 const STATE_FALL: StringName = &"fall"
 const STATE_GUARD: StringName = &"guard"
 const STATE_PARRY: StringName = &"parry"
+const STATE_BURROW: StringName = &"burrow"
 const STATE_ATTACK: StringName = &"attack"
 const STATE_HIT: StringName = &"hit"
 const STATE_DEAD: StringName = &"dead"
@@ -18,6 +19,7 @@ const ATTACK_AIR_SLAM: StringName = &"air_slam"
 const ATTACK_COUNTER: StringName = &"counter"
 const ATTACK_GROUND_FINISHER: StringName = &"ground_finisher"
 const ATTACK_SWITCH: StringName = &"switch"
+const ATTACK_BURROW_EMERGE: StringName = &"burrow_emerge"
 
 const INPUT_NONE: StringName = &""
 const INPUT_LIGHT: StringName = &"input_light"
@@ -41,6 +43,11 @@ const INPUT_SWITCH: StringName = &"input_switch"
 @export_range(0.0, 100.0, 0.1) var emergency_parry_qi_threshold: float = 70.0
 @export_range(0.0, 100.0, 0.1) var emergency_parry_qi_restore: float = 10.0
 @export_range(1, 6, 1) var max_air_actions: int = 3
+@export_range(0.0, 100.0, 0.1) var burrow_entry_cost: float = 10.0
+@export_range(0.0, 100.0, 0.1) var burrow_qi_per_second: float = 15.0
+@export_range(0.5, 3.0, 0.05) var burrow_speed_multiplier: float = 1.1
+@export_range(0, 120, 1) var burrow_cooldown_frames: int = 24
+@export_range(0.0, 128.0, 1.0) var burrow_depth: float = 36.0
 @export var weapons: Array[WeaponData] = []
 
 @onready var state_machine: ActorStateMachine = $StateMachine
@@ -50,6 +57,8 @@ const INPUT_SWITCH: StringName = &"input_switch"
 @onready var shi: ShiComponent = $ShiComponent
 @onready var hitbox: HitboxComponent = $AttackHitbox
 @onready var visual: Polygon2D = $Visual
+@onready var burrow_detector: Area2D = $BurrowDetector
+@onready var burrow_crack: Line2D = $BurrowCrack
 
 var facing_direction: int = 1
 var hitstun_frames_remaining: int = 0
@@ -62,6 +71,7 @@ var counter_index: int = 0
 var buffered_input: StringName = INPUT_NONE
 var air_actions_remaining: int = 3
 var _parry_is_emergency: bool = false
+var burrow_cooldown_remaining: int = 0
 
 
 func _ready() -> void:
@@ -74,6 +84,7 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	state_machine.tick()
+	burrow_cooldown_remaining = maxi(burrow_cooldown_remaining - 1, 0)
 	_apply_gravity(delta)
 	_handle_emergency_parry()
 
@@ -84,6 +95,8 @@ func _physics_process(delta: float) -> void:
 			_process_guard(delta)
 		STATE_PARRY:
 			_process_parry()
+		STATE_BURROW:
+			_process_burrow(delta)
 		STATE_ATTACK:
 			_process_attack(delta)
 		STATE_HIT:
@@ -107,6 +120,10 @@ func _process_ground_and_air(delta: float) -> void:
 
 	if Input.is_action_just_pressed(&"perfect_parry") and is_on_floor():
 		_start_parry(false)
+		return
+
+	if Input.is_action_just_pressed(&"burrow") and _can_start_burrow():
+		_start_burrow()
 		return
 
 	if Input.is_action_just_pressed(&"switch_weapon") and is_on_floor():
@@ -158,6 +175,25 @@ func _process_parry() -> void:
 	if state_machine.frames_in_state >= parry_active_frames + parry_recovery_frames:
 		_parry_is_emergency = false
 		state_machine.transition_to(STATE_IDLE)
+
+
+func _process_burrow(delta: float) -> void:
+	if Input.is_action_just_pressed(&"burrow") or qi.current_qi <= 0.0:
+		_exit_burrow(false)
+		return
+
+	if Input.is_action_just_pressed(&"light_attack") or Input.is_action_just_pressed(&"heavy_attack"):
+		_exit_burrow(true)
+		return
+
+	var input_axis := Input.get_axis(&"move_left", &"move_right")
+	velocity.x = input_axis * move_speed * burrow_speed_multiplier
+	velocity.y = 0.0
+	if not is_zero_approx(input_axis):
+		facing_direction = 1 if input_axis > 0.0 else -1
+
+	if not qi.consume(burrow_qi_per_second * delta):
+		_exit_burrow(false)
 
 
 func _process_attack(delta: float) -> void:
@@ -214,6 +250,10 @@ func _finish_current_attack() -> void:
 		if counter_index < _current_weapon().counter_chain.size():
 			_start_attack(_current_weapon().counter_chain[counter_index], ATTACK_COUNTER, true)
 			return
+	elif finished_mode == ATTACK_BURROW_EMERGE and buffered_input == INPUT_LIGHT:
+		combo_step = 0
+		_start_attack(_current_weapon().light_chain[0], ATTACK_LIGHT, false)
+		return
 	elif finished_mode == ATTACK_LIGHT:
 		if combo_step == 0 and buffered_input == INPUT_LIGHT:
 			combo_step = 1
@@ -292,6 +332,49 @@ func _start_parry(is_emergency: bool) -> void:
 		return
 	_parry_is_emergency = is_emergency
 	state_machine.transition_to(STATE_PARRY)
+
+
+func _can_start_burrow() -> bool:
+	return (
+		burrow_cooldown_remaining <= 0
+		and qi.current_qi >= burrow_entry_cost
+		and burrow_detector.get_overlapping_areas().size() > 0
+	)
+
+
+func _start_burrow() -> bool:
+	if not _can_start_burrow():
+		return false
+	if not qi.consume(burrow_entry_cost):
+		return false
+
+	hitbox.cancel_attack()
+	current_attack_data = null
+	attack_mode = &""
+	collision_layer = 0
+	position.y += burrow_depth
+	velocity = Vector2.ZERO
+	visual.modulate = Color(1.0, 1.0, 1.0, 0.28)
+	burrow_crack.visible = true
+	state_machine.transition_to(STATE_BURROW)
+	return true
+
+
+func _exit_burrow(attack_on_exit: bool) -> void:
+	if not state_machine.is_state(STATE_BURROW):
+		return
+
+	collision_layer = 2
+	position.y -= burrow_depth
+	visual.modulate = Color.WHITE
+	burrow_crack.visible = false
+	burrow_cooldown_remaining = burrow_cooldown_frames
+
+	if attack_on_exit and _current_weapon().burrow_emerge != null:
+		if _start_attack(_current_weapon().burrow_emerge, ATTACK_BURROW_EMERGE, false):
+			return
+
+	state_machine.transition_to(STATE_IDLE if is_on_floor() else STATE_FALL)
 
 
 func _handle_emergency_parry() -> void:
@@ -374,6 +457,10 @@ func face_position(target_position: Vector2) -> void:
 func receive_hit(attacker: Node, attack_data: AttackData, direction: int) -> HurtboxComponent.ReceiveResult:
 	if state_machine.is_state(STATE_DEAD):
 		return HurtboxComponent.ReceiveResult.IGNORED
+	if state_machine.is_state(STATE_BURROW):
+		if attack_data.attack_type != AttackData.AttackType.ANTI_BURROW:
+			return HurtboxComponent.ReceiveResult.IGNORED
+		_exit_burrow(false)
 
 	if state_machine.is_state(STATE_PARRY) and state_machine.frames_in_state < parry_active_frames:
 		if attack_data.attack_type != AttackData.AttackType.UNBLOCKABLE:
@@ -427,3 +514,7 @@ func apply_hit_reaction(attack_data: AttackData, direction: int) -> void:
 func _on_died() -> void:
 	hitbox.cancel_attack()
 	state_machine.transition_to(STATE_DEAD)
+
+
+func is_burrowed() -> bool:
+	return state_machine.is_state(STATE_BURROW)

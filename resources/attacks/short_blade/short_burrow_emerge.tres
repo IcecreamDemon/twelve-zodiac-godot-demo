@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="AttackData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/attack_data.gd" id="1_kjcle"]
+
+[resource]
+script = ExtResource("1_kjcle")
+attack_id = &"short_burrow_emerge"
+animation_name = &"short_burrow_emerge"
+startup_frames = 5
+active_frames = 5
+damage = 12.0
+posture_damage = 12.0
+hitbox_offset = Vector2(34, -72)
+hitbox_size = Vector2(76, 86)
+knockback = Vector2(80, -380)
+launch_velocity = Vector2(100, -410)
+hitstun_frames = 20
+reaction_type = 1
+juggle_cost = 1
+shi_gain_on_hit = 0.0
+shi_cost = 15.0
+qi_cost = 2.0

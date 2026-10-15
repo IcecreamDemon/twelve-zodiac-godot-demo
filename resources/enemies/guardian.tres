@@ -3,6 +3,23 @@
 [ext_resource type="Script" path="res://scripts/data/attack_data.gd" id="1_nbox8"]
 [ext_resource type="Script" path="res://scripts/data/enemy_profile.gd" id="2_f0uw0"]
 
+[sub_resource type="Resource" id="Resource_m8eyb"]
+script = ExtResource("1_nbox8")
+attack_id = &"anti_burrow_pulse"
+animation_name = &"anti_burrow_pulse"
+attack_type = 2
+startup_frames = 16
+active_frames = 6
+recovery_frames = 24
+damage = 13.0
+posture_damage = 18.0
+hitbox_offset = Vector2(0, -6)
+hitbox_size = Vector2(190, 80)
+knockback = Vector2(160, -80)
+hitstun_frames = 18
+knockdown_frames = 26
+reaction_type = 2
+
 [sub_resource type="Resource" id="Resource_lmjd2"]
 script = ExtResource("1_nbox8")
 attack_id = &"guardian_heavy"
@@ -50,3 +67,4 @@ preferred_range_max = 86.0
 guard_chance = 0.65
 melee_attacks = Array[ExtResource("1_nbox8")]([SubResource("Resource_lmjd2")])
 unblockable_attack = SubResource("Resource_btw5a")
+anti_burrow_attack = SubResource("Resource_m8eyb")

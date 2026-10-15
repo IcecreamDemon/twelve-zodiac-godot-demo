@@ -13,6 +13,7 @@ extends Resource
 @export var air_light: AttackData
 @export var air_slam: AttackData
 @export var ground_finisher: AttackData
+@export var burrow_emerge: AttackData
 
 
 func is_valid() -> bool:
@@ -27,4 +28,5 @@ func is_valid() -> bool:
 		and air_light != null
 		and air_slam != null
 		and ground_finisher != null
+		and burrow_emerge != null
 	)

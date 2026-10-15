@@ -41,6 +41,25 @@ qi_cost = 2.0
 
 [sub_resource type="Resource" id="Resource_l1dyp"]
 script = ExtResource("1_hp4w2")
+attack_id = &"short_burrow_emerge"
+animation_name = &"short_burrow_emerge"
+startup_frames = 5
+active_frames = 5
+damage = 12.0
+posture_damage = 12.0
+hitbox_offset = Vector2(34, -72)
+hitbox_size = Vector2(76, 86)
+knockback = Vector2(80, -380)
+launch_velocity = Vector2(100, -410)
+hitstun_frames = 20
+reaction_type = 1
+juggle_cost = 1
+shi_gain_on_hit = 0.0
+shi_cost = 15.0
+qi_cost = 2.0
+
+[sub_resource type="Resource" id="Resource_1hjdr"]
+script = ExtResource("1_hp4w2")
 attack_id = &"short_counter_1"
 animation_name = &"short_counter_1"
 startup_frames = 3
@@ -53,7 +72,7 @@ knockback = Vector2(70, 0)
 hitstun_frames = 8
 shi_gain_on_hit = 8.0
 
-[sub_resource type="Resource" id="Resource_1hjdr"]
+[sub_resource type="Resource" id="Resource_k3rpg"]
 script = ExtResource("1_hp4w2")
 attack_id = &"short_counter_2"
 animation_name = &"short_counter_2"
@@ -67,7 +86,7 @@ knockback = Vector2(70, 0)
 hitstun_frames = 8
 shi_gain_on_hit = 8.0
 
-[sub_resource type="Resource" id="Resource_k3rpg"]
+[sub_resource type="Resource" id="Resource_7xewg"]
 script = ExtResource("1_hp4w2")
 attack_id = &"short_counter_3"
 animation_name = &"short_counter_3"
@@ -80,7 +99,7 @@ knockback = Vector2(70, 0)
 hitstun_frames = 8
 shi_gain_on_hit = 8.0
 
-[sub_resource type="Resource" id="Resource_7xewg"]
+[sub_resource type="Resource" id="Resource_xg22i"]
 script = ExtResource("1_hp4w2")
 attack_id = &"short_forward"
 animation_name = &"short_forward"
@@ -96,7 +115,7 @@ hitstun_frames = 16
 shi_gain_on_hit = 12.0
 qi_cost = 1.0
 
-[sub_resource type="Resource" id="Resource_xg22i"]
+[sub_resource type="Resource" id="Resource_yg23l"]
 script = ExtResource("1_hp4w2")
 attack_id = &"short_ground_finisher"
 animation_name = &"short_ground_finisher"
@@ -115,7 +134,7 @@ is_ground_finisher = true
 shi_gain_on_hit = 20.0
 qi_cost = 2.0
 
-[sub_resource type="Resource" id="Resource_yg23l"]
+[sub_resource type="Resource" id="Resource_dqg1f"]
 script = ExtResource("1_hp4w2")
 attack_id = &"short_heavy"
 animation_name = &"short_heavy"
@@ -134,7 +153,7 @@ reaction_type = 2
 shi_gain_on_hit = 18.0
 qi_cost = 3.0
 
-[sub_resource type="Resource" id="Resource_dqg1f"]
+[sub_resource type="Resource" id="Resource_4j0fv"]
 script = ExtResource("1_hp4w2")
 attack_id = &"short_l1"
 animation_name = &"short_l1"
@@ -149,7 +168,7 @@ knockback = Vector2(80, 0)
 hitstun_frames = 10
 qi_cost = 1.0
 
-[sub_resource type="Resource" id="Resource_4j0fv"]
+[sub_resource type="Resource" id="Resource_dn085"]
 script = ExtResource("1_hp4w2")
 attack_id = &"short_l2"
 animation_name = &"short_l2"
@@ -163,7 +182,7 @@ knockback = Vector2(90, 0)
 hitstun_frames = 11
 qi_cost = 1.0
 
-[sub_resource type="Resource" id="Resource_dn085"]
+[sub_resource type="Resource" id="Resource_2jb5o"]
 script = ExtResource("1_hp4w2")
 attack_id = &"short_neutral"
 animation_name = &"short_neutral"
@@ -176,7 +195,7 @@ hitstun_frames = 14
 shi_gain_on_hit = 12.0
 qi_cost = 1.0
 
-[sub_resource type="Resource" id="Resource_2jb5o"]
+[sub_resource type="Resource" id="Resource_epesr"]
 script = ExtResource("1_hp4w2")
 attack_id = &"short_switch"
 animation_name = &"short_switch"
@@ -191,7 +210,7 @@ hitstun_frames = 9
 shi_gain_on_hit = 8.0
 qi_cost = 1.0
 
-[sub_resource type="Resource" id="Resource_epesr"]
+[sub_resource type="Resource" id="Resource_8dn0h"]
 script = ExtResource("1_hp4w2")
 attack_id = &"short_up"
 animation_name = &"short_up"
@@ -213,13 +232,14 @@ qi_cost = 2.0
 script = ExtResource("2_rrjjh")
 weapon_id = &"short_blade"
 display_name = "残锋短刃"
-light_chain = Array[ExtResource("1_hp4w2")]([SubResource("Resource_dqg1f"), SubResource("Resource_4j0fv")])
-neutral_finisher = SubResource("Resource_dn085")
-forward_finisher = SubResource("Resource_7xewg")
-up_finisher = SubResource("Resource_epesr")
-heavy_finisher = SubResource("Resource_yg23l")
-switch_attack = SubResource("Resource_2jb5o")
-counter_chain = Array[ExtResource("1_hp4w2")]([SubResource("Resource_l1dyp"), SubResource("Resource_1hjdr"), SubResource("Resource_k3rpg")])
+light_chain = Array[ExtResource("1_hp4w2")]([SubResource("Resource_4j0fv"), SubResource("Resource_dn085")])
+neutral_finisher = SubResource("Resource_2jb5o")
+forward_finisher = SubResource("Resource_xg22i")
+up_finisher = SubResource("Resource_8dn0h")
+heavy_finisher = SubResource("Resource_dqg1f")
+switch_attack = SubResource("Resource_epesr")
+counter_chain = Array[ExtResource("1_hp4w2")]([SubResource("Resource_1hjdr"), SubResource("Resource_k3rpg"), SubResource("Resource_7xewg")])
 air_light = SubResource("Resource_xwto1")
 air_slam = SubResource("Resource_1qhda")
-ground_finisher = SubResource("Resource_xg22i")
+ground_finisher = SubResource("Resource_yg23l")
+burrow_emerge = SubResource("Resource_l1dyp")

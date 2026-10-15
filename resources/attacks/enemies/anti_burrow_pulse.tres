@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="AttackData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/attack_data.gd" id="1_6rgua"]
+
+[resource]
+script = ExtResource("1_6rgua")
+attack_id = &"anti_burrow_pulse"
+animation_name = &"anti_burrow_pulse"
+attack_type = 2
+startup_frames = 16
+active_frames = 6
+recovery_frames = 24
+damage = 13.0
+posture_damage = 18.0
+hitbox_offset = Vector2(0, -6)
+hitbox_size = Vector2(190, 80)
+knockback = Vector2(160, -80)
+hitstun_frames = 18
+knockdown_frames = 26
+reaction_type = 2

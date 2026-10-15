@@ -167,6 +167,22 @@ func _build_short_blade() -> WeaponData:
 		"qi_cost": 2.0,
 	})
 	weapon.ground_finisher = _ground_finisher("short_ground_finisher", "short_blade", 22.0)
+	weapon.burrow_emerge = _save_attack("short_burrow_emerge", "short_blade", {
+		"startup_frames": 5,
+		"active_frames": 5,
+		"recovery_frames": 10,
+		"damage": 12.0,
+		"posture_damage": 12.0,
+		"hitbox_offset": Vector2(34.0, -72.0),
+		"hitbox_size": Vector2(76.0, 86.0),
+		"knockback": Vector2(80.0, -380.0),
+		"launch_velocity": Vector2(100.0, -410.0),
+		"reaction_type": 1,
+		"juggle_cost": 1,
+		"hitstun_frames": 20,
+		"shi_cost": 15.0,
+		"qi_cost": 2.0,
+	})
 	return weapon
 
 
@@ -248,6 +264,20 @@ func _build_enemy_attacks() -> Dictionary:
 			"knockdown_frames": 28,
 			"hitstun_frames": 20,
 		}),
+		"anti_burrow_pulse": _save_enemy_attack("anti_burrow_pulse", {
+			"attack_type": 2,
+			"startup_frames": 16,
+			"active_frames": 6,
+			"recovery_frames": 24,
+			"damage": 13.0,
+			"posture_damage": 18.0,
+			"hitbox_offset": Vector2(0.0, -6.0),
+			"hitbox_size": Vector2(190.0, 80.0),
+			"knockback": Vector2(160.0, -80.0),
+			"reaction_type": 2,
+			"knockdown_frames": 26,
+			"hitstun_frames": 18,
+		}),
 	}
 
 
@@ -281,6 +311,7 @@ func _build_enemy_profiles(attacks: Dictionary) -> void:
 	tian.guard_chance = 0.25
 	tian.melee_attacks = [attacks["tian_light"], attacks["tian_heavy"]]
 	tian.unblockable_attack = attacks["tian_heavy"]
+	tian.anti_burrow_attack = attacks["anti_burrow_pulse"]
 	ResourceSaver.save(tian, "res://resources/enemies/tian_bing.tres")
 
 	var guardian := ENEMY_PROFILE_SCRIPT.new()
@@ -297,6 +328,7 @@ func _build_enemy_profiles(attacks: Dictionary) -> void:
 	guardian.guard_chance = 0.65
 	guardian.melee_attacks = [attacks["guardian_heavy"]]
 	guardian.unblockable_attack = attacks["guardian_break"]
+	guardian.anti_burrow_attack = attacks["anti_burrow_pulse"]
 	ResourceSaver.save(guardian, "res://resources/enemies/guardian.tres")
 
 	var clerk := ENEMY_PROFILE_SCRIPT.new()
@@ -313,6 +345,7 @@ func _build_enemy_profiles(attacks: Dictionary) -> void:
 	clerk.guard_chance = 0.1
 	clerk.melee_attacks = [attacks["tian_light"]]
 	clerk.unblockable_attack = attacks["clerk_red"]
+	clerk.anti_burrow_attack = attacks["anti_burrow_pulse"]
 	clerk.projectile_attack = attacks["clerk_projectile"]
 	clerk.projectile_scene = projectile_scene
 	ResourceSaver.save(clerk, "res://resources/enemies/cleric_officer.tres")
@@ -456,6 +489,22 @@ func _build_spear() -> WeaponData:
 		"qi_cost": 2.0,
 	})
 	weapon.ground_finisher = _ground_finisher("spear_ground_finisher", "spear", 24.0)
+	weapon.burrow_emerge = _save_attack("spear_burrow_emerge", "spear", {
+		"startup_frames": 6,
+		"active_frames": 5,
+		"recovery_frames": 12,
+		"damage": 13.0,
+		"posture_damage": 14.0,
+		"hitbox_offset": Vector2(44.0, -78.0),
+		"hitbox_size": Vector2(104.0, 92.0),
+		"knockback": Vector2(90.0, -390.0),
+		"launch_velocity": Vector2(100.0, -430.0),
+		"reaction_type": 1,
+		"juggle_cost": 1,
+		"hitstun_frames": 21,
+		"shi_cost": 15.0,
+		"qi_cost": 2.0,
+	})
 	return weapon
 
 

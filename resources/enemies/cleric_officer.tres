@@ -6,6 +6,23 @@
 
 [sub_resource type="Resource" id="Resource_m8eyb"]
 script = ExtResource("1_nowru")
+attack_id = &"anti_burrow_pulse"
+animation_name = &"anti_burrow_pulse"
+attack_type = 2
+startup_frames = 16
+active_frames = 6
+recovery_frames = 24
+damage = 13.0
+posture_damage = 18.0
+hitbox_offset = Vector2(0, -6)
+hitbox_size = Vector2(190, 80)
+knockback = Vector2(160, -80)
+hitstun_frames = 18
+knockdown_frames = 26
+reaction_type = 2
+
+[sub_resource type="Resource" id="Resource_pjha2"]
+script = ExtResource("1_nowru")
 attack_id = &"tian_light"
 animation_name = &"tian_light"
 startup_frames = 9
@@ -56,7 +73,8 @@ move_speed = 120.0
 preferred_range_min = 180.0
 preferred_range_max = 320.0
 guard_chance = 0.1
-melee_attacks = Array[ExtResource("1_nowru")]([SubResource("Resource_m8eyb")])
+melee_attacks = Array[ExtResource("1_nowru")]([SubResource("Resource_pjha2")])
 unblockable_attack = SubResource("Resource_kitco")
+anti_burrow_attack = SubResource("Resource_m8eyb")
 projectile_attack = SubResource("Resource_y60up")
 projectile_scene = ExtResource("2_vrl85")

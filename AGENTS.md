@@ -15,8 +15,8 @@ Read that file before editing the project. It contains the Cold Start block, arc
   `E:\SteamLibrary\steamapps\common\Godot Engine\godot.windows.opt.tools.64.exe`
 - MCP: `Godot MCP Native 1.0.8`
 - MCP URL: `http://localhost:9080/mcp`
-- Current stage: M0 through M3 are complete.
-- Next implementation target: M4 free burrow, ground cracks, anti-burrow attacks, and emergence combo.
+- Current stage: M0 through M4 are complete.
+- Next implementation target: M5 behavior recording, old-self replay AI, and host-face reveal.
 
 ## Non-Negotiable Scope
 
@@ -63,6 +63,9 @@ Headless validation:
 & "E:\SteamLibrary\steamapps\common\Godot Engine\godot.windows.opt.tools.64.exe" --headless --path "E:\twelfe" --script res://tests/enemies/enemy_unblockable_test.gd
 & "E:\SteamLibrary\steamapps\common\Godot Engine\godot.windows.opt.tools.64.exe" --headless --path "E:\twelfe" --script res://tests/enemies/enemy_projectile_test.gd
 & "E:\SteamLibrary\steamapps\common\Godot Engine\godot.windows.opt.tools.64.exe" --headless --path "E:\twelfe" --script res://tests/enemies/enemy_ai_smoke_test.gd
+& "E:\SteamLibrary\steamapps\common\Godot Engine\godot.windows.opt.tools.64.exe" --headless --path "E:\twelfe" --script res://tests/combat/burrow_state_test.gd
+& "E:\SteamLibrary\steamapps\common\Godot Engine\godot.windows.opt.tools.64.exe" --headless --path "E:\twelfe" --script res://tests/combat/burrow_cost_test.gd
+& "E:\SteamLibrary\steamapps\common\Godot Engine\godot.windows.opt.tools.64.exe" --headless --path "E:\twelfe" --script res://tests/combat/emergence_combo_test.gd
 ```
 
 Update the task board and decision log in the full design document after every completed milestone.

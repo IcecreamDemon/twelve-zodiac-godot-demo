@@ -169,6 +169,8 @@ func _process_knockdown(delta: float) -> void:
 
 
 func _can_act_from_distance(distance: float) -> bool:
+	if _player != null and _player.is_burrowed():
+		return distance <= 190.0
 	if profile.archetype == EnemyProfile.Archetype.CLERIC_OFFICER:
 		return distance <= profile.preferred_range_max + 80.0
 	return distance <= profile.preferred_range_max
@@ -176,6 +178,10 @@ func _can_act_from_distance(distance: float) -> bool:
 
 func _choose_action(distance: float) -> void:
 	if profile == null or _player == null:
+		return
+
+	if _player.is_burrowed() and profile.anti_burrow_attack != null:
+		_start_melee(profile.anti_burrow_attack)
 		return
 
 	if profile.uses_guard and qi.current_qi > 25.0 and randf() < profile.guard_chance:

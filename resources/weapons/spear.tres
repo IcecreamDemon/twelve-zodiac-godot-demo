@@ -40,6 +40,25 @@ qi_cost = 2.0
 
 [sub_resource type="Resource" id="Resource_f4riw"]
 script = ExtResource("1_u7l32")
+attack_id = &"spear_burrow_emerge"
+animation_name = &"spear_burrow_emerge"
+active_frames = 5
+recovery_frames = 12
+damage = 13.0
+posture_damage = 14.0
+hitbox_offset = Vector2(44, -78)
+hitbox_size = Vector2(104, 92)
+knockback = Vector2(90, -390)
+launch_velocity = Vector2(100, -430)
+hitstun_frames = 21
+reaction_type = 1
+juggle_cost = 1
+shi_gain_on_hit = 0.0
+shi_cost = 15.0
+qi_cost = 2.0
+
+[sub_resource type="Resource" id="Resource_nnn7d"]
+script = ExtResource("1_u7l32")
 attack_id = &"spear_counter"
 animation_name = &"spear_counter"
 startup_frames = 3
@@ -52,7 +71,7 @@ knockback = Vector2(70, 0)
 hitstun_frames = 8
 shi_gain_on_hit = 8.0
 
-[sub_resource type="Resource" id="Resource_nnn7d"]
+[sub_resource type="Resource" id="Resource_neqh5"]
 script = ExtResource("1_u7l32")
 attack_id = &"spear_forward"
 animation_name = &"spear_forward"
@@ -68,7 +87,7 @@ hitstun_frames = 18
 shi_gain_on_hit = 12.0
 qi_cost = 2.0
 
-[sub_resource type="Resource" id="Resource_neqh5"]
+[sub_resource type="Resource" id="Resource_6usac"]
 script = ExtResource("1_u7l32")
 attack_id = &"spear_ground_finisher"
 animation_name = &"spear_ground_finisher"
@@ -87,7 +106,7 @@ is_ground_finisher = true
 shi_gain_on_hit = 20.0
 qi_cost = 2.0
 
-[sub_resource type="Resource" id="Resource_6usac"]
+[sub_resource type="Resource" id="Resource_n5vns"]
 script = ExtResource("1_u7l32")
 attack_id = &"spear_heavy"
 animation_name = &"spear_heavy"
@@ -106,7 +125,7 @@ reaction_type = 2
 shi_gain_on_hit = 18.0
 qi_cost = 3.0
 
-[sub_resource type="Resource" id="Resource_n5vns"]
+[sub_resource type="Resource" id="Resource_dwth8"]
 script = ExtResource("1_u7l32")
 attack_id = &"spear_l1"
 animation_name = &"spear_l1"
@@ -118,7 +137,7 @@ hitbox_size = Vector2(104, 48)
 knockback = Vector2(110, 0)
 qi_cost = 1.0
 
-[sub_resource type="Resource" id="Resource_dwth8"]
+[sub_resource type="Resource" id="Resource_152jx"]
 script = ExtResource("1_u7l32")
 attack_id = &"spear_l2"
 animation_name = &"spear_l2"
@@ -132,7 +151,7 @@ hitbox_size = Vector2(116, 50)
 hitstun_frames = 13
 qi_cost = 1.0
 
-[sub_resource type="Resource" id="Resource_152jx"]
+[sub_resource type="Resource" id="Resource_m420y"]
 script = ExtResource("1_u7l32")
 attack_id = &"spear_neutral"
 animation_name = &"spear_neutral"
@@ -148,7 +167,7 @@ hitstun_frames = 15
 shi_gain_on_hit = 12.0
 qi_cost = 1.0
 
-[sub_resource type="Resource" id="Resource_m420y"]
+[sub_resource type="Resource" id="Resource_pb3fy"]
 script = ExtResource("1_u7l32")
 attack_id = &"spear_switch"
 animation_name = &"spear_switch"
@@ -162,7 +181,7 @@ hitstun_frames = 10
 shi_gain_on_hit = 8.0
 qi_cost = 1.0
 
-[sub_resource type="Resource" id="Resource_pb3fy"]
+[sub_resource type="Resource" id="Resource_ujk6j"]
 script = ExtResource("1_u7l32")
 attack_id = &"spear_up"
 animation_name = &"spear_up"
@@ -184,13 +203,14 @@ qi_cost = 2.0
 script = ExtResource("2_17uv3")
 weapon_id = &"spear"
 display_name = "守关长枪"
-light_chain = Array[ExtResource("1_u7l32")]([SubResource("Resource_n5vns"), SubResource("Resource_dwth8")])
-neutral_finisher = SubResource("Resource_152jx")
-forward_finisher = SubResource("Resource_nnn7d")
-up_finisher = SubResource("Resource_pb3fy")
-heavy_finisher = SubResource("Resource_6usac")
-switch_attack = SubResource("Resource_m420y")
-counter_chain = Array[ExtResource("1_u7l32")]([SubResource("Resource_f4riw")])
+light_chain = Array[ExtResource("1_u7l32")]([SubResource("Resource_dwth8"), SubResource("Resource_152jx")])
+neutral_finisher = SubResource("Resource_m420y")
+forward_finisher = SubResource("Resource_neqh5")
+up_finisher = SubResource("Resource_ujk6j")
+heavy_finisher = SubResource("Resource_n5vns")
+switch_attack = SubResource("Resource_pb3fy")
+counter_chain = Array[ExtResource("1_u7l32")]([SubResource("Resource_nnn7d")])
 air_light = SubResource("Resource_oqcxr")
 air_slam = SubResource("Resource_udw87")
-ground_finisher = SubResource("Resource_neqh5")
+ground_finisher = SubResource("Resource_6usac")
+burrow_emerge = SubResource("Resource_f4riw")

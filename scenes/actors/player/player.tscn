@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3]
+[gd_scene load_steps=13 format=3]
 
 [ext_resource type="Script" path="res://scripts/actors/player/player_controller.gd" id="1_player"]
 [ext_resource type="Script" path="res://scripts/actors/actor_state_machine.gd" id="2_state"]
@@ -16,6 +16,9 @@ size = Vector2(46, 84)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hit"]
 size = Vector2(72, 54)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_burrow"]
+size = Vector2(52, 24)
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_player")
@@ -73,3 +76,19 @@ script = ExtResource("10_hurtbox")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2(0, -42)
 shape = SubResource("RectangleShape2D_body")
+
+[node name="BurrowDetector" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 128
+monitoring = true
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BurrowDetector"]
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_burrow")
+
+[node name="BurrowCrack" type="Line2D" parent="."]
+visible = false
+points = PackedVector2Array(-28, -36, -8, -34, 8, -38, 28, -36)
+width = 6.0
+default_color = Color(0.42, 0.2, 0.12, 0.9)

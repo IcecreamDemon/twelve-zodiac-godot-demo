@@ -21,5 +21,6 @@ enum Archetype {
 @export var uses_guard: bool = true
 @export var melee_attacks: Array[AttackData] = []
 @export var unblockable_attack: AttackData
+@export var anti_burrow_attack: AttackData
 @export var projectile_attack: AttackData
 @export var projectile_scene: PackedScene

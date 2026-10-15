@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="AttackData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/attack_data.gd" id="1_g52j7"]
+
+[resource]
+script = ExtResource("1_g52j7")
+attack_id = &"spear_burrow_emerge"
+animation_name = &"spear_burrow_emerge"
+active_frames = 5
+recovery_frames = 12
+damage = 13.0
+posture_damage = 14.0
+hitbox_offset = Vector2(44, -78)
+hitbox_size = Vector2(104, 92)
+knockback = Vector2(90, -390)
+launch_velocity = Vector2(100, -430)
+hitstun_frames = 21
+reaction_type = 1
+juggle_cost = 1
+shi_gain_on_hit = 0.0
+shi_cost = 15.0
+qi_cost = 2.0

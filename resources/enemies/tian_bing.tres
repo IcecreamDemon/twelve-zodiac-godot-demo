@@ -5,6 +5,23 @@
 
 [sub_resource type="Resource" id="Resource_m8eyb"]
 script = ExtResource("1_c2r4k")
+attack_id = &"anti_burrow_pulse"
+animation_name = &"anti_burrow_pulse"
+attack_type = 2
+startup_frames = 16
+active_frames = 6
+recovery_frames = 24
+damage = 13.0
+posture_damage = 18.0
+hitbox_offset = Vector2(0, -6)
+hitbox_size = Vector2(190, 80)
+knockback = Vector2(160, -80)
+hitstun_frames = 18
+knockdown_frames = 26
+reaction_type = 2
+
+[sub_resource type="Resource" id="Resource_pjha2"]
+script = ExtResource("1_c2r4k")
 attack_id = &"tian_light"
 animation_name = &"tian_light"
 startup_frames = 9
@@ -15,7 +32,7 @@ hitbox_offset = Vector2(52, -44)
 hitbox_size = Vector2(76, 54)
 knockback = Vector2(110, 0)
 
-[sub_resource type="Resource" id="Resource_pjha2"]
+[sub_resource type="Resource" id="Resource_gfgjj"]
 script = ExtResource("1_c2r4k")
 attack_id = &"tian_heavy"
 animation_name = &"tian_heavy"
@@ -37,5 +54,6 @@ enemy_id = &"tian_bing"
 display_name = "天兵"
 move_speed = 145.0
 preferred_range_max = 92.0
-melee_attacks = Array[ExtResource("1_c2r4k")]([SubResource("Resource_m8eyb"), SubResource("Resource_pjha2")])
-unblockable_attack = SubResource("Resource_pjha2")
+melee_attacks = Array[ExtResource("1_c2r4k")]([SubResource("Resource_pjha2"), SubResource("Resource_gfgjj")])
+unblockable_attack = SubResource("Resource_gfgjj")
+anti_burrow_attack = SubResource("Resource_m8eyb")
