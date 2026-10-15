@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="AttackData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/attack_data.gd" id="1_7cogb"]
+
+[resource]
+script = ExtResource("1_7cogb")
+attack_id = &"guardian_break"
+animation_name = &"guardian_break"
+attack_type = 1
+startup_frames = 28
+active_frames = 6
+recovery_frames = 30
+damage = 20.0
+posture_damage = 34.0
+hitbox_offset = Vector2(62, -42)
+hitbox_size = Vector2(94, 68)
+knockback = Vector2(220, -80)
+hitstun_frames = 22
+knockdown_frames = 30
+reaction_type = 2

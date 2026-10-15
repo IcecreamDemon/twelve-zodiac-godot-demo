@@ -1,0 +1,64 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/actors/player/player.tscn" id="1_player"]
+[ext_resource type="PackedScene" path="res://scenes/actors/enemies/tian_bing.tscn" id="2_tian"]
+[ext_resource type="PackedScene" path="res://scenes/actors/enemies/guardian.tscn" id="3_guardian"]
+[ext_resource type="PackedScene" path="res://scenes/actors/enemies/cleric_officer.tscn" id="4_clerk"]
+[ext_resource type="Script" path="res://scripts/debug/combat_debug_overlay.gd" id="5_debug"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ground"]
+size = Vector2(1920, 120)
+
+[node name="EnemyLab" type="Node2D"]
+
+[node name="Background" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(0, 0, 1920, 0, 1920, 1080, 0, 1080)
+color = Color(0.9, 0.89, 0.84, 1)
+
+[node name="Ground" type="StaticBody2D" parent="."]
+position = Vector2(960, 920)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
+shape = SubResource("RectangleShape2D_ground")
+
+[node name="GroundVisual" type="Polygon2D" parent="Ground"]
+polygon = PackedVector2Array(-960, -60, 960, -60, 960, 60, -960, 60)
+color = Color(0.12, 0.14, 0.16, 1)
+
+[node name="Player" parent="." instance=ExtResource("1_player")]
+position = Vector2(260, 860)
+
+[node name="TianBing" parent="." instance=ExtResource("2_tian")]
+position = Vector2(760, 860)
+
+[node name="Guardian" parent="." instance=ExtResource("3_guardian")]
+position = Vector2(1120, 860)
+
+[node name="ClericOfficer" parent="." instance=ExtResource("4_clerk")]
+position = Vector2(1560, 860)
+
+[node name="DebugOverlay" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("5_debug")
+
+[node name="StateLabel" type="Label" parent="DebugOverlay"]
+offset_left = 40.0
+offset_top = 32.0
+offset_right = 520.0
+offset_bottom = 60.0
+text = "PLAYER  IDLE"
+
+[node name="FrameLabel" type="Label" parent="DebugOverlay"]
+offset_left = 40.0
+offset_top = 60.0
+offset_right = 640.0
+offset_bottom = 88.0
+text = "ATTACK FRAME  00 / 00   ACTIVE  FALSE"

@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="AttackData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/attack_data.gd" id="1_6vi8d"]
+
+[resource]
+script = ExtResource("1_6vi8d")
+attack_id = &"clerk_red"
+animation_name = &"clerk_red"
+attack_type = 1
+startup_frames = 26
+active_frames = 5
+recovery_frames = 28
+damage = 18.0
+posture_damage = 26.0
+hitbox_offset = Vector2(70, -46)
+hitbox_size = Vector2(120, 70)
+knockback = Vector2(180, -80)
+hitstun_frames = 20
+reaction_type = 2

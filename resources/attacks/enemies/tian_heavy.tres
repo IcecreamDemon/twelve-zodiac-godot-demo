@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="AttackData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/attack_data.gd" id="1_5qni5"]
+
+[resource]
+script = ExtResource("1_5qni5")
+attack_id = &"tian_heavy"
+animation_name = &"tian_heavy"
+startup_frames = 17
+active_frames = 5
+recovery_frames = 22
+damage = 17.0
+posture_damage = 22.0
+guard_qi_damage = 20.0
+hitbox_offset = Vector2(58, -44)
+hitbox_size = Vector2(88, 60)
+knockback = Vector2(180, -60)
+hitstun_frames = 18
+reaction_type = 2

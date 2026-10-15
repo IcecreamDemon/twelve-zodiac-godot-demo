@@ -1,0 +1,71 @@
+[gd_scene load_steps=10 format=3]
+
+[ext_resource type="Script" path="res://scripts/actors/enemies/enemy_controller.gd" id="1_enemy"]
+[ext_resource type="Resource" path="res://resources/enemies/tian_bing.tres" id="2_profile"]
+[ext_resource type="Script" path="res://scripts/actors/actor_state_machine.gd" id="3_state"]
+[ext_resource type="Script" path="res://scripts/components/health_component.gd" id="4_health"]
+[ext_resource type="Script" path="res://scripts/components/posture_component.gd" id="5_posture"]
+[ext_resource type="Script" path="res://scripts/components/qi_component.gd" id="6_qi"]
+[ext_resource type="Script" path="res://scripts/components/shi_component.gd" id="7_shi"]
+[ext_resource type="Script" path="res://scripts/combat/hitbox_component.gd" id="8_hitbox"]
+[ext_resource type="Script" path="res://scripts/combat/hurtbox_component.gd" id="9_hurtbox"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_body"]
+size = Vector2(48, 86)
+
+[node name="TianBing" type="CharacterBody2D" groups=["enemy"]]
+collision_layer = 4
+collision_mask = 1
+script = ExtResource("1_enemy")
+profile = ExtResource("2_profile")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -43)
+shape = SubResource("RectangleShape2D_body")
+
+[node name="Visual" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-20, -84, 20, -84, 22, -42, 34, -28, 18, -12, 30, 2, 14, 8, -6, -2, -20, 8, -34, -4, -20, -18, -34, -34)
+color = Color(0.25, 0.33, 0.45, 1)
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("3_state")
+initial_state = &"idle"
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("4_health")
+max_health = 100.0
+
+[node name="PostureComponent" type="Node" parent="."]
+script = ExtResource("5_posture")
+max_posture = 80.0
+
+[node name="QiComponent" type="Node" parent="."]
+script = ExtResource("6_qi")
+max_qi = 100.0
+
+[node name="ShiComponent" type="Node" parent="."]
+script = ExtResource("7_shi")
+max_shi = 100.0
+
+[node name="AttackHitbox" type="Area2D" parent="." groups=["combat_hitbox"]]
+position = Vector2(52, -44)
+collision_layer = 0
+collision_mask = 8
+monitoring = false
+monitorable = false
+script = ExtResource("8_hitbox")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHitbox"]
+disabled = true
+shape = SubResource("RectangleShape2D_body")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 0
+monitoring = false
+monitorable = true
+script = ExtResource("9_hurtbox")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, -43)
+shape = SubResource("RectangleShape2D_body")

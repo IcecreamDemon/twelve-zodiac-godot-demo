@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="AttackData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/attack_data.gd" id="1_eyrq2"]
+
+[resource]
+script = ExtResource("1_eyrq2")
+attack_id = &"guardian_heavy"
+animation_name = &"guardian_heavy"
+startup_frames = 21
+active_frames = 6
+recovery_frames = 26
+damage = 15.0
+posture_damage = 30.0
+guard_qi_damage = 24.0
+hitbox_offset = Vector2(56, -44)
+hitbox_size = Vector2(86, 62)
+knockback = Vector2(130, 0)
+hitstun_frames = 18

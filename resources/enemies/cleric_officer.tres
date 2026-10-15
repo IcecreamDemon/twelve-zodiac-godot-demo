@@ -1,0 +1,62 @@
+[gd_resource type="Resource" script_class="EnemyProfile" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/attack_data.gd" id="1_nowru"]
+[ext_resource type="PackedScene" path="res://scenes/combat/enemy_projectile.tscn" id="2_vrl85"]
+[ext_resource type="Script" path="res://scripts/data/enemy_profile.gd" id="3_khf72"]
+
+[sub_resource type="Resource" id="Resource_m8eyb"]
+script = ExtResource("1_nowru")
+attack_id = &"tian_light"
+animation_name = &"tian_light"
+startup_frames = 9
+active_frames = 4
+recovery_frames = 14
+guard_qi_damage = 12.0
+hitbox_offset = Vector2(52, -44)
+hitbox_size = Vector2(76, 54)
+knockback = Vector2(110, 0)
+
+[sub_resource type="Resource" id="Resource_y60up"]
+script = ExtResource("1_nowru")
+attack_id = &"clerk_projectile"
+animation_name = &"clerk_projectile"
+startup_frames = 14
+active_frames = 1
+recovery_frames = 22
+damage = 9.0
+posture_damage = 8.0
+guard_qi_damage = 14.0
+knockback = Vector2(90, 0)
+
+[sub_resource type="Resource" id="Resource_kitco"]
+script = ExtResource("1_nowru")
+attack_id = &"clerk_red"
+animation_name = &"clerk_red"
+attack_type = 1
+startup_frames = 26
+active_frames = 5
+recovery_frames = 28
+damage = 18.0
+posture_damage = 26.0
+hitbox_offset = Vector2(70, -46)
+hitbox_size = Vector2(120, 70)
+knockback = Vector2(180, -80)
+hitstun_frames = 20
+reaction_type = 2
+
+[resource]
+script = ExtResource("3_khf72")
+enemy_id = &"cleric_officer"
+display_name = "法吏"
+archetype = 2
+max_health = 85.0
+max_posture = 60.0
+qi_recovery_per_second = 22.0
+move_speed = 120.0
+preferred_range_min = 180.0
+preferred_range_max = 320.0
+guard_chance = 0.1
+melee_attacks = Array[ExtResource("1_nowru")]([SubResource("Resource_m8eyb")])
+unblockable_attack = SubResource("Resource_kitco")
+projectile_attack = SubResource("Resource_y60up")
+projectile_scene = ExtResource("2_vrl85")

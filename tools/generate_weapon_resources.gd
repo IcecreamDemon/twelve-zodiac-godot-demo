@@ -2,21 +2,27 @@ extends SceneTree
 
 const ATTACK_DATA_SCRIPT := preload("res://scripts/data/attack_data.gd")
 const WEAPON_DATA_SCRIPT := preload("res://scripts/data/weapon_data.gd")
+const ENEMY_PROFILE_SCRIPT := preload("res://scripts/data/enemy_profile.gd")
 
 const SHORT_BLADE_DIR := "res://resources/attacks/short_blade/"
 const SPEAR_DIR := "res://resources/attacks/spear/"
+const ENEMY_ATTACK_DIR := "res://resources/attacks/enemies/"
 
 
 func _initialize() -> void:
 	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path("res://resources/weapons/"))
 	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(SHORT_BLADE_DIR))
 	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(SPEAR_DIR))
+	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(ENEMY_ATTACK_DIR))
+	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path("res://resources/enemies/"))
 
 	var short_blade := _build_short_blade()
 	var spear := _build_spear()
+	var enemy_attacks := _build_enemy_attacks()
 
 	ResourceSaver.save(short_blade, "res://resources/weapons/short_blade.tres")
 	ResourceSaver.save(spear, "res://resources/weapons/spear.tres")
+	_build_enemy_profiles(enemy_attacks)
 	print("WEAPON RESOURCE GENERATION PASS")
 	quit(0)
 
@@ -162,6 +168,154 @@ func _build_short_blade() -> WeaponData:
 	})
 	weapon.ground_finisher = _ground_finisher("short_ground_finisher", "short_blade", 22.0)
 	return weapon
+
+
+func _build_enemy_attacks() -> Dictionary:
+	return {
+		"tian_light": _save_enemy_attack("tian_light", {
+			"startup_frames": 9,
+			"active_frames": 4,
+			"recovery_frames": 14,
+			"damage": 10.0,
+			"posture_damage": 10.0,
+			"guard_qi_damage": 12.0,
+			"hitbox_offset": Vector2(52.0, -44.0),
+			"hitbox_size": Vector2(76.0, 54.0),
+			"knockback": Vector2(110.0, 0.0),
+			"hitstun_frames": 12,
+		}),
+		"tian_heavy": _save_enemy_attack("tian_heavy", {
+			"startup_frames": 17,
+			"active_frames": 5,
+			"recovery_frames": 22,
+			"damage": 17.0,
+			"posture_damage": 22.0,
+			"guard_qi_damage": 20.0,
+			"hitbox_offset": Vector2(58.0, -44.0),
+			"hitbox_size": Vector2(88.0, 60.0),
+			"knockback": Vector2(180.0, -60.0),
+			"reaction_type": 2,
+			"knockdown_frames": 28,
+			"hitstun_frames": 18,
+		}),
+		"guardian_heavy": _save_enemy_attack("guardian_heavy", {
+			"startup_frames": 21,
+			"active_frames": 6,
+			"recovery_frames": 26,
+			"damage": 15.0,
+			"posture_damage": 30.0,
+			"guard_qi_damage": 24.0,
+			"hitbox_offset": Vector2(56.0, -44.0),
+			"hitbox_size": Vector2(86.0, 62.0),
+			"knockback": Vector2(130.0, 0.0),
+			"hitstun_frames": 18,
+		}),
+		"guardian_break": _save_enemy_attack("guardian_break", {
+			"attack_type": 1,
+			"startup_frames": 28,
+			"active_frames": 6,
+			"recovery_frames": 30,
+			"damage": 20.0,
+			"posture_damage": 34.0,
+			"hitbox_offset": Vector2(62.0, -42.0),
+			"hitbox_size": Vector2(94.0, 68.0),
+			"knockback": Vector2(220.0, -80.0),
+			"reaction_type": 2,
+			"knockdown_frames": 30,
+			"hitstun_frames": 22,
+		}),
+		"clerk_projectile": _save_enemy_attack("clerk_projectile", {
+			"startup_frames": 14,
+			"active_frames": 1,
+			"recovery_frames": 22,
+			"damage": 9.0,
+			"posture_damage": 8.0,
+			"guard_qi_damage": 14.0,
+			"knockback": Vector2(90.0, 0.0),
+			"hitstun_frames": 12,
+		}),
+		"clerk_red": _save_enemy_attack("clerk_red", {
+			"attack_type": 1,
+			"startup_frames": 26,
+			"active_frames": 5,
+			"recovery_frames": 28,
+			"damage": 18.0,
+			"posture_damage": 26.0,
+			"hitbox_offset": Vector2(70.0, -46.0),
+			"hitbox_size": Vector2(120.0, 70.0),
+			"knockback": Vector2(180.0, -80.0),
+			"reaction_type": 2,
+			"knockdown_frames": 28,
+			"hitstun_frames": 20,
+		}),
+	}
+
+
+func _save_enemy_attack(attack_id: String, overrides: Dictionary) -> AttackData:
+	var attack: AttackData = ATTACK_DATA_SCRIPT.new()
+	attack.attack_id = StringName(attack_id)
+	attack.animation_name = StringName(attack_id)
+	attack.damage = 0.0
+	attack.posture_damage = 0.0
+	attack.hitstun_frames = 10
+	for property_name: String in overrides:
+		attack.set(property_name, overrides[property_name])
+	ResourceSaver.save(attack, "%s%s.tres" % [ENEMY_ATTACK_DIR, attack_id])
+	return attack
+
+
+func _build_enemy_profiles(attacks: Dictionary) -> void:
+	var projectile_scene: PackedScene = load("res://scenes/combat/enemy_projectile.tscn")
+
+	var tian := ENEMY_PROFILE_SCRIPT.new()
+	tian.enemy_id = &"tian_bing"
+	tian.display_name = "天兵"
+	tian.archetype = 0
+	tian.max_health = 100.0
+	tian.max_posture = 80.0
+	tian.max_qi = 100.0
+	tian.qi_recovery_per_second = 18.0
+	tian.move_speed = 145.0
+	tian.preferred_range_min = 48.0
+	tian.preferred_range_max = 92.0
+	tian.guard_chance = 0.25
+	tian.melee_attacks = [attacks["tian_light"], attacks["tian_heavy"]]
+	tian.unblockable_attack = attacks["tian_heavy"]
+	ResourceSaver.save(tian, "res://resources/enemies/tian_bing.tres")
+
+	var guardian := ENEMY_PROFILE_SCRIPT.new()
+	guardian.enemy_id = &"guardian"
+	guardian.display_name = "镇守"
+	guardian.archetype = 1
+	guardian.max_health = 140.0
+	guardian.max_posture = 120.0
+	guardian.max_qi = 140.0
+	guardian.qi_recovery_per_second = 14.0
+	guardian.move_speed = 95.0
+	guardian.preferred_range_min = 44.0
+	guardian.preferred_range_max = 86.0
+	guardian.guard_chance = 0.65
+	guardian.melee_attacks = [attacks["guardian_heavy"]]
+	guardian.unblockable_attack = attacks["guardian_break"]
+	ResourceSaver.save(guardian, "res://resources/enemies/guardian.tres")
+
+	var clerk := ENEMY_PROFILE_SCRIPT.new()
+	clerk.enemy_id = &"cleric_officer"
+	clerk.display_name = "法吏"
+	clerk.archetype = 2
+	clerk.max_health = 85.0
+	clerk.max_posture = 60.0
+	clerk.max_qi = 100.0
+	clerk.qi_recovery_per_second = 22.0
+	clerk.move_speed = 120.0
+	clerk.preferred_range_min = 180.0
+	clerk.preferred_range_max = 320.0
+	clerk.guard_chance = 0.1
+	clerk.melee_attacks = [attacks["tian_light"]]
+	clerk.unblockable_attack = attacks["clerk_red"]
+	clerk.projectile_attack = attacks["clerk_projectile"]
+	clerk.projectile_scene = projectile_scene
+	ResourceSaver.save(clerk, "res://resources/enemies/cleric_officer.tres")
 
 
 func _build_spear() -> WeaponData:

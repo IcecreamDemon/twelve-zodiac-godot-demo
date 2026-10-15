@@ -1,0 +1,52 @@
+[gd_resource type="Resource" script_class="EnemyProfile" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/attack_data.gd" id="1_nbox8"]
+[ext_resource type="Script" path="res://scripts/data/enemy_profile.gd" id="2_f0uw0"]
+
+[sub_resource type="Resource" id="Resource_lmjd2"]
+script = ExtResource("1_nbox8")
+attack_id = &"guardian_heavy"
+animation_name = &"guardian_heavy"
+startup_frames = 21
+active_frames = 6
+recovery_frames = 26
+damage = 15.0
+posture_damage = 30.0
+guard_qi_damage = 24.0
+hitbox_offset = Vector2(56, -44)
+hitbox_size = Vector2(86, 62)
+knockback = Vector2(130, 0)
+hitstun_frames = 18
+
+[sub_resource type="Resource" id="Resource_btw5a"]
+script = ExtResource("1_nbox8")
+attack_id = &"guardian_break"
+animation_name = &"guardian_break"
+attack_type = 1
+startup_frames = 28
+active_frames = 6
+recovery_frames = 30
+damage = 20.0
+posture_damage = 34.0
+hitbox_offset = Vector2(62, -42)
+hitbox_size = Vector2(94, 68)
+knockback = Vector2(220, -80)
+hitstun_frames = 22
+knockdown_frames = 30
+reaction_type = 2
+
+[resource]
+script = ExtResource("2_f0uw0")
+enemy_id = &"guardian"
+display_name = "镇守"
+archetype = 1
+max_health = 140.0
+max_posture = 120.0
+max_qi = 140.0
+qi_recovery_per_second = 14.0
+move_speed = 95.0
+preferred_range_min = 44.0
+preferred_range_max = 86.0
+guard_chance = 0.65
+melee_attacks = Array[ExtResource("1_nbox8")]([SubResource("Resource_lmjd2")])
+unblockable_attack = SubResource("Resource_btw5a")

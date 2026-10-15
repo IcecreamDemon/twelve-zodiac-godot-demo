@@ -9,7 +9,7 @@ static func resolve_hit(
 	direction: int,
 	damage_multiplier: float = 1.0,
 ) -> bool:
-	if not is_instance_valid(attacker) or not is_instance_valid(target):
+	if not is_instance_valid(target):
 		return false
 
 	var health := target.get_node_or_null("HealthComponent") as HealthComponent
@@ -17,7 +17,9 @@ static func resolve_hit(
 		return false
 
 	var posture := target.get_node_or_null("PostureComponent") as PostureComponent
-	var attacker_shi := attacker.get_node_or_null("ShiComponent") as ShiComponent
+	var attacker_shi: ShiComponent
+	if is_instance_valid(attacker):
+		attacker_shi = attacker.get_node_or_null("ShiComponent") as ShiComponent
 
 	health.take_damage(attack_data.damage * damage_multiplier)
 	if posture != null:

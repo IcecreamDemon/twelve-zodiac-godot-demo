@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3]
+[gd_scene load_steps=12 format=3]
 
 [ext_resource type="Script" path="res://scripts/actors/player/player_controller.gd" id="1_player"]
 [ext_resource type="Script" path="res://scripts/actors/actor_state_machine.gd" id="2_state"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://scripts/combat/hitbox_component.gd" id="7_hitbox"]
 [ext_resource type="Resource" path="res://resources/weapons/short_blade.tres" id="8_weapon"]
 [ext_resource type="Resource" path="res://resources/weapons/spear.tres" id="9_weapon"]
+[ext_resource type="Script" path="res://scripts/combat/hurtbox_component.gd" id="10_hurtbox"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_body"]
 size = Vector2(46, 84)
@@ -61,3 +62,14 @@ script = ExtResource("7_hitbox")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHitbox"]
 disabled = true
 shape = SubResource("RectangleShape2D_hit")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 0
+monitoring = false
+monitorable = true
+script = ExtResource("10_hurtbox")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, -42)
+shape = SubResource("RectangleShape2D_body")

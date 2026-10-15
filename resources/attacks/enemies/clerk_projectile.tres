@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="AttackData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/attack_data.gd" id="1_wnrrk"]
+
+[resource]
+script = ExtResource("1_wnrrk")
+attack_id = &"clerk_projectile"
+animation_name = &"clerk_projectile"
+startup_frames = 14
+active_frames = 1
+recovery_frames = 22
+damage = 9.0
+posture_damage = 8.0
+guard_qi_damage = 14.0
+knockback = Vector2(90, 0)
