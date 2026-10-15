@@ -13,11 +13,13 @@ config_version=5
 config/name="twelfe"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
+run/main_scene="res://scenes/boot/main.tscn"
 
 [autoload]
 
 GameEvents="*res://scripts/autoload/game_events.gd"
 DebugFlags="*res://scripts/autoload/debug_flags.gd"
+MCPRuntimeProbe="*uid://bsg12huaf1u5i"
 
 [display]
 

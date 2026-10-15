@@ -1,0 +1,192 @@
+[gd_scene load_steps=10 format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/actors/player/player.tscn" id="1_player"]
+[ext_resource type="PackedScene" path="res://scenes/actors/training_dummy.tscn" id="2_dummy"]
+[ext_resource type="Script" path="res://scripts/ui/combat_hud.gd" id="3_hud"]
+[ext_resource type="Script" path="res://scripts/debug/combat_debug_overlay.gd" id="4_debug"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ground"]
+size = Vector2(1920, 120)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_platform"]
+size = Vector2(420, 24)
+
+[node name="CombatLab" type="Node2D"]
+
+[node name="Background" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(0, 0, 1920, 0, 1920, 1080, 0, 1080)
+color = Color(0.925, 0.91, 0.86, 1)
+
+[node name="InkLineA" type="Line2D" parent="."]
+points = PackedVector2Array(0, 740, 260, 700, 540, 735, 820, 690, 1120, 728, 1450, 676, 1920, 710)
+width = 8.0
+default_color = Color(0.12, 0.14, 0.16, 0.12)
+
+[node name="InkLineB" type="Line2D" parent="."]
+points = PackedVector2Array(0, 180, 310, 245, 560, 190, 850, 250, 1160, 190, 1500, 240, 1920, 170)
+width = 5.0
+default_color = Color(0.12, 0.14, 0.16, 0.08)
+
+[node name="Ground" type="StaticBody2D" parent="."]
+position = Vector2(960, 920)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
+shape = SubResource("RectangleShape2D_ground")
+
+[node name="GroundVisual" type="Polygon2D" parent="Ground"]
+polygon = PackedVector2Array(-960, -60, 960, -60, 960, 60, -960, 60)
+color = Color(0.12, 0.14, 0.16, 1)
+
+[node name="Platform" type="StaticBody2D" parent="."]
+position = Vector2(960, 650)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform"]
+shape = SubResource("RectangleShape2D_platform")
+
+[node name="PlatformVisual" type="Polygon2D" parent="Platform"]
+polygon = PackedVector2Array(-210, -12, 210, -12, 210, 12, -210, 12)
+color = Color(0.28, 0.3, 0.31, 1)
+
+[node name="Player" parent="." instance=ExtResource("1_player")]
+position = Vector2(420, 860)
+
+[node name="TrainingDummy" parent="." instance=ExtResource("2_dummy")]
+position = Vector2(1320, 860)
+
+[node name="CombatHud" type="CanvasLayer" parent="."]
+script = ExtResource("3_hud")
+
+[node name="Root" type="Control" parent="CombatHud"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="PlayerLabel" type="Label" parent="CombatHud/Root"]
+offset_left = 40.0
+offset_top = 32.0
+offset_right = 420.0
+offset_bottom = 60.0
+text = "PLAYER"
+
+[node name="PlayerHealthBar" type="ProgressBar" parent="CombatHud/Root"]
+offset_left = 40.0
+offset_top = 64.0
+offset_right = 400.0
+offset_bottom = 86.0
+show_percentage = false
+value = 100.0
+
+[node name="PlayerPostureBar" type="ProgressBar" parent="CombatHud/Root"]
+offset_left = 40.0
+offset_top = 92.0
+offset_right = 400.0
+offset_bottom = 112.0
+show_percentage = false
+value = 80.0
+
+[node name="PlayerQiBar" type="ProgressBar" parent="CombatHud/Root"]
+offset_left = 40.0
+offset_top = 118.0
+offset_right = 400.0
+offset_bottom = 138.0
+show_percentage = false
+value = 100.0
+
+[node name="PlayerShiBar" type="ProgressBar" parent="CombatHud/Root"]
+offset_left = 40.0
+offset_top = 144.0
+offset_right = 400.0
+offset_bottom = 164.0
+show_percentage = false
+value = 0.0
+
+[node name="PlayerStateLabel" type="Label" parent="CombatHud/Root"]
+offset_left = 40.0
+offset_top = 174.0
+offset_right = 420.0
+offset_bottom = 202.0
+text = "STATE  IDLE"
+
+[node name="DummyLabel" type="Label" parent="CombatHud/Root"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -420.0
+offset_top = 32.0
+offset_right = -40.0
+offset_bottom = 60.0
+grow_horizontal = 0
+text = "TRAINING DUMMY"
+horizontal_alignment = 2
+
+[node name="DummyHealthBar" type="ProgressBar" parent="CombatHud/Root"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -400.0
+offset_top = 64.0
+offset_right = -40.0
+offset_bottom = 86.0
+grow_horizontal = 0
+show_percentage = false
+value = 100.0
+
+[node name="DummyPostureBar" type="ProgressBar" parent="CombatHud/Root"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -400.0
+offset_top = 92.0
+offset_right = -40.0
+offset_bottom = 112.0
+grow_horizontal = 0
+show_percentage = false
+value = 80.0
+
+[node name="DummyStateLabel" type="Label" parent="CombatHud/Root"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -420.0
+offset_top = 118.0
+offset_right = -40.0
+offset_bottom = 146.0
+grow_horizontal = 0
+text = "STATE  IDLE"
+horizontal_alignment = 2
+
+[node name="DebugOverlay" type="Control" parent="CombatHud/Root"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("4_debug")
+
+[node name="StateLabel" type="Label" parent="CombatHud/Root/DebugOverlay"]
+offset_left = 40.0
+offset_top = 246.0
+offset_right = 500.0
+offset_bottom = 274.0
+text = "PLAYER  IDLE"
+
+[node name="FrameLabel" type="Label" parent="CombatHud/Root/DebugOverlay"]
+offset_left = 40.0
+offset_top = 274.0
+offset_right = 600.0
+offset_bottom = 302.0
+text = "ATTACK FRAME  00 / 00   ACTIVE  FALSE"

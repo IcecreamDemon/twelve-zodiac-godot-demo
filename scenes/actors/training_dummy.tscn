@@ -1,0 +1,56 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://scripts/actors/training_dummy.gd" id="1_dummy"]
+[ext_resource type="Script" path="res://scripts/actors/actor_state_machine.gd" id="2_state"]
+[ext_resource type="Script" path="res://scripts/components/health_component.gd" id="3_health"]
+[ext_resource type="Script" path="res://scripts/components/posture_component.gd" id="4_posture"]
+[ext_resource type="Script" path="res://scripts/components/qi_component.gd" id="5_qi"]
+[ext_resource type="Script" path="res://scripts/components/shi_component.gd" id="6_shi"]
+[ext_resource type="Script" path="res://scripts/combat/hurtbox_component.gd" id="7_hurtbox"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_body"]
+size = Vector2(52, 88)
+
+[node name="TrainingDummy" type="CharacterBody2D" groups=["training_dummy"]]
+script = ExtResource("1_dummy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -44)
+shape = SubResource("RectangleShape2D_body")
+
+[node name="Visual" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-24, -88, 24, -88, 24, -54, 34, -42, 18, -28, 34, -10, 20, 0, 4, -10, -8, 0, -24, -12, -34, -32, -18, -44)
+color = Color(0.55, 0.28, 0.18, 1)
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 0
+monitoring = false
+monitorable = true
+script = ExtResource("7_hurtbox")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, -44)
+shape = SubResource("RectangleShape2D_body")
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("2_state")
+initial_state = &"idle"
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("3_health")
+max_health = 100.0
+
+[node name="PostureComponent" type="Node" parent="."]
+script = ExtResource("4_posture")
+max_posture = 80.0
+recovery_per_second = 8.0
+
+[node name="QiComponent" type="Node" parent="."]
+script = ExtResource("5_qi")
+max_qi = 100.0
+recovery_per_second = 0.0
+
+[node name="ShiComponent" type="Node" parent="."]
+script = ExtResource("6_shi")
+max_shi = 100.0

@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="AttackData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/attack_data.gd" id="1_attack"]
+
+[resource]
+script = ExtResource("1_attack")
+attack_id = &"test_slash"
+animation_name = &"slash"
+attack_type = 0
+startup_frames = 6
+active_frames = 4
+recovery_frames = 12
+damage = 8.0
+posture_damage = 10.0
+guard_qi_damage = 8.0
+hitbox_offset = Vector2(44, -44)
+hitbox_size = Vector2(72, 54)
+knockback = Vector2(120, -40)
+hitstun_frames = 12
+reaction_type = 0
+shi_gain_on_hit = 10.0
+shi_cost = 0.0
+qi_cost = 2.0
+buffer_start_frame = 6
+buffer_end_frame = 16
+hitstop_frames = 3
+screen_shake_strength = 0.1
