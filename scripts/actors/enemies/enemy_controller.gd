@@ -359,6 +359,10 @@ func _separate_horizontally_from(other_position: Vector2, adjustment_weight: flo
 	if horizontal_distance >= actor_contact_distance:
 		return
 
+	if adjustment_weight >= 1.0:
+		velocity.x = 0.0
+		return
+
 	var away_direction := -1.0 if horizontal_delta >= 0.0 else 1.0
 	var correction := (actor_contact_distance - horizontal_distance) * adjustment_weight
 	global_position.x += away_direction * correction

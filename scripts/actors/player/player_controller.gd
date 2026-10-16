@@ -53,6 +53,7 @@ const INPUT_SWITCH: StringName = &"input_switch"
 @export_range(0.0, 1000.0, 1.0) var dodge_speed: float = 460.0
 @export_range(1, 60, 1) var dodge_duration_frames: int = 18
 @export_range(1, 40, 1) var dodge_invulnerable_frames: int = 10
+@export_range(0.0, 240.0, 1.0) var dodge_actor_contact_distance: float = 88.0
 @export var weapons: Array[WeaponData] = []
 
 @onready var state_machine: ActorStateMachine = $StateMachine
@@ -213,9 +214,30 @@ func _process_dodge(delta: float) -> void:
 		state_machine.transition_to(STATE_IDLE if is_on_floor() else STATE_FALL)
 		return
 
+	_apply_dodge_actor_block()
 	var trailing_frames := maxi(dodge_duration_frames - dodge_invulnerable_frames, 1)
 	if state_machine.frames_in_state >= trailing_frames:
 		velocity.x = move_toward(velocity.x, 0.0, 1500.0 * delta)
+
+
+func _apply_dodge_actor_block() -> void:
+	if is_zero_approx(velocity.x):
+		return
+
+	var movement_direction := 1 if velocity.x > 0.0 else -1
+	for group: StringName in [&"training_dummy", &"enemy"]:
+		for node: Node in get_tree().get_nodes_in_group(group):
+			var actor := node as Node2D
+			if actor == null:
+				continue
+			if absf(actor.global_position.y - global_position.y) > 64.0:
+				continue
+			var horizontal_delta := actor.global_position.x - global_position.x
+			if signi(roundi(horizontal_delta)) != movement_direction:
+				continue
+			if absf(horizontal_delta) <= dodge_actor_contact_distance:
+				velocity.x = 0.0
+				return
 
 
 func _process_attack(delta: float) -> void:

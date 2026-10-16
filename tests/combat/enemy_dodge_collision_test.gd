@@ -20,6 +20,7 @@ func _run() -> void:
 	enemy.decision_cooldown = 999.0
 	enemy.global_position = player.global_position + Vector2(82.0, 0.0)
 	var enemy_start_y := enemy.global_position.y
+	var enemy_start_x := enemy.global_position.x
 	await physics_frame
 
 	player._start_dodge(1.0)
@@ -31,6 +32,8 @@ func _run() -> void:
 		failures.append("Player passed into the enemy body during dodge.")
 	if absf(enemy.global_position.y - enemy_start_y) > 0.5:
 		failures.append("Enemy model sank or lifted vertically during player collision.")
+	if absf(enemy.global_position.x - enemy_start_x) > 2.0:
+		failures.append("Enemy was pushed horizontally instead of blocking the player.")
 
 	if failures.is_empty():
 		print("ENEMY DODGE COLLISION TEST PASS: enemy body remains grounded.")
