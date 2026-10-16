@@ -14,4 +14,4 @@ hitbox_offset = Vector2(46, -44)
 hitbox_size = Vector2(72, 54)
 knockback = Vector2(90, 0)
 hitstun_frames = 11
-qi_cost = 1.0
+shi_cost = 1.0

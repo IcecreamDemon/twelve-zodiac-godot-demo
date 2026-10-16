@@ -39,6 +39,8 @@ Read that file before editing the project. It contains the Cold Start block, arc
 - Store tuning values in resources or configuration objects.
 - Keep combat components isolated: health, posture, qi, shi, hitbox, hurtbox, state machine.
 - Player movement baseline: speed `380`, jump velocity `900`, gravity `2200`, dodge speed `640`.
+- Player attacks consume shi, never qi. Qi is reserved for guard, dodge, and burrow.
+- Enemy hit reactions apply both horizontal knockback and hitstun according to `AttackData`.
 - Actor-to-actor physical body collision is disabled intentionally; movement blocking uses horizontal contact rules (`actor_contact_distance = 88`) so actors never get vertically displaced by `move_and_slide()`.
 - Enemy bodies stop before player contact and separate from other enemies only along the X axis.
 - `DemoFlowController` uses a dedicated `node_map.tscn` selection screen and a victory animation after every combat; no next enemy spawns before the player selects a node.

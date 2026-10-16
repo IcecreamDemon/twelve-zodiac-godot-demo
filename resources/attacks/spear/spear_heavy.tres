@@ -19,4 +19,4 @@ hitstun_frames = 20
 knockdown_frames = 32
 reaction_type = 2
 shi_gain_on_hit = 18.0
-qi_cost = 3.0
+shi_cost = 3.0

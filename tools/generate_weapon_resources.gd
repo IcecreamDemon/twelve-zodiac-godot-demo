@@ -577,8 +577,14 @@ func _save_attack(
 	attack.posture_damage = 0.0
 	attack.hitstun_frames = 10
 	attack.shi_gain_on_hit = 0.0
+	var converted_shi_cost := 0.0
 	for property_name: String in overrides:
+		if property_name == "qi_cost":
+			converted_shi_cost = maxf(converted_shi_cost, float(overrides[property_name]))
+			continue
 		attack.set(property_name, overrides[property_name])
+	attack.shi_cost = maxf(attack.shi_cost, converted_shi_cost)
+	attack.qi_cost = 0.0
 
 	var directory := SHORT_BLADE_DIR if weapon_dir == "short_blade" else SPEAR_DIR
 	ResourceSaver.save(attack, "%s%s.tres" % [directory, attack_id])

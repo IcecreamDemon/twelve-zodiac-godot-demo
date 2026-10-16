@@ -54,6 +54,7 @@ const INPUT_SWITCH: StringName = &"input_switch"
 @export_range(1, 60, 1) var dodge_duration_frames: int = 18
 @export_range(1, 40, 1) var dodge_invulnerable_frames: int = 10
 @export_range(0.0, 240.0, 1.0) var dodge_actor_contact_distance: float = 88.0
+@export_range(0.0, 100.0, 0.1) var starting_shi: float = 30.0
 @export var weapons: Array[WeaponData] = []
 
 @onready var state_machine: ActorStateMachine = $StateMachine
@@ -84,6 +85,8 @@ var behavior_recorder: BehaviorRecorder
 func _ready() -> void:
 	floor_snap_length = floor_snap_length_pixels
 	air_actions_remaining = max_air_actions
+	shi.current_shi = minf(starting_shi, shi.max_shi)
+	shi.shi_changed.emit(shi.current_shi, shi.max_shi)
 	health.died.connect(_on_died)
 	state_machine.transition_to(STATE_IDLE)
 	_update_weapon_visual()
