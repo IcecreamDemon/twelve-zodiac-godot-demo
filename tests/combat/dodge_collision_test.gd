@@ -19,6 +19,7 @@ func _run() -> void:
 	var dummy := lab.get_node("TrainingDummy") as TrainingDummy
 	dummy.global_position = player.global_position + Vector2(82.0, 0.0)
 	var dummy_start_x := dummy.global_position.x
+	var dummy_start_y := dummy.global_position.y
 	await physics_frame
 
 	player._start_dodge(1.0)
@@ -30,6 +31,8 @@ func _run() -> void:
 		failures.append("Player passed into or through the enemy body during dodge.")
 	if absf(dummy.global_position.x - dummy_start_x) > 2.0:
 		failures.append("Player pushed the enemy while dodging.")
+	if absf(dummy.global_position.y - dummy_start_y) > 0.5:
+		failures.append("Enemy moved vertically during a dodge collision.")
 
 	if failures.is_empty():
 		print("DODGE COLLISION TEST PASS: enemy bodies block dodge movement.")
