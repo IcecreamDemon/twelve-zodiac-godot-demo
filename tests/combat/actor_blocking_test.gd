@@ -18,7 +18,7 @@ func _run() -> void:
 	var player := lab.get_node("Player") as PlayerController
 	var enemy := lab.get_node("TianBing") as EnemyController
 	enemy.decision_cooldown = 999.0
-	enemy.global_position = player.global_position + Vector2(130.0, 0.0)
+	enemy.global_position.x = player.global_position.x + 130.0
 	var enemy_start_y := enemy.global_position.y
 
 	Input.action_press(&"move_right")

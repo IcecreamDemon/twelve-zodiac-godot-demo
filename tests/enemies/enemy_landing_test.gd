@@ -27,7 +27,7 @@ func _run() -> void:
 
 	if enemy.global_position.y > 860.0:
 		failures.append("Enemy sank below the arena ground after hit reaction.")
-	if enemy.visual.position.y != -6.0:
+	if enemy.visual.position.y != -8.0:
 		failures.append("Enemy visual offset is not aligned with the ground.")
 
 	if failures.is_empty():

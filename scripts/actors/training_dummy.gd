@@ -11,6 +11,8 @@ const JUGGLE_DAMAGE_SCALE: Array[float] = [1.0, 0.85, 0.7, 0.55]
 
 @export_range(0.0, 5000.0, 1.0) var gravity: float = 1500.0
 @export_range(1, 6, 1) var max_juggle_hits: int = 3
+@export var lock_vertical_to_ground: bool = true
+@export var ground_lock_y_override: float = -1.0
 
 @onready var state_machine: ActorStateMachine = $StateMachine
 @onready var health: HealthComponent = $HealthComponent
@@ -22,9 +24,11 @@ const JUGGLE_DAMAGE_SCALE: Array[float] = [1.0, 0.85, 0.7, 0.55]
 var hitstun_frames_remaining: int = 0
 var knockdown_frames_remaining: int = 0
 var current_juggle_hits: int = 0
+var _ground_lock_y: float
 
 
 func _ready() -> void:
+	_ground_lock_y = ground_lock_y_override if ground_lock_y_override >= 0.0 else global_position.y
 	floor_snap_length = 8.0
 	floor_stop_on_slope = true
 	health.died.connect(_on_died)
@@ -57,6 +61,7 @@ func _physics_process(delta: float) -> void:
 			velocity.x = move_toward(velocity.x, 0.0, 1200.0 * delta)
 
 	move_and_slide()
+	_lock_ground_vertical()
 
 
 func receive_hit(
@@ -121,6 +126,18 @@ func is_knockdown() -> bool:
 func _enter_knockdown(frames: int) -> void:
 	knockdown_frames_remaining = maxi(frames, 1)
 	state_machine.transition_to(STATE_KNOCKDOWN)
+
+
+func _lock_ground_vertical() -> void:
+	if not lock_vertical_to_ground:
+		return
+	if state_machine.is_state(STATE_LAUNCHED):
+		return
+	if state_machine.is_state(STATE_KNOCKDOWN) and not is_on_floor():
+		return
+
+	global_position.y = _ground_lock_y
+	velocity.y = 0.0
 
 
 func _on_died() -> void:

@@ -18,7 +18,7 @@ func _run() -> void:
 	var player := lab.get_node("Player") as PlayerController
 	var enemy := lab.get_node("TianBing") as EnemyController
 	enemy.decision_cooldown = 999.0
-	enemy.global_position = player.global_position + Vector2(82.0, 0.0)
+	enemy.global_position.x = player.global_position.x + 82.0
 	var enemy_start_y := enemy.global_position.y
 	var enemy_start_x := enemy.global_position.x
 	await physics_frame
@@ -31,7 +31,12 @@ func _run() -> void:
 	if separation < 80.0:
 		failures.append("Player passed into the enemy body during dodge.")
 	if absf(enemy.global_position.y - enemy_start_y) > 0.5:
-		failures.append("Enemy model sank or lifted vertically during player collision.")
+		failures.append(
+			"Enemy model sank or lifted vertically during player collision. start=%.2f end=%.2f" % [
+				enemy_start_y,
+				enemy.global_position.y,
+			],
+		)
 	if absf(enemy.global_position.x - enemy_start_x) > 2.0:
 		failures.append("Enemy was pushed horizontally instead of blocking the player.")
 

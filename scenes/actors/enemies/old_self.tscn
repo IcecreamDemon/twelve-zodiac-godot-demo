@@ -18,13 +18,14 @@ collision_layer = 4
 collision_mask = 1
 script = ExtResource("1_old_self")
 profile = ExtResource("2_profile")
+ground_lock_y_override = 860.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -43)
 shape = SubResource("RectangleShape2D_body")
 
 [node name="Visual" type="Polygon2D" parent="."]
-position = Vector2(0, -6)
+position = Vector2(0, -8)
 polygon = PackedVector2Array(-18, -84, 18, -84, 20, -48, 34, -34, 18, -16, 34, 0, 14, 8, -4, -2, -20, 8, -34, -6, -20, -20, -34, -36)
 color = Color(0.08, 0.08, 0.1, 1)
 

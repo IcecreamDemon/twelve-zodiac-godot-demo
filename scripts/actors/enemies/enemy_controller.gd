@@ -19,6 +19,8 @@ const JUGGLE_DAMAGE_SCALE: Array[float] = [1.0, 0.85, 0.7, 0.55]
 @export_range(0.0, 10.0, 0.1) var guard_duration: float = 0.65
 @export_range(0.0, 100.0, 0.1) var guard_qi_per_second: float = 18.0
 @export_range(0.0, 240.0, 1.0) var actor_contact_distance: float = 88.0
+@export var lock_vertical_to_ground: bool = true
+@export var ground_lock_y_override: float = -1.0
 
 @onready var state_machine: ActorStateMachine = $StateMachine
 @onready var health: HealthComponent = $HealthComponent
@@ -39,9 +41,11 @@ var guard_frames_remaining: int = 0
 var current_juggle_hits: int = 0
 var decision_cooldown: float = 0.0
 var _player: PlayerController
+var _ground_lock_y: float
 
 
 func _ready() -> void:
+	_ground_lock_y = ground_lock_y_override if ground_lock_y_override >= 0.0 else global_position.y
 	floor_snap_length = 8.0
 	floor_stop_on_slope = true
 	_apply_profile()
@@ -80,6 +84,7 @@ func _physics_process(delta: float) -> void:
 
 	_prevent_player_overlap()
 	move_and_slide()
+	_lock_ground_vertical()
 	visual.scale.x = float(facing_direction)
 
 
@@ -367,3 +372,15 @@ func _separate_horizontally_from(other_position: Vector2, adjustment_weight: flo
 	var correction := (actor_contact_distance - horizontal_distance) * adjustment_weight
 	global_position.x += away_direction * correction
 	velocity.x = 0.0
+
+
+func _lock_ground_vertical() -> void:
+	if not lock_vertical_to_ground:
+		return
+	if state_machine.is_state(STATE_LAUNCHED):
+		return
+	if state_machine.is_state(STATE_KNOCKDOWN) and not is_on_floor():
+		return
+
+	global_position.y = _ground_lock_y
+	velocity.y = 0.0
