@@ -1,8 +1,10 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=9 format=3]
 
 [ext_resource type="PackedScene" path="res://scenes/actors/player/player.tscn" id="1_player"]
 [ext_resource type="Script" path="res://scripts/flow/demo_flow_controller.gd" id="2_flow"]
 [ext_resource type="Script" path="res://scripts/debug/combat_debug_overlay.gd" id="3_debug"]
+[ext_resource type="PackedScene" path="res://scenes/ui/flow_hud.tscn" id="4_hud"]
+[ext_resource type="PackedScene" path="res://scenes/flow/node_map.tscn" id="5_map"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ground"]
 size = Vector2(1920, 120)
@@ -40,6 +42,10 @@ shape = SubResource("RectangleShape2D_ground")
 position = Vector2(280, 860)
 
 [node name="EncounterRoot" type="Node2D" parent="."]
+
+[node name="FlowHud" parent="." instance=ExtResource("4_hud")]
+
+[node name="NodeMap" parent="." instance=ExtResource("5_map")]
 
 [node name="Ui" type="CanvasLayer" parent="."]
 
@@ -112,6 +118,23 @@ text = "夺愿神倒下。"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
+
+[node name="VictoryPanel" type="Panel" parent="Ui/Root"]
+visible = false
+offset_left = 710.0
+offset_top = 430.0
+offset_right = 1210.0
+offset_bottom = 650.0
+pivot_offset = Vector2(250, 110)
+
+[node name="VictoryLabel" type="Label" parent="Ui/Root/VictoryPanel"]
+offset_left = 40.0
+offset_top = 62.0
+offset_right = 460.0
+offset_bottom = 148.0
+text = "战斗结束"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="DebugOverlay" type="Control" parent="."]
 layout_mode = 3

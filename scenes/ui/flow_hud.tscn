@@ -1,0 +1,219 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/flow_hud.gd" id="1_hud"]
+
+[node name="FlowHud" type="CanvasLayer"]
+script = ExtResource("1_hud")
+
+[node name="Root" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="PlayerName" type="Label" parent="Root"]
+offset_left = 36.0
+offset_top = 22.0
+offset_right = 260.0
+offset_bottom = 50.0
+text = "鼠光"
+
+[node name="PlayerState" type="Label" parent="Root"]
+offset_left = 270.0
+offset_top = 22.0
+offset_right = 560.0
+offset_bottom = 50.0
+text = "状态  IDLE"
+
+[node name="PlayerHealth" type="ProgressBar" parent="Root"]
+offset_left = 36.0
+offset_top = 58.0
+offset_right = 356.0
+offset_bottom = 80.0
+show_percentage = false
+value = 100.0
+
+[node name="PlayerHealthText" type="Label" parent="Root"]
+offset_left = 364.0
+offset_top = 58.0
+offset_right = 560.0
+offset_bottom = 80.0
+text = "生命  100 / 100"
+
+[node name="PlayerPosture" type="ProgressBar" parent="Root"]
+offset_left = 36.0
+offset_top = 86.0
+offset_right = 356.0
+offset_bottom = 108.0
+show_percentage = false
+value = 80.0
+
+[node name="PlayerPostureText" type="Label" parent="Root"]
+offset_left = 364.0
+offset_top = 86.0
+offset_right = 560.0
+offset_bottom = 108.0
+text = "架势  80 / 80"
+
+[node name="PlayerQi" type="ProgressBar" parent="Root"]
+offset_left = 36.0
+offset_top = 114.0
+offset_right = 356.0
+offset_bottom = 136.0
+show_percentage = false
+value = 100.0
+
+[node name="PlayerQiText" type="Label" parent="Root"]
+offset_left = 364.0
+offset_top = 114.0
+offset_right = 560.0
+offset_bottom = 136.0
+text = "气  100 / 100"
+
+[node name="PlayerShi" type="ProgressBar" parent="Root"]
+offset_left = 36.0
+offset_top = 142.0
+offset_right = 356.0
+offset_bottom = 164.0
+show_percentage = false
+value = 0.0
+
+[node name="PlayerShiText" type="Label" parent="Root"]
+offset_left = 364.0
+offset_top = 142.0
+offset_right = 560.0
+offset_bottom = 164.0
+text = "势  0 / 100"
+
+[node name="EnemyName" type="Label" parent="Root"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -560.0
+offset_top = 22.0
+offset_right = -36.0
+offset_bottom = 50.0
+grow_horizontal = 0
+text = "敌人"
+horizontal_alignment = 2
+
+[node name="EnemyState" type="Label" parent="Root"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -820.0
+offset_top = 22.0
+offset_right = -570.0
+offset_bottom = 50.0
+grow_horizontal = 0
+text = "状态  --"
+horizontal_alignment = 2
+
+[node name="EnemyHealth" type="ProgressBar" parent="Root"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -356.0
+offset_top = 58.0
+offset_right = -36.0
+offset_bottom = 80.0
+grow_horizontal = 0
+show_percentage = false
+value = 100.0
+
+[node name="EnemyHealthText" type="Label" parent="Root"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -620.0
+offset_top = 58.0
+offset_right = -364.0
+offset_bottom = 80.0
+grow_horizontal = 0
+text = "生命  100 / 100"
+horizontal_alignment = 2
+
+[node name="EnemyPosture" type="ProgressBar" parent="Root"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -356.0
+offset_top = 86.0
+offset_right = -36.0
+offset_bottom = 108.0
+grow_horizontal = 0
+show_percentage = false
+value = 80.0
+
+[node name="EnemyPostureText" type="Label" parent="Root"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -620.0
+offset_top = 86.0
+offset_right = -364.0
+offset_bottom = 108.0
+grow_horizontal = 0
+text = "架势  80 / 80"
+horizontal_alignment = 2
+
+[node name="EnemyQi" type="ProgressBar" parent="Root"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -356.0
+offset_top = 114.0
+offset_right = -36.0
+offset_bottom = 136.0
+grow_horizontal = 0
+show_percentage = false
+value = 100.0
+
+[node name="EnemyQiText" type="Label" parent="Root"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -620.0
+offset_top = 114.0
+offset_right = -364.0
+offset_bottom = 136.0
+grow_horizontal = 0
+text = "气  100 / 100"
+horizontal_alignment = 2
+
+[node name="EnemyShi" type="ProgressBar" parent="Root"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -356.0
+offset_top = 142.0
+offset_right = -36.0
+offset_bottom = 164.0
+grow_horizontal = 0
+show_percentage = false
+value = 0.0
+
+[node name="EnemyShiText" type="Label" parent="Root"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -620.0
+offset_top = 142.0
+offset_right = -364.0
+offset_bottom = 164.0
+grow_horizontal = 0
+text = "势  0 / 100"
+horizontal_alignment = 2

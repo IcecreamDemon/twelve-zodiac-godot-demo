@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3]
+[gd_scene load_steps=9 format=3]
 
 [ext_resource type="PackedScene" path="res://scenes/actors/player/player.tscn" id="1_player"]
 [ext_resource type="PackedScene" path="res://scenes/actors/enemies/tian_bing.tscn" id="2_tian"]
 [ext_resource type="PackedScene" path="res://scenes/actors/enemies/guardian.tscn" id="3_guardian"]
 [ext_resource type="PackedScene" path="res://scenes/actors/enemies/cleric_officer.tscn" id="4_clerk"]
 [ext_resource type="Script" path="res://scripts/debug/combat_debug_overlay.gd" id="5_debug"]
+[ext_resource type="PackedScene" path="res://scenes/ui/flow_hud.tscn" id="6_hud"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ground"]
 size = Vector2(1920, 120)
@@ -48,6 +49,8 @@ position = Vector2(1120, 860)
 
 [node name="ClericOfficer" parent="." instance=ExtResource("4_clerk")]
 position = Vector2(1560, 860)
+
+[node name="FlowHud" parent="." instance=ExtResource("6_hud")]
 
 [node name="DebugOverlay" type="Control" parent="."]
 layout_mode = 3

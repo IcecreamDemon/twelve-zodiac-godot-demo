@@ -318,6 +318,12 @@ func is_knockdown() -> bool:
 	return state_machine.is_state(STATE_KNOCKDOWN)
 
 
+func display_name() -> String:
+	if profile != null and not profile.display_name.is_empty():
+		return profile.display_name
+	return name
+
+
 func face_position(target_position: Vector2) -> void:
 	facing_direction = 1 if target_position.x >= global_position.x else -1
 

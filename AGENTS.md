@@ -38,9 +38,11 @@ Read that file before editing the project. It contains the Cold Start block, arc
 - Use frame counts for attack timing, not raw `delta`.
 - Store tuning values in resources or configuration objects.
 - Keep combat components isolated: health, posture, qi, shi, hitbox, hurtbox, state machine.
-- Player movement baseline: speed `380`, jump velocity `900`, gravity `2200`, dodge speed `460`.
+- Player movement baseline: speed `380`, jump velocity `900`, gravity `2200`, dodge speed `640`.
 - Actor-to-actor physical body collision is disabled intentionally; movement blocking uses horizontal contact rules (`actor_contact_distance = 88`) so actors never get vertically displaced by `move_and_slide()`.
 - Enemy bodies stop before player contact and separate from other enemies only along the X axis.
+- `DemoFlowController` uses a dedicated `node_map.tscn` selection screen and a victory animation after every combat; no next enemy spawns before the player selects a node.
+- `flow_hud.tscn` displays player and active enemy health, posture, qi, shi, and state.
 - Enemy bodies also separate horizontally from other enemies; they never resolve actor overlap along the Y axis.
 - Do not introduce third-party combat or behavior-tree plugins for the first milestone.
 

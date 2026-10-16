@@ -17,7 +17,7 @@ func _run() -> void:
 		failures.append("Jump velocity is below the tuned prototype baseline.")
 	if player.gravity < 2000.0:
 		failures.append("Gravity is below the tuned prototype baseline.")
-	if player.dodge_speed < 440.0:
+	if player.dodge_speed < 620.0:
 		failures.append("Dodge speed is below the tuned prototype baseline.")
 	if player.collision_mask != 1:
 		failures.append("Player should use manual actor blocking instead of enemy body collisions.")

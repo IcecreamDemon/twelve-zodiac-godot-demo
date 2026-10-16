@@ -26,6 +26,9 @@ const BURNER_SCENE := preload("res://scenes/actors/incense_burner.tscn")
 @onready var return_button: Button = $Ui/Root/ChoicePanel/ReturnButton
 @onready var shop_button: Button = $Ui/Root/ChoicePanel/ShopButton
 @onready var ending_label: Label = $Ui/Root/EndingLabel
+@onready var victory_panel: Panel = $Ui/Root/VictoryPanel
+@onready var victory_label: Label = $Ui/Root/VictoryPanel/VictoryLabel
+@onready var node_map: NodeMapController = $NodeMap
 
 var flow_state: FlowState = FlowState.PROLOGUE
 var behavior_recorder: BehaviorRecorder
@@ -41,6 +44,7 @@ func _ready() -> void:
 	continue_button.pressed.connect(_on_continue_pressed)
 	return_button.pressed.connect(_on_return_incense)
 	shop_button.pressed.connect(_on_spend_incense)
+	node_map.option_selected.connect(_on_node_option_selected)
 	_set_state(FlowState.PROLOGUE)
 
 
@@ -51,6 +55,8 @@ func _set_state(next_state: FlowState) -> void:
 	choice_panel.visible = false
 	dialogue_panel.visible = false
 	ending_label.visible = false
+	victory_panel.visible = false
+	node_map.hide_options()
 
 	match flow_state:
 		FlowState.PROLOGUE:
@@ -123,7 +129,10 @@ func _on_continue_pressed() -> void:
 
 	match flow_state:
 		FlowState.PROLOGUE:
-			_set_state(FlowState.TUTORIAL)
+			_show_node_selection(
+				"无雨乡 · 第一节点",
+				[{"id": "tutorial", "title": "进入天兵哨站"}],
+			)
 		FlowState.TUTORIAL, FlowState.ELITE, FlowState.OLD_SELF, FlowState.BOSS:
 			dialogue_panel.visible = false
 		FlowState.COMPLETE:
@@ -147,13 +156,27 @@ func _on_enemy_died(enemy: EnemyController) -> void:
 	if enemy != active_enemy:
 		return
 	active_enemy = null
+	await _play_victory_animation()
+	_clear_encounter()
 	match flow_state:
 		FlowState.TUTORIAL:
-			_set_state(FlowState.CHOICE)
+			_show_node_selection(
+				"香火归属",
+				[
+					{"id": "return_incense", "title": "把香火归还百姓"},
+					{"id": "spend_incense", "title": "把香火投入祝安商店"},
+				],
+			)
 		FlowState.ELITE:
-			_set_state(FlowState.OLD_SELF)
+			_show_node_selection(
+				"天河录库 · 异常记录",
+				[{"id": "old_self", "title": "追踪失名旧我"}],
+			)
 		FlowState.OLD_SELF:
-			_set_state(FlowState.BOSS)
+			_show_node_selection(
+				"无雨乡 · 区域出口",
+				[{"id": "boss", "title": "直面夺愿神"}],
+			)
 		FlowState.BOSS:
 			_set_state(FlowState.COMPLETE)
 
@@ -172,3 +195,38 @@ func _clear_encounter() -> void:
 	active_enemy = null
 	for child: Node in encounter_root.get_children():
 		child.queue_free()
+
+
+func _show_node_selection(title: String, options: Array[Dictionary]) -> void:
+	dialogue_panel.visible = false
+	node_map.show_options(title, options)
+
+
+func _on_node_option_selected(option_id: StringName) -> void:
+	match option_id:
+		&"tutorial":
+			_set_state(FlowState.TUTORIAL)
+		&"return_incense":
+			_on_return_incense()
+		&"spend_incense":
+			_on_spend_incense()
+		&"old_self":
+			_set_state(FlowState.OLD_SELF)
+		&"boss":
+			_set_state(FlowState.BOSS)
+
+
+func _play_victory_animation() -> void:
+	victory_label.text = "战斗结束"
+	victory_panel.visible = true
+	victory_panel.modulate.a = 0.0
+	victory_panel.scale = Vector2(0.92, 0.92)
+	var tween := create_tween()
+	tween.set_parallel(true)
+	tween.tween_property(victory_panel, "modulate:a", 1.0, 0.22)
+	tween.tween_property(victory_panel, "scale", Vector2.ONE, 0.22)
+	await get_tree().create_timer(0.8).timeout
+	var fade := create_tween()
+	fade.tween_property(victory_panel, "modulate:a", 0.0, 0.22)
+	await fade.finished
+	victory_panel.visible = false
