@@ -18,7 +18,7 @@ const JUGGLE_DAMAGE_SCALE: Array[float] = [1.0, 0.85, 0.7, 0.55]
 @export_range(0.0, 5000.0, 1.0) var gravity: float = 1500.0
 @export_range(0.0, 10.0, 0.1) var guard_duration: float = 0.65
 @export_range(0.0, 100.0, 0.1) var guard_qi_per_second: float = 18.0
-@export_range(0.0, 200.0, 1.0) var actor_contact_distance: float = 54.0
+@export_range(0.0, 240.0, 1.0) var actor_contact_distance: float = 88.0
 
 @onready var state_machine: ActorStateMachine = $StateMachine
 @onready var health: HealthComponent = $HealthComponent

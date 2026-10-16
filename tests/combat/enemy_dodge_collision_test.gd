@@ -27,7 +27,7 @@ func _run() -> void:
 		await physics_frame
 
 	var separation := enemy.global_position.x - player.global_position.x
-	if separation < 42.0:
+	if separation < 80.0:
 		failures.append("Player passed into the enemy body during dodge.")
 	if absf(enemy.global_position.y - enemy_start_y) > 0.5:
 		failures.append("Enemy model sank or lifted vertically during player collision.")

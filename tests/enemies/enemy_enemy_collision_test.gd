@@ -26,7 +26,7 @@ func _run() -> void:
 	for _frame: int in range(30):
 		await physics_frame
 
-	if absf(guardian.global_position.x - tian.global_position.x) < 50.0:
+	if absf(guardian.global_position.x - tian.global_position.x) < 80.0:
 		failures.append("Enemy bodies remain overlapped instead of separating horizontally.")
 	if absf(tian.global_position.y - tian_start_y) > 0.5:
 		failures.append("First enemy moved vertically during enemy-enemy collision.")

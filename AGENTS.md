@@ -40,7 +40,7 @@ Read that file before editing the project. It contains the Cold Start block, arc
 - Keep combat components isolated: health, posture, qi, shi, hitbox, hurtbox, state machine.
 - Player movement baseline: speed `380`, jump velocity `900`, gravity `2200`, dodge speed `460`.
 - Player and enemy bodies collide physically; dodge cannot push enemies through their collision bodies.
-- Enemy bodies use horizontal-only player separation (`actor_contact_distance = 54`) so collision resolution never displaces them vertically.
+- Enemy bodies use horizontal-only player separation (`actor_contact_distance = 88`) so collision resolution never displaces them vertically or visually overlaps wide models.
 - Enemy bodies also separate horizontally from other enemies; they never resolve actor overlap along the Y axis.
 - Do not introduce third-party combat or behavior-tree plugins for the first milestone.
 
