@@ -17,8 +17,7 @@ func _run() -> void:
 
 	var player := lab.get_node("Player") as PlayerController
 	var enemy := lab.get_node("TianBing") as EnemyController
-	enemy.set_physics_process(false)
-	enemy.velocity = Vector2.ZERO
+	enemy.decision_cooldown = 999.0
 	enemy.global_position = player.global_position + Vector2(82.0, 0.0)
 	var enemy_start_y := enemy.global_position.y
 	await physics_frame

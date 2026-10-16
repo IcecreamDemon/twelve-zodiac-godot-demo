@@ -18,6 +18,7 @@ const JUGGLE_DAMAGE_SCALE: Array[float] = [1.0, 0.85, 0.7, 0.55]
 @export_range(0.0, 5000.0, 1.0) var gravity: float = 1500.0
 @export_range(0.0, 10.0, 0.1) var guard_duration: float = 0.65
 @export_range(0.0, 100.0, 0.1) var guard_qi_per_second: float = 18.0
+@export_range(0.0, 200.0, 1.0) var actor_contact_distance: float = 54.0
 
 @onready var state_machine: ActorStateMachine = $StateMachine
 @onready var health: HealthComponent = $HealthComponent
@@ -77,6 +78,7 @@ func _physics_process(delta: float) -> void:
 		STATE_DEAD:
 			velocity.x = move_toward(velocity.x, 0.0, 1200.0 * delta)
 
+	_prevent_player_overlap()
 	move_and_slide()
 	visual.scale.x = float(facing_direction)
 
@@ -330,3 +332,19 @@ func _resolve_player() -> void:
 	if is_instance_valid(_player):
 		return
 	_player = get_tree().get_first_node_in_group(&"player") as PlayerController
+
+
+func _prevent_player_overlap() -> void:
+	if _player == null or state_machine.is_state(STATE_DEAD):
+		return
+	if absf(_player.global_position.y - global_position.y) > 64.0:
+		return
+
+	var horizontal_delta := _player.global_position.x - global_position.x
+	var horizontal_distance := absf(horizontal_delta)
+	if horizontal_distance >= actor_contact_distance:
+		return
+
+	var away_direction := -1.0 if horizontal_delta >= 0.0 else 1.0
+	global_position.x += away_direction * (actor_contact_distance - horizontal_distance)
+	velocity.x = 0.0

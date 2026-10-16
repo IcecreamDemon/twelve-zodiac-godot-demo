@@ -38,8 +38,9 @@ Read that file before editing the project. It contains the Cold Start block, arc
 - Use frame counts for attack timing, not raw `delta`.
 - Store tuning values in resources or configuration objects.
 - Keep combat components isolated: health, posture, qi, shi, hitbox, hurtbox, state machine.
-- Player movement baseline: speed `380`, jump velocity `850`, dodge speed `460`.
+- Player movement baseline: speed `380`, jump velocity `900`, gravity `2200`, dodge speed `460`.
 - Player and enemy bodies collide physically; dodge cannot push enemies through their collision bodies.
+- Enemy bodies use horizontal-only player separation (`actor_contact_distance = 54`) so collision resolution never displaces them vertically.
 - Do not introduce third-party combat or behavior-tree plugins for the first milestone.
 
 ## Verification
