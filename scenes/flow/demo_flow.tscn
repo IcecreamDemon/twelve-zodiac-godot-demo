@@ -1,0 +1,138 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/actors/player/player.tscn" id="1_player"]
+[ext_resource type="Script" path="res://scripts/flow/demo_flow_controller.gd" id="2_flow"]
+[ext_resource type="Script" path="res://scripts/debug/combat_debug_overlay.gd" id="3_debug"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ground"]
+size = Vector2(1920, 120)
+
+[node name="DemoFlow" type="Node2D"]
+script = ExtResource("2_flow")
+
+[node name="Background" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(0, 0, 1920, 0, 1920, 1080, 0, 1080)
+color = Color(0.91, 0.89, 0.84, 1)
+
+[node name="Ground" type="StaticBody2D" parent="."]
+position = Vector2(960, 920)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
+shape = SubResource("RectangleShape2D_ground")
+
+[node name="GroundVisual" type="Polygon2D" parent="Ground"]
+polygon = PackedVector2Array(-960, -60, 960, -60, 960, 60, -960, 60)
+color = Color(0.12, 0.14, 0.16, 1)
+
+[node name="BurrowSurface" type="Area2D" parent="."]
+position = Vector2(960, 920)
+collision_layer = 128
+collision_mask = 0
+monitoring = false
+monitorable = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BurrowSurface"]
+shape = SubResource("RectangleShape2D_ground")
+
+[node name="Player" parent="." instance=ExtResource("1_player")]
+position = Vector2(280, 860)
+
+[node name="EncounterRoot" type="Node2D" parent="."]
+
+[node name="Ui" type="CanvasLayer" parent="."]
+
+[node name="Root" type="Control" parent="Ui"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="DialoguePanel" type="Panel" parent="Ui/Root"]
+visible = false
+offset_left = 360.0
+offset_top = 760.0
+offset_right = 1560.0
+offset_bottom = 1010.0
+
+[node name="DialogueLabel" type="Label" parent="Ui/Root/DialoguePanel"]
+offset_left = 36.0
+offset_top = 30.0
+offset_right = 1160.0
+offset_bottom = 120.0
+text = "Dialogue"
+autowrap_mode = 2
+
+[node name="ContinueButton" type="Button" parent="Ui/Root/DialoguePanel"]
+offset_left = 1030.0
+offset_top = 152.0
+offset_right = 1160.0
+offset_bottom = 200.0
+text = "继续"
+
+[node name="ChoicePanel" type="Panel" parent="Ui/Root"]
+visible = false
+offset_left = 520.0
+offset_top = 700.0
+offset_right = 1400.0
+offset_bottom = 980.0
+
+[node name="Title" type="Label" parent="Ui/Root/ChoicePanel"]
+offset_left = 36.0
+offset_top = 24.0
+offset_right = 800.0
+offset_bottom = 64.0
+text = "这份香火，是还给百姓，还是投入祝安的商店？"
+
+[node name="ReturnButton" type="Button" parent="Ui/Root/ChoicePanel"]
+offset_left = 70.0
+offset_top = 120.0
+offset_right = 350.0
+offset_bottom = 190.0
+text = "归还百姓"
+
+[node name="ShopButton" type="Button" parent="Ui/Root/ChoicePanel"]
+offset_left = 430.0
+offset_top = 120.0
+offset_right = 710.0
+offset_bottom = 190.0
+text = "投入祝安商店"
+
+[node name="EndingLabel" type="Label" parent="Ui/Root"]
+visible = false
+offset_left = 360.0
+offset_top = 420.0
+offset_right = 1560.0
+offset_bottom = 560.0
+text = "夺愿神倒下。"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="DebugOverlay" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("3_debug")
+
+[node name="StateLabel" type="Label" parent="DebugOverlay"]
+offset_left = 40.0
+offset_top = 32.0
+offset_right = 520.0
+offset_bottom = 60.0
+text = "PLAYER  IDLE"
+
+[node name="FrameLabel" type="Label" parent="DebugOverlay"]
+offset_left = 40.0
+offset_top = 60.0
+offset_right = 640.0
+offset_bottom = 88.0
+text = "ATTACK FRAME  00 / 00   ACTIVE  FALSE"

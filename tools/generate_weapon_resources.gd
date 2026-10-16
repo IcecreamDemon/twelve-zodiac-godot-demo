@@ -278,6 +278,46 @@ func _build_enemy_attacks() -> Dictionary:
 			"knockdown_frames": 26,
 			"hitstun_frames": 18,
 		}),
+		"boss_swipe": _save_enemy_attack("boss_swipe", {
+			"startup_frames": 14,
+			"active_frames": 5,
+			"recovery_frames": 18,
+			"damage": 14.0,
+			"posture_damage": 18.0,
+			"guard_qi_damage": 18.0,
+			"hitbox_offset": Vector2(68.0, -44.0),
+			"hitbox_size": Vector2(112.0, 62.0),
+			"knockback": Vector2(150.0, 0.0),
+			"hitstun_frames": 14,
+		}),
+		"boss_smash": _save_enemy_attack("boss_smash", {
+			"startup_frames": 24,
+			"active_frames": 7,
+			"recovery_frames": 28,
+			"damage": 22.0,
+			"posture_damage": 34.0,
+			"guard_qi_damage": 28.0,
+			"hitbox_offset": Vector2(70.0, -40.0),
+			"hitbox_size": Vector2(126.0, 72.0),
+			"knockback": Vector2(220.0, -90.0),
+			"reaction_type": 2,
+			"knockdown_frames": 32,
+			"hitstun_frames": 22,
+		}),
+		"boss_unblockable": _save_enemy_attack("boss_unblockable", {
+			"attack_type": 1,
+			"startup_frames": 32,
+			"active_frames": 7,
+			"recovery_frames": 34,
+			"damage": 25.0,
+			"posture_damage": 42.0,
+			"hitbox_offset": Vector2(86.0, -42.0),
+			"hitbox_size": Vector2(150.0, 82.0),
+			"knockback": Vector2(260.0, -100.0),
+			"reaction_type": 2,
+			"knockdown_frames": 34,
+			"hitstun_frames": 24,
+		}),
 	}
 
 
@@ -349,6 +389,23 @@ func _build_enemy_profiles(attacks: Dictionary) -> void:
 	clerk.projectile_attack = attacks["clerk_projectile"]
 	clerk.projectile_scene = projectile_scene
 	ResourceSaver.save(clerk, "res://resources/enemies/cleric_officer.tres")
+
+	var boss := ENEMY_PROFILE_SCRIPT.new()
+	boss.enemy_id = &"duo_yuan_shen"
+	boss.display_name = "夺愿神"
+	boss.archetype = 1
+	boss.max_health = 320.0
+	boss.max_posture = 180.0
+	boss.max_qi = 200.0
+	boss.qi_recovery_per_second = 20.0
+	boss.move_speed = 112.0
+	boss.preferred_range_min = 56.0
+	boss.preferred_range_max = 104.0
+	boss.guard_chance = 0.12
+	boss.melee_attacks = [attacks["boss_swipe"], attacks["boss_smash"]]
+	boss.unblockable_attack = attacks["boss_unblockable"]
+	boss.anti_burrow_attack = attacks["anti_burrow_pulse"]
+	ResourceSaver.save(boss, "res://resources/enemies/duo_yuan_shen.tres")
 
 
 func _build_spear() -> WeaponData:

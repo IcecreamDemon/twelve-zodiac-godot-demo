@@ -1,0 +1,73 @@
+[gd_scene load_steps=9 format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/actors/player/player.tscn" id="1_player"]
+[ext_resource type="PackedScene" path="res://scenes/actors/boss/duo_yuan_shen.tscn" id="2_boss"]
+[ext_resource type="PackedScene" path="res://scenes/actors/incense_burner.tscn" id="3_burner"]
+[ext_resource type="Script" path="res://scripts/debug/combat_debug_overlay.gd" id="4_debug"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ground"]
+size = Vector2(1920, 120)
+
+[node name="BossLab" type="Node2D"]
+
+[node name="Background" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(0, 0, 1920, 0, 1920, 1080, 0, 1080)
+color = Color(0.88, 0.84, 0.78, 1)
+
+[node name="Ground" type="StaticBody2D" parent="."]
+position = Vector2(960, 920)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
+shape = SubResource("RectangleShape2D_ground")
+
+[node name="GroundVisual" type="Polygon2D" parent="Ground"]
+polygon = PackedVector2Array(-960, -60, 960, -60, 960, 60, -960, 60)
+color = Color(0.12, 0.14, 0.16, 1)
+
+[node name="BurrowSurface" type="Area2D" parent="."]
+position = Vector2(960, 920)
+collision_layer = 128
+collision_mask = 0
+monitoring = false
+monitorable = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BurrowSurface"]
+shape = SubResource("RectangleShape2D_ground")
+
+[node name="Player" parent="." instance=ExtResource("1_player")]
+position = Vector2(280, 860)
+
+[node name="DuoYuanShen" parent="." instance=ExtResource("2_boss")]
+position = Vector2(1420, 860)
+
+[node name="BurnerLeft" parent="." instance=ExtResource("3_burner")]
+position = Vector2(820, 828)
+
+[node name="BurnerRight" parent="." instance=ExtResource("3_burner")]
+position = Vector2(1040, 828)
+
+[node name="DebugOverlay" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("4_debug")
+
+[node name="StateLabel" type="Label" parent="DebugOverlay"]
+offset_left = 40.0
+offset_top = 32.0
+offset_right = 520.0
+offset_bottom = 60.0
+text = "PLAYER  IDLE"
+
+[node name="FrameLabel" type="Label" parent="DebugOverlay"]
+offset_left = 40.0
+offset_top = 60.0
+offset_right = 640.0
+offset_bottom = 88.0
+text = "ATTACK FRAME  00 / 00   ACTIVE  FALSE"

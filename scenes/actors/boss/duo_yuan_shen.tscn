@@ -1,0 +1,74 @@
+[gd_scene load_steps=10 format=3]
+
+[ext_resource type="Script" path="res://scripts/ai/duo_yuan_shen_ai.gd" id="1_boss"]
+[ext_resource type="Resource" path="res://resources/enemies/duo_yuan_shen.tres" id="2_profile"]
+[ext_resource type="Script" path="res://scripts/actors/actor_state_machine.gd" id="3_state"]
+[ext_resource type="Script" path="res://scripts/components/health_component.gd" id="4_health"]
+[ext_resource type="Script" path="res://scripts/components/posture_component.gd" id="5_posture"]
+[ext_resource type="Script" path="res://scripts/components/qi_component.gd" id="6_qi"]
+[ext_resource type="Script" path="res://scripts/components/shi_component.gd" id="7_shi"]
+[ext_resource type="Script" path="res://scripts/combat/hitbox_component.gd" id="8_hitbox"]
+[ext_resource type="Script" path="res://scripts/combat/hurtbox_component.gd" id="9_hurtbox"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_body"]
+size = Vector2(66, 108)
+
+[node name="DuoYuanShen" type="CharacterBody2D" groups=["enemy", "boss"]]
+collision_layer = 4
+collision_mask = 1
+script = ExtResource("1_boss")
+profile = ExtResource("2_profile")
+max_juggle_hits = 1
+ground_lock_y_override = 860.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -52)
+shape = SubResource("RectangleShape2D_body")
+
+[node name="Visual" type="Polygon2D" parent="."]
+position = Vector2(0, -8)
+polygon = PackedVector2Array(-30, -104, 30, -104, 34, -62, 50, -42, 28, -18, 42, 0, 20, 8, -8, -2, -30, 8, -50, -8, -32, -34, -48, -58)
+color = Color(0.16, 0.12, 0.1, 1)
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("3_state")
+initial_state = &"idle"
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("4_health")
+max_health = 320.0
+
+[node name="PostureComponent" type="Node" parent="."]
+script = ExtResource("5_posture")
+max_posture = 180.0
+
+[node name="QiComponent" type="Node" parent="."]
+script = ExtResource("6_qi")
+max_qi = 200.0
+
+[node name="ShiComponent" type="Node" parent="."]
+script = ExtResource("7_shi")
+max_shi = 100.0
+
+[node name="AttackHitbox" type="Area2D" parent="." groups=["combat_hitbox"]]
+position = Vector2(68, -44)
+collision_layer = 0
+collision_mask = 8
+monitoring = false
+monitorable = false
+script = ExtResource("8_hitbox")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHitbox"]
+disabled = true
+shape = SubResource("RectangleShape2D_body")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 0
+monitoring = false
+monitorable = true
+script = ExtResource("9_hurtbox")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, -52)
+shape = SubResource("RectangleShape2D_body")

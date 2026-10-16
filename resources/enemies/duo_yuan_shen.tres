@@ -1,0 +1,87 @@
+[gd_resource type="Resource" script_class="EnemyProfile" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/attack_data.gd" id="1_pive6"]
+[ext_resource type="Script" path="res://scripts/data/enemy_profile.gd" id="2_y6kji"]
+
+[sub_resource type="Resource" id="Resource_m8eyb"]
+script = ExtResource("1_pive6")
+attack_id = &"anti_burrow_pulse"
+animation_name = &"anti_burrow_pulse"
+attack_type = 2
+startup_frames = 16
+active_frames = 6
+recovery_frames = 24
+damage = 13.0
+posture_damage = 18.0
+hitbox_offset = Vector2(0, -6)
+hitbox_size = Vector2(190, 80)
+knockback = Vector2(160, -80)
+hitstun_frames = 18
+knockdown_frames = 26
+reaction_type = 2
+
+[sub_resource type="Resource" id="Resource_lrvlx"]
+script = ExtResource("1_pive6")
+attack_id = &"boss_swipe"
+animation_name = &"boss_swipe"
+startup_frames = 14
+active_frames = 5
+recovery_frames = 18
+damage = 14.0
+posture_damage = 18.0
+guard_qi_damage = 18.0
+hitbox_offset = Vector2(68, -44)
+hitbox_size = Vector2(112, 62)
+knockback = Vector2(150, 0)
+hitstun_frames = 14
+
+[sub_resource type="Resource" id="Resource_fspxq"]
+script = ExtResource("1_pive6")
+attack_id = &"boss_smash"
+animation_name = &"boss_smash"
+startup_frames = 24
+active_frames = 7
+recovery_frames = 28
+damage = 22.0
+posture_damage = 34.0
+guard_qi_damage = 28.0
+hitbox_offset = Vector2(70, -40)
+hitbox_size = Vector2(126, 72)
+knockback = Vector2(220, -90)
+hitstun_frames = 22
+knockdown_frames = 32
+reaction_type = 2
+
+[sub_resource type="Resource" id="Resource_tsa55"]
+script = ExtResource("1_pive6")
+attack_id = &"boss_unblockable"
+animation_name = &"boss_unblockable"
+attack_type = 1
+startup_frames = 32
+active_frames = 7
+recovery_frames = 34
+damage = 25.0
+posture_damage = 42.0
+hitbox_offset = Vector2(86, -42)
+hitbox_size = Vector2(150, 82)
+knockback = Vector2(260, -100)
+hitstun_frames = 24
+knockdown_frames = 34
+reaction_type = 2
+
+[resource]
+script = ExtResource("2_y6kji")
+enemy_id = &"duo_yuan_shen"
+display_name = "夺愿神"
+archetype = 1
+max_health = 320.0
+max_posture = 180.0
+max_qi = 200.0
+qi_recovery_per_second = 20.0
+move_speed = 112.0
+preferred_range_min = 56.0
+preferred_range_max = 104.0
+guard_chance = 0.12
+melee_attacks = Array[ExtResource("1_pive6")]([SubResource("Resource_lrvlx"), SubResource("Resource_fspxq")])
+unblockable_attack = SubResource("Resource_tsa55")
+anti_burrow_attack = SubResource("Resource_m8eyb")

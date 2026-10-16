@@ -15,8 +15,8 @@ Read that file before editing the project. It contains the Cold Start block, arc
   `E:\SteamLibrary\steamapps\common\Godot Engine\godot.windows.opt.tools.64.exe`
 - MCP: `Godot MCP Native 1.0.8`
 - MCP URL: `http://localhost:9080/mcp`
-- Current stage: M0 through M5 are complete.
-- Next implementation target: M6 夺愿神 boss and the six-node vertical slice.
+- Current stage: M0 through M6 are complete.
+- Next implementation target: M7 placeholder art pass, audio, Windows export, and demo video.
 
 ## Non-Negotiable Scope
 
@@ -73,6 +73,9 @@ Headless validation:
 & "E:\SteamLibrary\steamapps\common\Godot Engine\godot.windows.opt.tools.64.exe" --headless --path "E:\twelfe" --script res://tests/combat/dodge_test.gd
 & "E:\SteamLibrary\steamapps\common\Godot Engine\godot.windows.opt.tools.64.exe" --headless --path "E:\twelfe" --script res://tests/old_self/behavior_recorder_test.gd
 & "E:\SteamLibrary\steamapps\common\Godot Engine\godot.windows.opt.tools.64.exe" --headless --path "E:\twelfe" --script res://tests/old_self/old_self_profile_test.gd
+& "E:\SteamLibrary\steamapps\common\Godot Engine\godot.windows.opt.tools.64.exe" --headless --path "E:\twelfe" --script res://tests/boss/boss_phase_test.gd
+& "E:\SteamLibrary\steamapps\common\Godot Engine\godot.windows.opt.tools.64.exe" --headless --path "E:\twelfe" --script res://tests/boss/incense_burner_test.gd
+& "E:\SteamLibrary\steamapps\common\Godot Engine\godot.windows.opt.tools.64.exe" --headless --path "E:\twelfe" --script res://tests/flow/demo_flow_test.gd
 ```
 
 Update the task board and decision log in the full design document after every completed milestone.

@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="AttackData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/attack_data.gd" id="1_k2vcr"]
+
+[resource]
+script = ExtResource("1_k2vcr")
+attack_id = &"boss_smash"
+animation_name = &"boss_smash"
+startup_frames = 24
+active_frames = 7
+recovery_frames = 28
+damage = 22.0
+posture_damage = 34.0
+guard_qi_damage = 28.0
+hitbox_offset = Vector2(70, -40)
+hitbox_size = Vector2(126, 72)
+knockback = Vector2(220, -90)
+hitstun_frames = 22
+knockdown_frames = 32
+reaction_type = 2
