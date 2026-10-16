@@ -25,6 +25,8 @@ var current_juggle_hits: int = 0
 
 
 func _ready() -> void:
+	floor_snap_length = 8.0
+	floor_stop_on_slope = true
 	health.died.connect(_on_died)
 	state_machine.transition_to(STATE_IDLE)
 

@@ -41,6 +41,8 @@ var _player: PlayerController
 
 
 func _ready() -> void:
+	floor_snap_length = 8.0
+	floor_stop_on_slope = true
 	_apply_profile()
 	health.died.connect(_on_died)
 	state_machine.transition_to(STATE_IDLE)

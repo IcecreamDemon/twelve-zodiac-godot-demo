@@ -15,7 +15,7 @@ size = Vector2(44, 82)
 
 [node name="ClericOfficer" type="CharacterBody2D" groups=["enemy"]]
 collision_layer = 4
-collision_mask = 1
+collision_mask = 3
 script = ExtResource("1_enemy")
 profile = ExtResource("2_profile")
 
@@ -24,6 +24,7 @@ position = Vector2(0, -41)
 shape = SubResource("RectangleShape2D_body")
 
 [node name="Visual" type="Polygon2D" parent="."]
+position = Vector2(0, -8)
 polygon = PackedVector2Array(-18, -80, 18, -80, 20, -44, 32, -30, 18, -12, 30, 0, 12, 8, -6, -2, -20, 8, -32, -2, -20, -18, -32, -32)
 color = Color(0.52, 0.42, 0.3, 1)
 

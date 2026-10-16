@@ -15,7 +15,7 @@ size = Vector2(48, 86)
 
 [node name="OldSelf" type="CharacterBody2D" groups=["enemy", "old_self"]]
 collision_layer = 4
-collision_mask = 1
+collision_mask = 3
 script = ExtResource("1_old_self")
 profile = ExtResource("2_profile")
 
@@ -24,6 +24,7 @@ position = Vector2(0, -43)
 shape = SubResource("RectangleShape2D_body")
 
 [node name="Visual" type="Polygon2D" parent="."]
+position = Vector2(0, -8)
 polygon = PackedVector2Array(-18, -84, 18, -84, 20, -48, 34, -34, 18, -16, 34, 0, 14, 8, -4, -2, -20, 8, -34, -6, -20, -20, -34, -36)
 color = Color(0.08, 0.08, 0.1, 1)
 

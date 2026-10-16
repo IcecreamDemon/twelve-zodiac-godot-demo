@@ -15,7 +15,7 @@ size = Vector2(58, 94)
 
 [node name="Guardian" type="CharacterBody2D" groups=["enemy"]]
 collision_layer = 4
-collision_mask = 1
+collision_mask = 3
 script = ExtResource("1_enemy")
 profile = ExtResource("2_profile")
 max_juggle_hits = 2
@@ -25,6 +25,7 @@ position = Vector2(0, -47)
 shape = SubResource("RectangleShape2D_body")
 
 [node name="Visual" type="Polygon2D" parent="."]
+position = Vector2(0, -8)
 polygon = PackedVector2Array(-28, -92, 28, -92, 31, -50, 44, -34, 24, -14, 38, 2, 16, 8, -10, -2, -28, 8, -44, -8, -30, -28, -44, -46)
 color = Color(0.34, 0.29, 0.25, 1)
 
