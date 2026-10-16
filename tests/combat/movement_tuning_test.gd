@@ -19,8 +19,8 @@ func _run() -> void:
 		failures.append("Gravity is below the tuned prototype baseline.")
 	if player.dodge_speed < 440.0:
 		failures.append("Dodge speed is below the tuned prototype baseline.")
-	if player.collision_mask != 5:
-		failures.append("Player collision mask does not include ground and enemies.")
+	if player.collision_mask != 1:
+		failures.append("Player should use manual actor blocking instead of enemy body collisions.")
 	var lab_scene := preload("res://scenes/tests/combat_lab.tscn")
 	var lab := lab_scene.instantiate()
 	var platform := lab.get_node_or_null("Platform") as Node2D

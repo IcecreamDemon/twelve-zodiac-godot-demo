@@ -127,6 +127,8 @@ func _process_ground_and_air(delta: float) -> void:
 	if not is_zero_approx(input_axis):
 		facing_direction = 1 if input_axis > 0.0 else -1
 
+	_apply_actor_block()
+
 	if Input.is_action_just_pressed(&"perfect_parry") and is_on_floor():
 		_start_parry(false)
 		return
@@ -214,13 +216,13 @@ func _process_dodge(delta: float) -> void:
 		state_machine.transition_to(STATE_IDLE if is_on_floor() else STATE_FALL)
 		return
 
-	_apply_dodge_actor_block()
+	_apply_actor_block()
 	var trailing_frames := maxi(dodge_duration_frames - dodge_invulnerable_frames, 1)
 	if state_machine.frames_in_state >= trailing_frames:
 		velocity.x = move_toward(velocity.x, 0.0, 1500.0 * delta)
 
 
-func _apply_dodge_actor_block() -> void:
+func _apply_actor_block() -> void:
 	if is_zero_approx(velocity.x):
 		return
 
