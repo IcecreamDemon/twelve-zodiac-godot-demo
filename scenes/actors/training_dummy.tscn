@@ -9,7 +9,7 @@
 [ext_resource type="Script" path="res://scripts/combat/hurtbox_component.gd" id="7_hurtbox"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_body"]
-size = Vector2(52, 88)
+size = Vector2(52, 92)
 
 [node name="TrainingDummy" type="CharacterBody2D" groups=["training_dummy"]]
 collision_layer = 4
@@ -21,7 +21,7 @@ position = Vector2(0, -44)
 shape = SubResource("RectangleShape2D_body")
 
 [node name="Visual" type="Polygon2D" parent="."]
-position = Vector2(0, -8)
+position = Vector2(0, 2)
 polygon = PackedVector2Array(-24, -88, 24, -88, 24, -54, 34, -42, 18, -28, 34, -10, 20, 0, 4, -10, -8, 0, -24, -12, -34, -32, -18, -44)
 color = Color(0.55, 0.28, 0.18, 1)
 
