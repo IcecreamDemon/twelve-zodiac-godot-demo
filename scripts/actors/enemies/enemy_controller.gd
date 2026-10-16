@@ -335,16 +335,31 @@ func _resolve_player() -> void:
 
 
 func _prevent_player_overlap() -> void:
-	if _player == null or state_machine.is_state(STATE_DEAD):
-		return
-	if absf(_player.global_position.y - global_position.y) > 64.0:
+	if state_machine.is_state(STATE_DEAD):
 		return
 
-	var horizontal_delta := _player.global_position.x - global_position.x
+	if _player != null:
+		_separate_horizontally_from(_player.global_position, 1.0)
+
+	for node: Node in get_tree().get_nodes_in_group(&"enemy"):
+		if node == self:
+			continue
+		var other := node as Node2D
+		if other == null:
+			continue
+		_separate_horizontally_from(other.global_position, 0.5)
+
+
+func _separate_horizontally_from(other_position: Vector2, adjustment_weight: float) -> void:
+	if absf(other_position.y - global_position.y) > 64.0:
+		return
+
+	var horizontal_delta := other_position.x - global_position.x
 	var horizontal_distance := absf(horizontal_delta)
 	if horizontal_distance >= actor_contact_distance:
 		return
 
 	var away_direction := -1.0 if horizontal_delta >= 0.0 else 1.0
-	global_position.x += away_direction * (actor_contact_distance - horizontal_distance)
+	var correction := (actor_contact_distance - horizontal_distance) * adjustment_weight
+	global_position.x += away_direction * correction
 	velocity.x = 0.0
