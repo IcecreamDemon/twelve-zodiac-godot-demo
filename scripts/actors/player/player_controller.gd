@@ -330,6 +330,7 @@ func _finish_current_attack() -> void:
 	combo_step = 0
 	counter_index = 0
 	buffered_input = INPUT_NONE
+	shi.set_recovery_enabled(true)
 	state_machine.transition_to(STATE_IDLE if is_on_floor() else STATE_FALL)
 
 
@@ -372,6 +373,7 @@ func _start_attack(data: AttackData, mode: StringName, is_chain: bool) -> bool:
 	current_attack_data = data
 	attack_mode = mode
 	buffered_input = INPUT_NONE
+	shi.set_recovery_enabled(false)
 	state_machine.transition_to(STATE_ATTACK)
 	hitbox.begin_attack(data, facing_direction)
 	if not is_chain and mode != ATTACK_COUNTER:
@@ -434,6 +436,7 @@ func _start_burrow() -> bool:
 	hitbox.cancel_attack()
 	current_attack_data = null
 	attack_mode = &""
+	shi.set_recovery_enabled(true)
 	collision_layer = 0
 	position.y += burrow_depth
 	velocity = Vector2.ZERO
@@ -593,11 +596,13 @@ func apply_hit_reaction(attack_data: AttackData, direction: int) -> void:
 	hitbox.cancel_attack()
 	current_attack_data = null
 	attack_mode = &""
+	shi.set_recovery_enabled(true)
 	state_machine.transition_to(STATE_HIT)
 
 
 func _on_died() -> void:
 	hitbox.cancel_attack()
+	shi.set_recovery_enabled(true)
 	state_machine.transition_to(STATE_DEAD)
 
 

@@ -40,7 +40,7 @@ Read that file before editing the project. It contains the Cold Start block, arc
 - Keep combat components isolated: health, posture, qi, shi, hitbox, hurtbox, state machine.
 - Player movement baseline: speed `380`, jump velocity `900`, gravity `2200`, dodge speed `640`.
 - Player attacks consume shi, never qi. Qi is reserved for guard, dodge, and burrow.
-- Shi slowly recovers at `4` points per second by default, in addition to hit generation.
+- Shi slowly recovers at `4` points per second outside attacks; recovery pauses during all attack states and combo branches.
 - Enemy hit reactions apply both horizontal knockback and hitstun according to `AttackData`.
 - Actor-to-actor physical body collision is disabled intentionally; movement blocking uses horizontal contact rules (`actor_contact_distance = 88`) so actors never get vertically displaced by `move_and_slide()`.
 - Enemy bodies stop before player contact and separate from other enemies only along the X axis.

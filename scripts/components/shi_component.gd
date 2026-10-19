@@ -7,12 +7,17 @@ signal shi_changed(current: float, maximum: float)
 @export_range(0.0, 100.0, 0.1) var recovery_per_second: float = 4.0
 
 var current_shi: float = 0.0
+var recovery_enabled: bool = true
 
 
 func _process(delta: float) -> void:
-	if recovery_per_second <= 0.0 or current_shi >= max_shi:
+	if not recovery_enabled or recovery_per_second <= 0.0 or current_shi >= max_shi:
 		return
 	add(recovery_per_second * delta)
+
+
+func set_recovery_enabled(enabled: bool) -> void:
+	recovery_enabled = enabled
 
 
 func add(amount: float) -> void:
@@ -35,6 +40,7 @@ func consume(amount: float) -> bool:
 
 func reset() -> void:
 	current_shi = 0.0
+	recovery_enabled = true
 	shi_changed.emit(current_shi, max_shi)
 
 
