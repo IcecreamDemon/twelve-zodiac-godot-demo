@@ -41,6 +41,11 @@ Press `F5` to run the six-node demo flow. Individual test scenes are under `scen
 - Design and handoff: `https://github.com/IcecreamDemon/game`
 - Local design document: `E:\game plant\docs\superpowers\specs\2026-10-15-zodiac-demo-design.md`
 
+## MCP
+
+- Godot MCP Native endpoint: `http://localhost:19081/mcp`
+- Start or keep the Godot editor running, then open a new Codex conversation to load MCP tools.
+
 ## Repository Scope
 
 The repository includes source, scenes, resources, tests, and the Godot MCP addon. Windows build output and editor caches are intentionally ignored.

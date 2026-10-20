@@ -14,7 +14,7 @@ Read that file before editing the project. It contains the Cold Start block, arc
 - Editor:
   `E:\SteamLibrary\steamapps\common\Godot Engine\godot.windows.opt.tools.64.exe`
 - MCP: `Godot MCP Native 1.0.8`
-- MCP URL: `http://localhost:9080/mcp`
+- MCP URL: `http://localhost:19081/mcp`
 - Source repository: `https://github.com/IcecreamDemon/twelve-zodiac-godot-demo`
 - Current stage: M0 through M6 and the M7 Windows export are complete.
 - Next implementation target: placeholder art pass, audio, and a 30–60 second demo recording.
