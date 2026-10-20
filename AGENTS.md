@@ -47,6 +47,7 @@ Read that file before editing the project. It contains the Cold Start block, arc
 - Enemy bodies stop before player contact and separate from other enemies only along the X axis.
 - `DemoFlowController` uses a dedicated `node_map.tscn` selection screen and a victory animation after every combat; no next enemy spawns before the player selects a node.
 - `flow_hud.tscn` displays player and active enemy health, posture, qi, shi, and state.
+- `HitboxComponent` drives short hitstop and `CombatCamera` shake from `AttackData.hitstop_frames` and `screen_shake_strength`.
 - Enemy bodies also separate horizontally from other enemies; they never resolve actor overlap along the Y axis.
 - Do not introduce third-party combat or behavior-tree plugins for the first milestone.
 

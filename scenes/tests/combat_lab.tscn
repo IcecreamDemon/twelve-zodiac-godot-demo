@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" path="res://scenes/actors/training_dummy.tscn" id="2_dummy"]
 [ext_resource type="Script" path="res://scripts/ui/combat_hud.gd" id="3_hud"]
 [ext_resource type="Script" path="res://scripts/debug/combat_debug_overlay.gd" id="4_debug"]
+[ext_resource type="Script" path="res://scripts/combat/combat_camera.gd" id="5_camera"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ground"]
 size = Vector2(1920, 120)
@@ -12,6 +13,10 @@ size = Vector2(1920, 120)
 size = Vector2(420, 24)
 
 [node name="CombatLab" type="Node2D"]
+
+[node name="Camera" type="Camera2D" parent="."]
+position = Vector2(960, 540)
+script = ExtResource("5_camera")
 
 [node name="Background" type="Polygon2D" parent="."]
 polygon = PackedVector2Array(0, 0, 1920, 0, 1920, 1080, 0, 1080)

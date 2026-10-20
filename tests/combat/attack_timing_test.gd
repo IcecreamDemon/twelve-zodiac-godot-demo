@@ -41,6 +41,8 @@ func _run() -> void:
 
 	for _frame: int in range(40):
 		await physics_frame
+		if dummy.health.current_health < starting_health:
+			break
 
 	var damage_dealt := starting_health - dummy.health.current_health
 	var posture_dealt := starting_posture - dummy.posture.current_posture
@@ -60,10 +62,11 @@ func _run() -> void:
 				posture_dealt,
 			],
 		)
-	if not is_equal_approx(shi_gained, test_attack.shi_gain_on_hit):
+	var expected_net_shi := test_attack.shi_gain_on_hit - test_attack.shi_cost
+	if not is_equal_approx(shi_gained, expected_net_shi):
 		failures.append(
-			"Expected %.1f shi, got %.1f." % [
-				test_attack.shi_gain_on_hit,
+			"Expected net %.1f shi, got %.1f." % [
+				expected_net_shi,
 				shi_gained,
 			],
 		)

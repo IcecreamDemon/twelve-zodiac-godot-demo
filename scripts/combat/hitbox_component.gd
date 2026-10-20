@@ -13,6 +13,7 @@ var frame_index: int = 0
 var is_active: bool = false
 
 var _hit_targets: Dictionary = {}
+var _hitstop_running: bool = false
 
 
 func _ready() -> void:
@@ -70,6 +71,35 @@ func _try_hit(area: Area2D) -> void:
 	if result != HurtboxComponent.ReceiveResult.IGNORED:
 		_hit_targets[area] = true
 		hit_confirmed.emit(hurtbox.get_parent(), attack_data)
+		_play_hit_feedback(result)
+
+
+func _play_hit_feedback(result: HurtboxComponent.ReceiveResult) -> void:
+	var events := get_node_or_null("/root/GameEvents")
+	if events != null:
+		if result == HurtboxComponent.ReceiveResult.PARRY:
+			events.emit_parry_succeeded(global_position)
+		else:
+			var strength := attack_data.screen_shake_strength
+			if result == HurtboxComponent.ReceiveResult.BLOCK:
+				strength *= 0.55
+			events.emit_hit_resolved(global_position, strength)
+
+	if not _hitstop_running and attack_data.hitstop_frames > 0:
+		_apply_hitstop(attack_data.hitstop_frames)
+
+
+func _apply_hitstop(frames: int) -> void:
+	_hitstop_running = true
+	Engine.time_scale = 0.08
+	await get_tree().create_timer(
+		float(frames) / 60.0,
+		true,
+		false,
+		true,
+	).timeout
+	Engine.time_scale = 1.0
+	_hitstop_running = false
 
 
 func _finish_attack() -> void:
