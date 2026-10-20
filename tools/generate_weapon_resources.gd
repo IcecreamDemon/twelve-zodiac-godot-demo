@@ -585,10 +585,36 @@ func _save_attack(
 		attack.set(property_name, overrides[property_name])
 	attack.shi_cost = maxf(attack.shi_cost, converted_shi_cost)
 	attack.qi_cost = 0.0
+	_apply_attack_shi_cost(attack_id, attack)
 
 	var directory := SHORT_BLADE_DIR if weapon_dir == "short_blade" else SPEAR_DIR
 	ResourceSaver.save(attack, "%s%s.tres" % [directory, attack_id])
 	return attack
+
+
+func _apply_attack_shi_cost(attack_id: String, attack: AttackData) -> void:
+	if attack_id.contains("counter"):
+		attack.shi_cost = 0.0
+	elif attack_id.contains("air_slam"):
+		attack.shi_cost = 20.0
+	elif attack_id.contains("ground_finisher"):
+		attack.shi_cost = 20.0
+	elif attack_id.contains("burrow_emerge"):
+		attack.shi_cost = 15.0
+	elif attack_id.contains("heavy"):
+		attack.shi_cost = 25.0
+	elif attack_id.contains("air_light"):
+		attack.shi_cost = 8.0
+	elif attack_id.contains("switch"):
+		attack.shi_cost = 8.0
+	elif attack_id.contains("up"):
+		attack.shi_cost = 15.0
+	elif attack_id.contains("forward"):
+		attack.shi_cost = 15.0
+	elif attack_id.contains("neutral"):
+		attack.shi_cost = 12.0
+	elif attack_id.ends_with("_l1") or attack_id.ends_with("_l2"):
+		attack.shi_cost = 8.0
 
 
 func _counter_attack(

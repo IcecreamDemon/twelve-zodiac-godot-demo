@@ -17,3 +17,4 @@ knockback = Vector2(70, 0)
 hitstun_frames = 10
 juggle_cost = 1
 is_air_attack = true
+shi_cost = 8.0

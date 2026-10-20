@@ -17,6 +17,7 @@ knockback = Vector2(80, 0)
 hitstun_frames = 11
 juggle_cost = 1
 is_air_attack = true
+shi_cost = 8.0
 
 [sub_resource type="Resource" id="Resource_udw87"]
 script = ExtResource("1_u7l32")
@@ -36,7 +37,7 @@ reaction_type = 2
 juggle_cost = 2
 is_air_attack = true
 shi_gain_on_hit = 18.0
-shi_cost = 2.0
+shi_cost = 20.0
 
 [sub_resource type="Resource" id="Resource_f4riw"]
 script = ExtResource("1_u7l32")
@@ -84,7 +85,7 @@ hitbox_size = Vector2(150, 54)
 knockback = Vector2(230, 0)
 hitstun_frames = 18
 shi_gain_on_hit = 12.0
-shi_cost = 2.0
+shi_cost = 15.0
 
 [sub_resource type="Resource" id="Resource_6usac"]
 script = ExtResource("1_u7l32")
@@ -103,7 +104,7 @@ knockdown_frames = 36
 reaction_type = 2
 is_ground_finisher = true
 shi_gain_on_hit = 20.0
-shi_cost = 2.0
+shi_cost = 20.0
 
 [sub_resource type="Resource" id="Resource_n5vns"]
 script = ExtResource("1_u7l32")
@@ -122,7 +123,7 @@ hitstun_frames = 20
 knockdown_frames = 32
 reaction_type = 2
 shi_gain_on_hit = 18.0
-shi_cost = 3.0
+shi_cost = 25.0
 
 [sub_resource type="Resource" id="Resource_dwth8"]
 script = ExtResource("1_u7l32")
@@ -134,7 +135,7 @@ damage = 8.0
 hitbox_offset = Vector2(68, -42)
 hitbox_size = Vector2(104, 48)
 knockback = Vector2(110, 0)
-shi_cost = 1.0
+shi_cost = 8.0
 
 [sub_resource type="Resource" id="Resource_152jx"]
 script = ExtResource("1_u7l32")
@@ -148,7 +149,7 @@ posture_damage = 11.0
 hitbox_offset = Vector2(76, -42)
 hitbox_size = Vector2(116, 50)
 hitstun_frames = 13
-shi_cost = 1.0
+shi_cost = 8.0
 
 [sub_resource type="Resource" id="Resource_m420y"]
 script = ExtResource("1_u7l32")
@@ -164,7 +165,7 @@ hitbox_size = Vector2(132, 52)
 knockback = Vector2(150, 0)
 hitstun_frames = 15
 shi_gain_on_hit = 12.0
-shi_cost = 1.0
+shi_cost = 12.0
 
 [sub_resource type="Resource" id="Resource_pb3fy"]
 script = ExtResource("1_u7l32")
@@ -178,7 +179,7 @@ hitbox_size = Vector2(88, 50)
 knockback = Vector2(-90, 0)
 hitstun_frames = 10
 shi_gain_on_hit = 8.0
-shi_cost = 1.0
+shi_cost = 8.0
 
 [sub_resource type="Resource" id="Resource_ujk6j"]
 script = ExtResource("1_u7l32")
@@ -196,7 +197,7 @@ hitstun_frames = 22
 reaction_type = 1
 juggle_cost = 1
 shi_gain_on_hit = 12.0
-shi_cost = 2.0
+shi_cost = 15.0
 
 [resource]
 script = ExtResource("2_17uv3")

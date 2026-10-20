@@ -15,6 +15,8 @@ func _run() -> void:
 	await physics_frame
 
 	var player := lab.get_node("Player") as PlayerController
+	if player.shi.recovery_per_second > 2.0:
+		failures.append("Shi passive recovery is too fast for the current balance.")
 	player.shi.current_shi = 10.0
 	var starting_shi := player.shi.current_shi
 

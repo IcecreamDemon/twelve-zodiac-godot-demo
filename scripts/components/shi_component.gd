@@ -4,7 +4,7 @@ extends Node
 signal shi_changed(current: float, maximum: float)
 
 @export_range(1.0, 9999.0, 1.0) var max_shi: float = 100.0
-@export_range(0.0, 100.0, 0.1) var recovery_per_second: float = 4.0
+@export_range(0.0, 100.0, 0.1) var recovery_per_second: float = 2.0
 
 var current_shi: float = 0.0
 var recovery_enabled: bool = true

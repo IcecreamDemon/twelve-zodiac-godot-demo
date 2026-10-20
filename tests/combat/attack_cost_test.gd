@@ -28,6 +28,10 @@ func _run() -> void:
 		failures.append("Attack resource still contains a qi cost.")
 	if attack.shi_cost <= 0.0:
 		failures.append("Attack resource does not contain a shi cost.")
+	if attack.shi_cost < 8.0:
+		failures.append("Light attack shi cost is too small to matter.")
+	if player._current_weapon().heavy_finisher.shi_cost < 20.0:
+		failures.append("Heavy attack shi cost is too small to matter.")
 
 	if failures.is_empty():
 		print("ATTACK COST TEST PASS: attacks consume shi, not qi.")

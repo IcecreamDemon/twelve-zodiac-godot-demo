@@ -14,4 +14,4 @@ posture_damage = 11.0
 hitbox_offset = Vector2(76, -42)
 hitbox_size = Vector2(116, 50)
 hitstun_frames = 13
-shi_cost = 1.0
+shi_cost = 8.0

@@ -19,4 +19,4 @@ knockdown_frames = 36
 reaction_type = 2
 is_ground_finisher = true
 shi_gain_on_hit = 20.0
-shi_cost = 2.0
+shi_cost = 20.0
