@@ -14,6 +14,7 @@ posture_damage = 8.0
 hitbox_offset = Vector2(42, -44)
 hitbox_size = Vector2(66, 52)
 knockback = Vector2(80, 0)
+forward_motion_speed = 38.0
 hitstun_frames = 10
 shi_cost = 8.0
 screen_shake_strength = 0.12

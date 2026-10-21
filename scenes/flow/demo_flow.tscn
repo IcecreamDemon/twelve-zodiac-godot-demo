@@ -10,6 +10,9 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ground"]
 size = Vector2(1920, 120)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_platform"]
+size = Vector2(420, 24)
+
 [node name="DemoFlow" type="Node2D"]
 script = ExtResource("2_flow")
 
@@ -32,6 +35,19 @@ shape = SubResource("RectangleShape2D_ground")
 [node name="GroundVisual" type="Polygon2D" parent="Ground"]
 polygon = PackedVector2Array(-960, -60, 960, -60, 960, 60, -960, 60)
 color = Color(0.12, 0.14, 0.16, 1)
+
+[node name="Platform" type="StaticBody2D" parent="."]
+position = Vector2(960, 720)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform"]
+one_way_collision = true
+shape = SubResource("RectangleShape2D_platform")
+
+[node name="PlatformVisual" type="Polygon2D" parent="Platform"]
+polygon = PackedVector2Array(-210, -12, 210, -12, 210, 12, -210, 12)
+color = Color(0.28, 0.3, 0.31, 1)
 
 [node name="BurrowSurface" type="Area2D" parent="."]
 position = Vector2(960, 920)

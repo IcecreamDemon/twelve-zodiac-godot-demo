@@ -249,6 +249,11 @@ func _process_attack(delta: float) -> void:
 	if attack_mode == ATTACK_AIR_SLAM:
 		velocity.x = move_toward(velocity.x, 0.0, 300.0 * delta)
 		velocity.y = maxf(velocity.y, 520.0)
+	elif (
+		current_attack_data.forward_motion_speed > 0.0
+		and state_machine.frames_in_state <= current_attack_data.startup_frames + current_attack_data.active_frames
+	):
+		velocity.x = current_attack_data.forward_motion_speed * float(facing_direction)
 	else:
 		velocity.x = move_toward(velocity.x, 0.0, ground_deceleration * delta)
 

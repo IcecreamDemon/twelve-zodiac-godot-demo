@@ -606,6 +606,7 @@ func _save_attack(
 	attack.qi_cost = 0.0
 	_apply_attack_shi_cost(attack_id, attack)
 	_apply_player_attack_feedback(attack_id, attack)
+	_apply_player_attack_motion(attack_id, attack)
 
 	var directory := SHORT_BLADE_DIR if weapon_dir == "short_blade" else SPEAR_DIR
 	ResourceSaver.save(attack, "%s%s.tres" % [directory, attack_id])
@@ -656,6 +657,29 @@ func _apply_player_attack_feedback(attack_id: String, attack: AttackData) -> voi
 	else:
 		attack.hitstop_frames = 3
 		attack.screen_shake_strength = 0.12
+
+
+func _apply_player_attack_motion(attack_id: String, attack: AttackData) -> void:
+	if attack_id.contains("air_") or attack_id.contains("ground_finisher") or attack_id.contains("burrow_emerge"):
+		attack.forward_motion_speed = 0.0
+	elif attack_id.contains("forward"):
+		attack.forward_motion_speed = 155.0
+	elif attack_id.contains("heavy"):
+		attack.forward_motion_speed = 85.0
+	elif attack_id.contains("neutral"):
+		attack.forward_motion_speed = 70.0
+	elif attack_id.contains("up"):
+		attack.forward_motion_speed = 35.0
+	elif attack_id.contains("switch"):
+		attack.forward_motion_speed = 55.0
+	elif attack_id.contains("counter"):
+		attack.forward_motion_speed = 25.0
+	elif attack_id.ends_with("_l1"):
+		attack.forward_motion_speed = 38.0
+	elif attack_id.ends_with("_l2"):
+		attack.forward_motion_speed = 32.0
+	else:
+		attack.forward_motion_speed = 0.0
 
 
 func _counter_attack(

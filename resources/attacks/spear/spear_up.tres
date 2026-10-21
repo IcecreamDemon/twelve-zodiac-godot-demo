@@ -14,6 +14,7 @@ hitbox_offset = Vector2(48, -78)
 hitbox_size = Vector2(94, 92)
 knockback = Vector2(90, -390)
 launch_velocity = Vector2(100, -450)
+forward_motion_speed = 35.0
 hitstun_frames = 22
 reaction_type = 1
 juggle_cost = 1

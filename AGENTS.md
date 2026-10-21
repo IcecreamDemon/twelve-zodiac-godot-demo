@@ -51,6 +51,8 @@ Read that file before editing the project. It contains the Cold Start block, arc
 - `HitboxComponent` drives short hitstop and `CombatCamera` shake from `AttackData.hitstop_frames` and `screen_shake_strength`.
 - Ground attack recovery can cancel into dodge after active frames; startup and counter attacks remain uncancelable.
 - Enemy startup telegraph uses silhouette tint: warm color for normal attacks, red for unblockable, blue for anti-burrow.
+- AttackData carries `forward_motion_speed`; light attacks drift slightly, forward finishers lunge, and heavy attacks step in.
+- Demo Flow and Combat Lab platforms use one-way collision.
 - Enemy bodies also separate horizontally from other enemies; they never resolve actor overlap along the Y axis.
 - Do not introduce third-party combat or behavior-tree plugins for the first milestone.
 

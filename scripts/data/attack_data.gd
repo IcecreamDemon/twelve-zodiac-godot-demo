@@ -26,6 +26,7 @@ enum ReactionType {
 @export var hitbox_size: Vector2 = Vector2(64.0, 48.0)
 @export var knockback: Vector2 = Vector2(120.0, 0.0)
 @export var launch_velocity: Vector2 = Vector2(120.0, -420.0)
+@export_range(0.0, 600.0, 1.0) var forward_motion_speed: float = 0.0
 @export_range(0, 120, 1) var hitstun_frames: int = 12
 @export_range(0, 240, 1) var knockdown_frames: int = 28
 @export var reaction_type: ReactionType = ReactionType.STUN

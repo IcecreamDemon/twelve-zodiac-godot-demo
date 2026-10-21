@@ -15,6 +15,7 @@ guard_qi_damage = 24.0
 hitbox_offset = Vector2(92, -42)
 hitbox_size = Vector2(142, 58)
 knockback = Vector2(230, -70)
+forward_motion_speed = 85.0
 hitstun_frames = 20
 knockdown_frames = 32
 reaction_type = 2
