@@ -21,3 +21,5 @@ juggle_cost = 2
 is_air_attack = true
 shi_gain_on_hit = 18.0
 shi_cost = 20.0
+hitstop_frames = 8
+screen_shake_strength = 0.32

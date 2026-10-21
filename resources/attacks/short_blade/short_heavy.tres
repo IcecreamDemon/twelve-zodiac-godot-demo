@@ -20,3 +20,5 @@ knockdown_frames = 30
 reaction_type = 2
 shi_gain_on_hit = 18.0
 shi_cost = 25.0
+hitstop_frames = 7
+screen_shake_strength = 0.28

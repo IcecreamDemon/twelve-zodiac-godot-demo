@@ -252,6 +252,10 @@ func _process_attack(delta: float) -> void:
 	else:
 		velocity.x = move_toward(velocity.x, 0.0, ground_deceleration * delta)
 
+	if Input.is_action_just_pressed(&"dodge"):
+		if try_dodge_cancel(Input.get_axis(&"move_left", &"move_right")):
+			return
+
 	_sample_attack_buffer()
 
 	if attack_mode == ATTACK_AIR_SLAM and is_on_floor() and state_machine.frames_in_state >= current_attack_data.startup_frames:
@@ -262,6 +266,31 @@ func _process_attack(delta: float) -> void:
 		return
 
 	_finish_current_attack()
+
+
+func try_dodge_cancel(input_axis: float) -> bool:
+	if current_attack_data == null:
+		return false
+	if attack_mode == ATTACK_COUNTER:
+		return false
+	var cancel_frame := current_attack_data.startup_frames + current_attack_data.active_frames
+	if state_machine.frames_in_state < cancel_frame:
+		return false
+	if qi.current_qi < dodge_qi_cost:
+		return false
+
+	_cancel_current_attack()
+	return _start_dodge(input_axis)
+
+
+func _cancel_current_attack() -> void:
+	hitbox.cancel_attack()
+	current_attack_data = null
+	attack_mode = &""
+	combo_step = 0
+	counter_index = 0
+	buffered_input = INPUT_NONE
+	shi.set_recovery_enabled(true)
 
 
 func _process_hit() -> void:

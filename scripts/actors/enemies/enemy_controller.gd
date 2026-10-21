@@ -82,6 +82,7 @@ func _physics_process(delta: float) -> void:
 		STATE_DEAD:
 			velocity.x = move_toward(velocity.x, 0.0, 1200.0 * delta)
 
+	_update_attack_telegraph()
 	_prevent_player_overlap()
 	move_and_slide()
 	_lock_ground_vertical()
@@ -160,6 +161,23 @@ func _process_attack(delta: float) -> void:
 		hitbox.cancel_attack()
 		decision_cooldown = 0.35
 		state_machine.transition_to(STATE_APPROACH)
+
+
+func _update_attack_telegraph() -> void:
+	if not state_machine.is_state(STATE_ATTACK) or current_attack_data == null:
+		return
+
+	if state_machine.frames_in_state > current_attack_data.startup_frames:
+		visual.modulate = Color.WHITE
+		return
+
+	var warning_color := Color(1.0, 0.72, 0.25, 1.0)
+	if current_attack_data.attack_type == AttackData.AttackType.UNBLOCKABLE:
+		warning_color = Color(1.0, 0.2, 0.12, 1.0)
+	elif current_attack_data.attack_type == AttackData.AttackType.ANTI_BURROW:
+		warning_color = Color(0.25, 0.75, 0.9, 1.0)
+	var ratio := float(state_machine.frames_in_state) / maxf(float(current_attack_data.startup_frames), 1.0)
+	visual.modulate = Color.WHITE.lerp(warning_color, clampf(ratio, 0.0, 1.0) * 0.75)
 
 
 func _process_hit(delta: float) -> void:
@@ -284,6 +302,7 @@ func apply_hit_reaction(attack_data: AttackData, direction: int) -> void:
 	hitbox.cancel_attack()
 	current_attack_data = null
 	attack_mode = &"melee"
+	visual.modulate = Color.WHITE
 
 	match attack_data.reaction_type:
 		AttackData.ReactionType.LAUNCH:

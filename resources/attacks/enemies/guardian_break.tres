@@ -18,3 +18,5 @@ knockback = Vector2(220, -80)
 hitstun_frames = 22
 knockdown_frames = 30
 reaction_type = 2
+hitstop_frames = 7
+screen_shake_strength = 0.28

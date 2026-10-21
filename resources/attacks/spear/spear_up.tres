@@ -19,3 +19,5 @@ reaction_type = 1
 juggle_cost = 1
 shi_gain_on_hit = 12.0
 shi_cost = 15.0
+hitstop_frames = 6
+screen_shake_strength = 0.24

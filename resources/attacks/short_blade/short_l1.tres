@@ -16,3 +16,4 @@ hitbox_size = Vector2(66, 52)
 knockback = Vector2(80, 0)
 hitstun_frames = 10
 shi_cost = 8.0
+screen_shake_strength = 0.12

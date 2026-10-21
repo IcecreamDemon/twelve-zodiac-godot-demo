@@ -16,3 +16,5 @@ hitbox_offset = Vector2(56, -44)
 hitbox_size = Vector2(86, 62)
 knockback = Vector2(130, 0)
 hitstun_frames = 18
+hitstop_frames = 6
+screen_shake_strength = 0.24

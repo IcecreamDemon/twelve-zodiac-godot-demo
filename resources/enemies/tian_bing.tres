@@ -19,6 +19,8 @@ knockback = Vector2(160, -80)
 hitstun_frames = 18
 knockdown_frames = 26
 reaction_type = 2
+hitstop_frames = 4
+screen_shake_strength = 0.16
 
 [sub_resource type="Resource" id="Resource_pjha2"]
 script = ExtResource("1_c2r4k")
@@ -31,6 +33,8 @@ guard_qi_damage = 12.0
 hitbox_offset = Vector2(52, -44)
 hitbox_size = Vector2(76, 54)
 knockback = Vector2(110, 0)
+hitstop_frames = 4
+screen_shake_strength = 0.16
 
 [sub_resource type="Resource" id="Resource_gfgjj"]
 script = ExtResource("1_c2r4k")
@@ -47,6 +51,8 @@ hitbox_size = Vector2(88, 60)
 knockback = Vector2(180, -60)
 hitstun_frames = 18
 reaction_type = 2
+hitstop_frames = 6
+screen_shake_strength = 0.24
 
 [resource]
 script = ExtResource("2_ndb84")

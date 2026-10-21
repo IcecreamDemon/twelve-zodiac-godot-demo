@@ -13,3 +13,5 @@ guard_qi_damage = 12.0
 hitbox_offset = Vector2(52, -44)
 hitbox_size = Vector2(76, 54)
 knockback = Vector2(110, 0)
+hitstop_frames = 4
+screen_shake_strength = 0.16

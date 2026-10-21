@@ -16,6 +16,7 @@ func _run() -> void:
 
 	var player := lab.get_node("Player") as PlayerController
 	var weapon := player._current_weapon()
+	player.shi.current_shi = player.shi.max_shi
 	player._switch_weapon(false)
 	if player._current_weapon().weapon_id != &"spear":
 		failures.append("Weapon switch did not select the spear.")

@@ -330,8 +330,27 @@ func _save_enemy_attack(attack_id: String, overrides: Dictionary) -> AttackData:
 	attack.hitstun_frames = 10
 	for property_name: String in overrides:
 		attack.set(property_name, overrides[property_name])
+	_apply_enemy_attack_feedback(attack_id, attack)
 	ResourceSaver.save(attack, "%s%s.tres" % [ENEMY_ATTACK_DIR, attack_id])
 	return attack
+
+
+func _apply_enemy_attack_feedback(attack_id: String, attack: AttackData) -> void:
+	if attack_id.contains("boss_unblockable"):
+		attack.hitstop_frames = 9
+		attack.screen_shake_strength = 0.38
+	elif attack_id.contains("boss_smash") or attack_id.contains("guardian_break"):
+		attack.hitstop_frames = 7
+		attack.screen_shake_strength = 0.28
+	elif attack_id.contains("heavy") or attack_id.contains("red"):
+		attack.hitstop_frames = 6
+		attack.screen_shake_strength = 0.24
+	elif attack_id.contains("projectile"):
+		attack.hitstop_frames = 3
+		attack.screen_shake_strength = 0.14
+	else:
+		attack.hitstop_frames = 4
+		attack.screen_shake_strength = 0.16
 
 
 func _build_enemy_profiles(attacks: Dictionary) -> void:
@@ -586,6 +605,7 @@ func _save_attack(
 	attack.shi_cost = maxf(attack.shi_cost, converted_shi_cost)
 	attack.qi_cost = 0.0
 	_apply_attack_shi_cost(attack_id, attack)
+	_apply_player_attack_feedback(attack_id, attack)
 
 	var directory := SHORT_BLADE_DIR if weapon_dir == "short_blade" else SPEAR_DIR
 	ResourceSaver.save(attack, "%s%s.tres" % [directory, attack_id])
@@ -615,6 +635,27 @@ func _apply_attack_shi_cost(attack_id: String, attack: AttackData) -> void:
 		attack.shi_cost = 12.0
 	elif attack_id.ends_with("_l1") or attack_id.ends_with("_l2"):
 		attack.shi_cost = 8.0
+
+
+func _apply_player_attack_feedback(attack_id: String, attack: AttackData) -> void:
+	if attack_id.contains("air_slam") or attack_id.contains("ground_finisher"):
+		attack.hitstop_frames = 8
+		attack.screen_shake_strength = 0.32
+	elif attack_id.contains("heavy"):
+		attack.hitstop_frames = 7
+		attack.screen_shake_strength = 0.28
+	elif attack_id.contains("up") or attack_id.contains("forward"):
+		attack.hitstop_frames = 6
+		attack.screen_shake_strength = 0.24
+	elif attack_id.contains("neutral"):
+		attack.hitstop_frames = 5
+		attack.screen_shake_strength = 0.2
+	elif attack_id.contains("counter"):
+		attack.hitstop_frames = 3
+		attack.screen_shake_strength = 0.12
+	else:
+		attack.hitstop_frames = 3
+		attack.screen_shake_strength = 0.12
 
 
 func _counter_attack(
