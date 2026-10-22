@@ -1,0 +1,121 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/pause_menu.gd" id="1_pause"]
+
+[node name="PauseMenu" type="CanvasLayer"]
+layer = 60
+script = ExtResource("1_pause")
+
+[node name="Root" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Shade" type="ColorRect" parent="Root"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.04, 0.05, 0.06, 0.78)
+
+[node name="Panel" type="Panel" parent="Root"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -340.0
+offset_top = -310.0
+offset_right = 340.0
+offset_bottom = 310.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="Root/Panel"]
+offset_left = 40.0
+offset_top = 32.0
+offset_right = 640.0
+offset_bottom = 90.0
+theme_override_font_sizes/font_size = 34
+text = "暂停"
+horizontal_alignment = 1
+
+[node name="ResumeButton" type="Button" parent="Root/Panel"]
+offset_left = 130.0
+offset_top = 130.0
+offset_right = 550.0
+offset_bottom = 194.0
+text = "继续"
+
+[node name="RestartButton" type="Button" parent="Root/Panel"]
+offset_left = 130.0
+offset_top = 214.0
+offset_right = 550.0
+offset_bottom = 278.0
+text = "重新开始当前节点"
+
+[node name="ControlsButton" type="Button" parent="Root/Panel"]
+offset_left = 130.0
+offset_top = 298.0
+offset_right = 550.0
+offset_bottom = 362.0
+text = "操作说明"
+
+[node name="TitleButton" type="Button" parent="Root/Panel"]
+offset_left = 130.0
+offset_top = 382.0
+offset_right = 550.0
+offset_bottom = 446.0
+text = "返回标题"
+
+[node name="QuitButton" type="Button" parent="Root/Panel"]
+offset_left = 130.0
+offset_top = 466.0
+offset_right = 550.0
+offset_bottom = 530.0
+text = "退出游戏"
+
+[node name="ControlsPanel" type="Panel" parent="Root"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -480.0
+offset_top = -360.0
+offset_right = 480.0
+offset_bottom = 360.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="Root/ControlsPanel"]
+offset_left = 42.0
+offset_top = 34.0
+offset_right = 900.0
+offset_bottom = 82.0
+theme_override_font_sizes/font_size = 30
+text = "操作说明"
+
+[node name="Text" type="Label" parent="Root/ControlsPanel"]
+offset_left = 42.0
+offset_top = 110.0
+offset_right = 900.0
+offset_bottom = 570.0
+theme_override_font_sizes/font_size = 22
+text = "A / D  移动\nSpace  跳跃\nJ  轻击\nK  重击 / 空中砸地 / 地面追击\nL  闪避\nU  防御\nI  精准格挡\nQ  切换武器\nF  潜地 / 钻出\nW  连招上挑修饰键\nEsc  暂停 / 返回"
+
+[node name="CloseButton" type="Button" parent="Root/ControlsPanel"]
+offset_left = 650.0
+offset_top = 610.0
+offset_right = 900.0
+offset_bottom = 670.0
+text = "关闭"

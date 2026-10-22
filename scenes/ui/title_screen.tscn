@@ -1,0 +1,108 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/title_screen.gd" id="1_title"]
+
+[node name="TitleScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_title")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.91, 0.89, 0.83, 1)
+
+[node name="InkTop" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(0, 0, 1920, 0, 1920, 180, 1430, 118, 1040, 164, 610, 92, 190, 150, 0, 80)
+color = Color(0.08, 0.09, 0.1, 0.92)
+
+[node name="InkBottom" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(0, 1080, 1920, 1080, 1920, 900, 1450, 958, 1090, 908, 650, 986, 280, 930, 0, 1002)
+color = Color(0.12, 0.14, 0.16, 0.88)
+
+[node name="Title" type="Label" parent="."]
+offset_left = 150.0
+offset_top = 210.0
+offset_right = 1100.0
+offset_bottom = 390.0
+theme_override_colors/font_color = Color(0.08, 0.09, 0.1, 1)
+theme_override_font_sizes/font_size = 112
+text = "十二神相录"
+
+[node name="Tagline" type="Label" parent="."]
+offset_left = 160.0
+offset_top = 390.0
+offset_right = 1100.0
+offset_bottom = 455.0
+theme_override_colors/font_color = Color(0.58, 0.14, 0.09, 1)
+theme_override_font_sizes/font_size = 34
+text = "天书无名，人间有相"
+
+[node name="Version" type="Label" parent="."]
+offset_left = 160.0
+offset_top = 470.0
+offset_right = 900.0
+offset_bottom = 510.0
+text = "GODOT PLAYABLE VERTICAL SLICE · 2026"
+
+[node name="StartButton" type="Button" parent="."]
+offset_left = 160.0
+offset_top = 590.0
+offset_right = 540.0
+offset_bottom = 666.0
+theme_override_font_sizes/font_size = 28
+text = "开始 Demo"
+
+[node name="ControlsButton" type="Button" parent="."]
+offset_left = 160.0
+offset_top = 690.0
+offset_right = 540.0
+offset_bottom = 766.0
+theme_override_font_sizes/font_size = 24
+text = "操作说明"
+
+[node name="QuitButton" type="Button" parent="."]
+offset_left = 160.0
+offset_top = 790.0
+offset_right = 540.0
+offset_bottom = 866.0
+theme_override_font_sizes/font_size = 24
+text = "退出"
+
+[node name="ControlsPanel" type="Panel" parent="."]
+visible = false
+offset_left = 700.0
+offset_top = 240.0
+offset_right = 1680.0
+offset_bottom = 900.0
+
+[node name="Title" type="Label" parent="ControlsPanel"]
+offset_left = 42.0
+offset_top = 30.0
+offset_right = 900.0
+offset_bottom = 78.0
+theme_override_font_sizes/font_size = 30
+text = "操作说明"
+
+[node name="Text" type="Label" parent="ControlsPanel"]
+offset_left = 42.0
+offset_top = 104.0
+offset_right = 900.0
+offset_bottom = 530.0
+theme_override_font_sizes/font_size = 22
+text = "A / D  左右移动\nSpace  跳跃\nJ  轻击\nK  重击 / 空中砸地 / 地面追击\nL  闪避\nU  按住防御\nI  精准格挡\nQ  切换武器\nF  潜地 / 钻出\nW  连招上挑修饰键\n\n地面连招：J → J → J / W+J / 方向+J / K / Q"
+
+[node name="CloseButton" type="Button" parent="ControlsPanel"]
+offset_left = 650.0
+offset_top = 570.0
+offset_right = 900.0
+offset_bottom = 630.0
+text = "关闭"

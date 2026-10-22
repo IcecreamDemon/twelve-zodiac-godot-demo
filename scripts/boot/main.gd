@@ -1,7 +1,7 @@
 extends Node
 
-const DEMO_FLOW_SCENE := "res://scenes/flow/demo_flow.tscn"
+const TITLE_SCENE := "res://scenes/ui/title_screen.tscn"
 
 
 func _ready() -> void:
-	get_tree().change_scene_to_file.call_deferred(DEMO_FLOW_SCENE)
+	get_tree().change_scene_to_file.call_deferred(TITLE_SCENE)

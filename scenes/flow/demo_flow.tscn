@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3]
+[gd_scene load_steps=10 format=3]
 
 [ext_resource type="PackedScene" path="res://scenes/actors/player/player.tscn" id="1_player"]
 [ext_resource type="Script" path="res://scripts/flow/demo_flow_controller.gd" id="2_flow"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" path="res://scenes/ui/flow_hud.tscn" id="4_hud"]
 [ext_resource type="PackedScene" path="res://scenes/flow/node_map.tscn" id="5_map"]
 [ext_resource type="Script" path="res://scripts/combat/combat_camera.gd" id="6_camera"]
+[ext_resource type="PackedScene" path="res://scenes/ui/pause_menu.tscn" id="7_pause"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ground"]
 size = Vector2(1920, 120)
@@ -67,6 +68,8 @@ position = Vector2(280, 860)
 [node name="FlowHud" parent="." instance=ExtResource("4_hud")]
 
 [node name="NodeMap" parent="." instance=ExtResource("5_map")]
+
+[node name="PauseMenu" parent="." instance=ExtResource("7_pause")]
 
 [node name="Ui" type="CanvasLayer" parent="."]
 
@@ -158,6 +161,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="DebugOverlay" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

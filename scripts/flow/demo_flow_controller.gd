@@ -16,6 +16,7 @@ const GUARDIAN_SCENE := preload("res://scenes/actors/enemies/guardian.tscn")
 const OLD_SELF_SCENE := preload("res://scenes/actors/enemies/old_self.tscn")
 const BOSS_SCENE := preload("res://scenes/actors/boss/duo_yuan_shen.tscn")
 const BURNER_SCENE := preload("res://scenes/actors/incense_burner.tscn")
+const TITLE_SCENE := "res://scenes/ui/title_screen.tscn"
 
 @onready var player: PlayerController = $Player
 @onready var encounter_root: Node2D = $EncounterRoot
@@ -29,6 +30,7 @@ const BURNER_SCENE := preload("res://scenes/actors/incense_burner.tscn")
 @onready var victory_panel: Panel = $Ui/Root/VictoryPanel
 @onready var victory_label: Label = $Ui/Root/VictoryPanel/VictoryLabel
 @onready var node_map: NodeMapController = $NodeMap
+@onready var pause_menu = $PauseMenu
 
 var flow_state: FlowState = FlowState.PROLOGUE
 var behavior_recorder: BehaviorRecorder
@@ -51,6 +53,8 @@ func _ready() -> void:
 	return_button.pressed.connect(_on_return_incense)
 	shop_button.pressed.connect(_on_spend_incense)
 	node_map.option_selected.connect(_on_node_option_selected)
+	pause_menu.restart_requested.connect(_on_pause_restart)
+	pause_menu.title_requested.connect(_on_pause_title)
 	_set_state(FlowState.PROLOGUE)
 
 
@@ -299,3 +303,17 @@ func _play_victory_animation() -> void:
 	fade.tween_property(victory_panel, "modulate:a", 0.0, 0.22)
 	await fade.finished
 	victory_panel.visible = false
+
+
+func _on_pause_restart() -> void:
+	get_tree().paused = false
+	player.health.reset()
+	player.posture.reset()
+	player.qi.reset()
+	player.shi.current_shi = player.starting_shi
+	_set_state(flow_state)
+
+
+func _on_pause_title() -> void:
+	get_tree().paused = false
+	get_tree().change_scene_to_file(TITLE_SCENE)

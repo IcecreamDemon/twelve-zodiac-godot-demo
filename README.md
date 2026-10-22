@@ -14,7 +14,7 @@ Godot 4 vertical slice for the original 2D side-view action roguelite concept.
 & "E:\SteamLibrary\steamapps\common\Godot Engine\godot.windows.opt.tools.64.exe" --editor --path "E:\twelfe"
 ```
 
-Press `F5` to run the six-node demo flow. Individual test scenes are under `scenes/tests/`.
+Press `F5` to open the title screen and start the six-node demo flow. Individual test scenes are under `scenes/tests/`.
 
 ## Controls
 
@@ -28,6 +28,7 @@ Press `F5` to run the six-node demo flow. Individual test scenes are under `scen
 - Switch weapon: `Q`
 - Burrow / emerge: `F`
 - Combo up branch modifier: `W`
+- Pause: `Esc`
 
 ## Tests
 
