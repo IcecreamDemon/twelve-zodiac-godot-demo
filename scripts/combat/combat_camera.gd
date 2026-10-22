@@ -6,6 +6,7 @@ extends Camera2D
 @export var trauma_decay_per_second: float = 2.8
 
 var trauma: float = 0.0
+var _parry_zoom_running: bool = false
 
 
 func _ready() -> void:
@@ -34,5 +35,12 @@ func _on_hit_resolved(_world_position: Vector2, strength: float) -> void:
 	trauma = minf(trauma + maxf(strength, 0.0) * 3.0, 1.0)
 
 
-func _on_parry_succeeded(_world_position: Vector2) -> void:
+func _on_parry_succeeded(_world_position: Vector2, _weapon_id: StringName) -> void:
 	trauma = minf(trauma + 0.7, 1.0)
+	if not _parry_zoom_running:
+		_parry_zoom_running = true
+		var tween := create_tween()
+		tween.tween_property(self, "zoom", Vector2(1.02, 1.02), 0.05)
+		tween.tween_property(self, "zoom", Vector2.ONE, 0.12)
+		await tween.finished
+		_parry_zoom_running = false

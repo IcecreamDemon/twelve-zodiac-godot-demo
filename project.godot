@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 GameEvents="*res://scripts/autoload/game_events.gd"
 DebugFlags="*res://scripts/autoload/debug_flags.gd"
+ParryFeedback="*res://scenes/ui/parry_feedback.tscn"
 MCPRuntimeProbe="*uid://bsg12huaf1u5i"
 
 [display]

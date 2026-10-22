@@ -25,6 +25,9 @@ func _ready() -> void:
 	player_shi_bar.max_value = 100.0
 	dummy_health_bar.max_value = 100.0
 	dummy_posture_bar.max_value = 100.0
+	var events := get_node_or_null("/root/GameEvents")
+	if events != null:
+		events.parry_succeeded.connect(_on_parry_succeeded)
 
 
 func _process(_delta: float) -> void:
@@ -70,3 +73,10 @@ func _resolve_actors() -> void:
 		_player = get_tree().get_first_node_in_group(&"player") as PlayerController
 	if not is_instance_valid(_dummy):
 		_dummy = get_tree().get_first_node_in_group(&"training_dummy") as TrainingDummy
+
+
+func _on_parry_succeeded(_world_position: Vector2, _weapon_id: StringName) -> void:
+	for bar: ProgressBar in [player_qi_bar, player_shi_bar]:
+		bar.modulate = Color(1.0, 0.78, 0.3, 1.0)
+		var tween := create_tween()
+		tween.tween_property(bar, "modulate", Color.WHITE, 0.28)

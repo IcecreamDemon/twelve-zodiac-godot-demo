@@ -537,6 +537,11 @@ func _current_weapon() -> WeaponData:
 	return weapons[weapon_index]
 
 
+func get_current_weapon_id() -> StringName:
+	var weapon := _current_weapon()
+	return weapon.weapon_id if weapon != null else &""
+
+
 func _update_weapon_visual() -> void:
 	var weapon := _current_weapon()
 	if weapon == null:

@@ -71,22 +71,29 @@ func _try_hit(area: Area2D) -> void:
 	if result != HurtboxComponent.ReceiveResult.IGNORED:
 		_hit_targets[area] = true
 		hit_confirmed.emit(hurtbox.get_parent(), attack_data)
-		_play_hit_feedback(result)
+		_play_hit_feedback(result, hurtbox.get_parent())
 
 
-func _play_hit_feedback(result: HurtboxComponent.ReceiveResult) -> void:
+func _play_hit_feedback(result: HurtboxComponent.ReceiveResult, target: Node) -> void:
 	var events := get_node_or_null("/root/GameEvents")
 	if events != null:
 		if result == HurtboxComponent.ReceiveResult.PARRY:
-			events.emit_parry_succeeded(global_position)
+			var weapon_id: StringName = &""
+			if target.has_method("get_current_weapon_id"):
+				weapon_id = target.call("get_current_weapon_id")
+			events.emit_parry_succeeded(global_position, weapon_id)
 		else:
 			var strength := attack_data.screen_shake_strength
 			if result == HurtboxComponent.ReceiveResult.BLOCK:
 				strength *= 0.55
 			events.emit_hit_resolved(global_position, strength)
 
-	if not _hitstop_running and attack_data.hitstop_frames > 0:
-		_apply_hitstop(attack_data.hitstop_frames)
+	if not _hitstop_running:
+		var frames := attack_data.hitstop_frames
+		if result == HurtboxComponent.ReceiveResult.PARRY:
+			frames = maxi(frames + 3, 7)
+		if frames > 0:
+			_apply_hitstop(frames)
 
 
 func _apply_hitstop(frames: int) -> void:

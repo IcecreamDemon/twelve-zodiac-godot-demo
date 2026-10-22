@@ -25,6 +25,12 @@ extends CanvasLayer
 @onready var enemy_shi_text: Label = $Root/EnemyShiText
 
 
+func _ready() -> void:
+	var events := get_node_or_null("/root/GameEvents")
+	if events != null:
+		events.parry_succeeded.connect(_on_parry_succeeded)
+
+
 func _process(_delta: float) -> void:
 	var player := get_tree().get_first_node_in_group(&"player") as PlayerController
 	if player != null:
@@ -118,3 +124,10 @@ func _clear_actor(
 		bar.value = 0.0
 	for label: Label in [health_text, posture_text, qi_text, shi_text]:
 		label.text = ""
+
+
+func _on_parry_succeeded(_world_position: Vector2, _weapon_id: StringName) -> void:
+	for bar: ProgressBar in [player_qi, player_shi]:
+		bar.modulate = Color(1.0, 0.78, 0.3, 1.0)
+		var tween := create_tween()
+		tween.tween_property(bar, "modulate", Color.WHITE, 0.28)
