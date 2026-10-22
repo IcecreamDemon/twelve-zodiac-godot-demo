@@ -21,7 +21,10 @@ static func resolve_hit(
 	if is_instance_valid(attacker):
 		attacker_shi = attacker.get_node_or_null("ShiComponent") as ShiComponent
 
-	health.take_damage(attack_data.damage * damage_multiplier)
+	var bonus_damage := 0.0
+	if is_instance_valid(attacker):
+		bonus_damage = float(attacker.get("bonus_damage")) if attacker.get("bonus_damage") != null else 0.0
+	health.take_damage(attack_data.damage * damage_multiplier + bonus_damage)
 	if posture != null:
 		posture.take_posture_damage(attack_data.posture_damage)
 	if attacker_shi != null:

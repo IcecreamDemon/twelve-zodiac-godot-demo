@@ -35,6 +35,17 @@ position = Vector2(0, -16)
 polygon = PackedVector2Array(-18, -80, 18, -80, 18, -26, 28, -14, 16, -2, 34, 8, 14, 18, -2, 10, -14, 18, -30, 4, -18, -12, -30, -24)
 color = Color(0.12, 0.15, 0.18, 1)
 
+[node name="WeaponShort" type="Polygon2D" parent="Visual"]
+position = Vector2(14, -46)
+polygon = PackedVector2Array(0, -4, 38, -4, 51, 0, 38, 4, 0, 4, -9, 0)
+color = Color(0.78, 0.8, 0.78, 1)
+
+[node name="WeaponSpear" type="Polygon2D" parent="Visual"]
+visible = false
+position = Vector2(14, -46)
+polygon = PackedVector2Array(-8, -3, 82, -3, 96, 0, 82, 3, -8, 3)
+color = Color(0.62, 0.44, 0.24, 1)
+
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource("2_state")
 initial_state = &"idle"

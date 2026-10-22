@@ -55,6 +55,7 @@ const INPUT_SWITCH: StringName = &"input_switch"
 @export_range(1, 40, 1) var dodge_invulnerable_frames: int = 10
 @export_range(0.0, 240.0, 1.0) var dodge_actor_contact_distance: float = 88.0
 @export_range(0.0, 100.0, 0.1) var starting_shi: float = 30.0
+@export_range(0.0, 100.0, 0.1) var bonus_damage: float = 0.0
 @export var weapons: Array[WeaponData] = []
 
 @onready var state_machine: ActorStateMachine = $StateMachine
@@ -66,6 +67,8 @@ const INPUT_SWITCH: StringName = &"input_switch"
 @onready var visual: Polygon2D = $Visual
 @onready var burrow_detector: Area2D = $BurrowDetector
 @onready var burrow_crack: Line2D = $BurrowCrack
+@onready var weapon_short: Polygon2D = $Visual/WeaponShort
+@onready var weapon_spear: Polygon2D = $Visual/WeaponSpear
 
 var facing_direction: int = 1
 var hitstun_frames_remaining: int = 0
@@ -519,10 +522,13 @@ func try_emergency_parry() -> bool:
 func _switch_weapon(from_combo: bool) -> void:
 	if weapons.size() < 2:
 		return
+	if state_machine.is_state(STATE_ATTACK) and not from_combo:
+		return
+	if state_machine.is_state(STATE_DEAD):
+		return
 	weapon_index = (weapon_index + 1) % weapons.size()
 	_update_weapon_visual()
-	if from_combo:
-		_start_attack(_current_weapon().switch_attack, ATTACK_SWITCH, false)
+	_start_attack(_current_weapon().switch_attack, ATTACK_SWITCH, false)
 
 
 func _current_weapon() -> WeaponData:
@@ -537,8 +543,15 @@ func _update_weapon_visual() -> void:
 		return
 	if weapon.weapon_id == &"spear":
 		visual.color = Color(0.18, 0.16, 0.14, 1.0)
+		weapon_short.visible = false
+		weapon_spear.visible = true
 	else:
 		visual.color = Color(0.12, 0.15, 0.18, 1)
+		weapon_short.visible = true
+		weapon_spear.visible = false
+	visual.modulate = Color(1.0, 0.82, 0.55, 1.0)
+	var tween := create_tween()
+	tween.tween_property(visual, "modulate", Color.WHITE, 0.18)
 
 
 func _find_knockdown_target() -> Node2D:

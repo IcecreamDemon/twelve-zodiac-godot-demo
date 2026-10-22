@@ -28,6 +28,13 @@ offset_right = 560.0
 offset_bottom = 50.0
 text = "状态  IDLE"
 
+[node name="PlayerWeapon" type="Label" parent="Root"]
+offset_left = 36.0
+offset_top = 172.0
+offset_right = 360.0
+offset_bottom = 196.0
+text = "武器  残锋短刃"
+
 [node name="PlayerHealth" type="ProgressBar" parent="Root"]
 offset_left = 36.0
 offset_top = 58.0

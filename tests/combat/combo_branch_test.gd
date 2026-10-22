@@ -20,7 +20,13 @@ func _run() -> void:
 	player._switch_weapon(false)
 	if player._current_weapon().weapon_id != &"spear":
 		failures.append("Weapon switch did not select the spear.")
+	player.hitbox.cancel_attack()
+	player._cancel_current_attack()
+	player.state_machine.transition_to(PlayerController.STATE_IDLE)
 	player._switch_weapon(false)
+	player.hitbox.cancel_attack()
+	player._cancel_current_attack()
+	player.state_machine.transition_to(PlayerController.STATE_IDLE)
 
 	player._start_ground_light()
 	if not player.state_machine.is_state(PlayerController.STATE_ATTACK):

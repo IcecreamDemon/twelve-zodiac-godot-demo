@@ -3,6 +3,7 @@ extends CanvasLayer
 
 @onready var player_name: Label = $Root/PlayerName
 @onready var player_state: Label = $Root/PlayerState
+@onready var player_weapon: Label = $Root/PlayerWeapon
 @onready var player_health: ProgressBar = $Root/PlayerHealth
 @onready var player_health_text: Label = $Root/PlayerHealthText
 @onready var player_posture: ProgressBar = $Root/PlayerPosture
@@ -30,10 +31,13 @@ func _process(_delta: float) -> void:
 		_update_actor(player, player_name, player_state, player_health, player_health_text,
 			player_posture, player_posture_text, player_qi, player_qi_text,
 			player_shi, player_shi_text, "鼠光")
+		var weapon := player._current_weapon()
+		player_weapon.text = "武器  %s" % (weapon.display_name if weapon != null else "--")
 	else:
 		_clear_actor(player_name, player_state, player_health, player_health_text,
 			player_posture, player_posture_text, player_qi, player_qi_text,
 			player_shi, player_shi_text, "PLAYER")
+		player_weapon.text = "武器  --"
 
 	var enemy := _find_enemy()
 	if enemy != null:

@@ -45,9 +45,12 @@ func _run() -> void:
 	if not flow.node_map.visible:
 		failures.append("Elite victory did not return to the node selection map.")
 
-	flow._on_node_option_selected(&"old_self")
+	var damage_before := flow.player.bonus_damage
+	flow._on_node_option_selected(&"elite_reward_damage")
 	if flow.flow_state != DemoFlowController.FlowState.OLD_SELF:
-		failures.append("Old-self node selection did not start the old-self encounter.")
+		failures.append("Elite reward did not start the old-self encounter.")
+	if flow.player.bonus_damage <= damage_before:
+		failures.append("Elite damage reward did not increase player damage.")
 
 	flow.player.health.take_damage(9999.0)
 	await process_frame

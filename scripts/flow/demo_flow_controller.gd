@@ -33,8 +33,14 @@ const BURNER_SCENE := preload("res://scenes/actors/incense_burner.tscn")
 var flow_state: FlowState = FlowState.PROLOGUE
 var behavior_recorder: BehaviorRecorder
 var incense_returned: bool = false
+var incense_currency: int = 20
+var evidence_count: int = 0
 var active_enemy: EnemyController
 var retrying: bool = false
+var shop_damage_bought: bool = false
+var shop_health_bought: bool = false
+var shop_qi_bought: bool = false
+var shop_posture_bought: bool = false
 
 
 func _ready() -> void:
@@ -141,15 +147,53 @@ func _on_continue_pressed() -> void:
 
 func _on_return_incense() -> void:
 	incense_returned = true
+	evidence_count += 1
+	incense_currency = maxi(incense_currency - 15, 0)
 	player.shi.add(20.0)
 	_set_state(FlowState.ELITE)
 
 
 func _on_spend_incense() -> void:
 	incense_returned = false
-	player.health.restore(25.0)
-	player.qi.restore(20.0)
-	_set_state(FlowState.ELITE)
+	_open_shop()
+
+
+func _open_shop() -> void:
+	var options: Array[Dictionary] = []
+	if not shop_damage_bought:
+		options.append({"id": "shop_damage", "title": "兵刃开锋（20 香火）：伤害 +2"})
+	if not shop_health_bought:
+		options.append({"id": "shop_health", "title": "粗布护甲（20 香火）：最大生命 +20"})
+	if not shop_qi_bought:
+		options.append({"id": "shop_qi", "title": "静心符（20 香火）：最大气 +20"})
+	if not shop_posture_bought:
+		options.append({"id": "shop_posture", "title": "护脊木牌（20 香火）：最大架势 +20"})
+	options.append({"id": "shop_leave", "title": "离开商店，继续登天"})
+	_show_node_selection("祝安商店 · 香火 %d" % incense_currency, options)
+
+
+func _buy_shop_option(option_id: StringName) -> void:
+	if incense_currency < 20:
+		_open_shop()
+		return
+	match option_id:
+		&"shop_damage":
+			shop_damage_bought = true
+			player.bonus_damage += 2.0
+		&"shop_health":
+			shop_health_bought = true
+			player.health.max_health += 20.0
+			player.health.restore(20.0)
+		&"shop_qi":
+			shop_qi_bought = true
+			player.qi.max_qi += 20.0
+			player.qi.restore(20.0)
+		&"shop_posture":
+			shop_posture_bought = true
+			player.posture.max_posture += 20.0
+			player.posture.reset()
+	incense_currency -= 20
+	_open_shop()
 
 
 func _on_enemy_died(enemy: EnemyController) -> void:
@@ -160,22 +204,30 @@ func _on_enemy_died(enemy: EnemyController) -> void:
 	_clear_encounter()
 	match flow_state:
 		FlowState.TUTORIAL:
+			incense_currency += 20
 			_show_node_selection(
-				"香火归属",
+				"香火归属 · 当前香火 %d" % incense_currency,
 				[
-					{"id": "return_incense", "title": "把香火归还百姓"},
-					{"id": "spend_incense", "title": "把香火投入祝安商店"},
+					{"id": "return_incense", "title": "归还香火：获得关键线索"},
+					{"id": "spend_incense", "title": "进入祝安商店：购买局内强化"},
+					{"id": "rest_at_shrine", "title": "在破庙休整：恢复 40 生命"},
 				],
 			)
 		FlowState.ELITE:
+			incense_currency += 30
 			_show_node_selection(
-				"天河录库 · 异常记录",
-				[{"id": "old_self", "title": "追踪失名旧我"}],
+				"战利品三选一 · 当前香火 %d" % incense_currency,
+				[
+					{"id": "elite_reward_damage", "title": "磨砺兵刃：所有攻击伤害 +2"},
+					{"id": "elite_reward_health", "title": "披上旧甲：最大生命 +20"},
+					{"id": "elite_reward_qi", "title": "静气凝神：最大气 +20"},
+				],
 			)
 		FlowState.OLD_SELF:
+			incense_currency += 20
 			_show_node_selection(
-				"无雨乡 · 区域出口",
-				[{"id": "boss", "title": "直面夺愿神"}],
+				"旧我残页 · 当前香火 %d" % incense_currency,
+				[{"id": "accept_evidence", "title": "收下残页：证据 +1，直面夺愿神"}],
 			)
 		FlowState.BOSS:
 			_set_state(FlowState.COMPLETE)
@@ -209,10 +261,27 @@ func _on_node_option_selected(option_id: StringName) -> void:
 		&"return_incense":
 			_on_return_incense()
 		&"spend_incense":
-			_on_spend_incense()
-		&"old_self":
+			_open_shop()
+		&"rest_at_shrine":
+			player.health.restore(40.0)
+			_set_state(FlowState.ELITE)
+		&"shop_damage", &"shop_health", &"shop_qi", &"shop_posture":
+			_buy_shop_option(option_id)
+		&"shop_leave":
+			_set_state(FlowState.ELITE)
+		&"elite_reward_damage":
+			player.bonus_damage += 2.0
 			_set_state(FlowState.OLD_SELF)
-		&"boss":
+		&"elite_reward_health":
+			player.health.max_health += 20.0
+			player.health.restore(20.0)
+			_set_state(FlowState.OLD_SELF)
+		&"elite_reward_qi":
+			player.qi.max_qi += 20.0
+			player.qi.restore(20.0)
+			_set_state(FlowState.OLD_SELF)
+		&"accept_evidence":
+			evidence_count += 1
 			_set_state(FlowState.BOSS)
 
 
