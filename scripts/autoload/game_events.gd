@@ -5,7 +5,11 @@ signal combat_finished(context: Dictionary)
 signal actor_died(actor: Node, context: Dictionary)
 signal flow_state_changed(previous_state: StringName, next_state: StringName)
 signal hit_resolved(world_position: Vector2, strength: float)
+signal block_succeeded(world_position: Vector2)
 signal parry_succeeded(world_position: Vector2, weapon_id: StringName)
+signal dodge_started(world_position: Vector2)
+signal burrow_started(world_position: Vector2)
+signal burrow_emerged(world_position: Vector2)
 
 
 func emit_combat_started(context: Dictionary = {}) -> void:
@@ -28,5 +32,21 @@ func emit_hit_resolved(world_position: Vector2, strength: float) -> void:
 	hit_resolved.emit(world_position, strength)
 
 
+func emit_block_succeeded(world_position: Vector2) -> void:
+	block_succeeded.emit(world_position)
+
+
 func emit_parry_succeeded(world_position: Vector2, weapon_id: StringName = &"") -> void:
 	parry_succeeded.emit(world_position, weapon_id)
+
+
+func emit_dodge_started(world_position: Vector2) -> void:
+	dodge_started.emit(world_position)
+
+
+func emit_burrow_started(world_position: Vector2) -> void:
+	burrow_started.emit(world_position)
+
+
+func emit_burrow_emerged(world_position: Vector2) -> void:
+	burrow_emerged.emit(world_position)

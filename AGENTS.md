@@ -57,6 +57,7 @@ Read that file before editing the project. It contains the Cold Start block, arc
 - Demo Flow uses incense currency, a functional shop, post-battle reward choices, and persistent max-health/qi/posture/damage upgrades.
 - Precision parry now triggers dedicated hitstop, screen flash, red seal stamp, ink ring, camera zoom punch, and qi/shi HUD pulses through the `ParryFeedback` autoload.
 - The project now boots into `title_screen.tscn`; `pause_menu.tscn` supports resume, current-node restart, controls, return to title, and quit.
+- `AudioManager` uses a 12-player SFX pool and generated `AudioStreamWAV` placeholder resources for hits, blocks, parries, dodge, burrow, emergence, UI, and enemy deaths.
 - Enemy bodies also separate horizontally from other enemies; they never resolve actor overlap along the Y axis.
 - Do not introduce third-party combat or behavior-tree plugins for the first milestone.
 

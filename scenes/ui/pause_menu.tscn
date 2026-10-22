@@ -82,6 +82,30 @@ offset_right = 550.0
 offset_bottom = 530.0
 text = "退出游戏"
 
+[node name="VolumeLabel" type="Label" parent="Root/Panel"]
+offset_left = 130.0
+offset_top = 542.0
+offset_right = 550.0
+offset_bottom = 570.0
+text = "主音量"
+
+[node name="VolumeSlider" type="HSlider" parent="Root/Panel"]
+offset_left = 130.0
+offset_top = 574.0
+offset_right = 500.0
+offset_bottom = 604.0
+min_value = 0.0
+max_value = 100.0
+step = 1.0
+value = 80.0
+
+[node name="VolumeValue" type="Label" parent="Root/Panel"]
+offset_left = 510.0
+offset_top = 574.0
+offset_right = 580.0
+offset_bottom = 604.0
+text = "80%"
+
 [node name="ControlsPanel" type="Panel" parent="Root"]
 visible = false
 layout_mode = 1

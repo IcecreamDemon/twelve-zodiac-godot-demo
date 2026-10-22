@@ -25,17 +25,27 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _on_start_pressed() -> void:
+	_play_ui()
 	get_tree().paused = false
 	get_tree().change_scene_to_file(DEMO_FLOW_SCENE)
 
 
 func _on_controls_pressed() -> void:
+	_play_ui()
 	controls_panel.visible = true
 
 
 func _hide_controls() -> void:
+	_play_ui()
 	controls_panel.visible = false
 
 
 func _on_quit_pressed() -> void:
+	_play_ui()
 	get_tree().quit()
+
+
+func _play_ui() -> void:
+	var audio := get_node_or_null("/root/AudioManager")
+	if audio != null:
+		audio.play_ui()

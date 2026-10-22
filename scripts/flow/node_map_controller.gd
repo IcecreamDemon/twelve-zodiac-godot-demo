@@ -26,5 +26,8 @@ func hide_options() -> void:
 
 
 func _on_option_pressed(option_id: StringName) -> void:
+	var audio := get_node_or_null("/root/AudioManager")
+	if audio != null:
+		audio.play_ui()
 	hide_options()
 	option_selected.emit(option_id)

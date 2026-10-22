@@ -82,10 +82,10 @@ func _play_hit_feedback(result: HurtboxComponent.ReceiveResult, target: Node) ->
 			if target.has_method("get_current_weapon_id"):
 				weapon_id = target.call("get_current_weapon_id")
 			events.emit_parry_succeeded(global_position, weapon_id)
+		elif result == HurtboxComponent.ReceiveResult.BLOCK:
+			events.emit_block_succeeded(global_position)
 		else:
 			var strength := attack_data.screen_shake_strength
-			if result == HurtboxComponent.ReceiveResult.BLOCK:
-				strength *= 0.55
 			events.emit_hit_resolved(global_position, strength)
 
 	if not _hitstop_running:

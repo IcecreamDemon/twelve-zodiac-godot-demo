@@ -14,6 +14,7 @@ func _ready() -> void:
 	var events := get_node_or_null("/root/GameEvents")
 	if events != null:
 		events.hit_resolved.connect(_on_hit_resolved)
+		events.block_succeeded.connect(_on_block_succeeded)
 		events.parry_succeeded.connect(_on_parry_succeeded)
 
 
@@ -33,6 +34,10 @@ func _process(delta: float) -> void:
 
 func _on_hit_resolved(_world_position: Vector2, strength: float) -> void:
 	trauma = minf(trauma + maxf(strength, 0.0) * 3.0, 1.0)
+
+
+func _on_block_succeeded(_world_position: Vector2) -> void:
+	trauma = minf(trauma + 0.2, 1.0)
 
 
 func _on_parry_succeeded(_world_position: Vector2, _weapon_id: StringName) -> void:

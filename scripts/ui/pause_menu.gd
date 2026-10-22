@@ -10,6 +10,8 @@ signal title_requested
 @onready var controls_button: Button = $Root/Panel/ControlsButton
 @onready var title_button: Button = $Root/Panel/TitleButton
 @onready var quit_button: Button = $Root/Panel/QuitButton
+@onready var volume_slider: HSlider = $Root/Panel/VolumeSlider
+@onready var volume_value: Label = $Root/Panel/VolumeValue
 @onready var controls_panel: Panel = $Root/ControlsPanel
 @onready var close_controls_button: Button = $Root/ControlsPanel/CloseButton
 
@@ -23,6 +25,11 @@ func _ready() -> void:
 	title_button.pressed.connect(_request_title)
 	quit_button.pressed.connect(_quit)
 	close_controls_button.pressed.connect(_hide_controls)
+	volume_slider.value_changed.connect(_on_volume_changed)
+	var audio := get_node_or_null("/root/AudioManager")
+	if audio != null:
+		volume_slider.value = audio.get_master_volume()
+	_update_volume_label(volume_slider.value)
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -44,15 +51,18 @@ func open_menu() -> void:
 
 
 func close_menu() -> void:
+	_play_ui()
 	get_tree().paused = false
 	root.visible = false
 
 
 func _show_controls() -> void:
+	_play_ui()
 	controls_panel.visible = true
 
 
 func _hide_controls() -> void:
+	_play_ui()
 	controls_panel.visible = false
 
 
@@ -67,9 +77,27 @@ func _request_title() -> void:
 
 
 func _quit() -> void:
+	_play_ui()
 	get_tree().paused = false
 	get_tree().quit()
 
 
 func _exit_tree() -> void:
 	get_tree().paused = false
+
+
+func _on_volume_changed(value: float) -> void:
+	var audio := get_node_or_null("/root/AudioManager")
+	if audio != null:
+		audio.set_master_volume(value)
+	_update_volume_label(value)
+
+
+func _update_volume_label(value: float) -> void:
+	volume_value.text = "%d%%" % roundi(value)
+
+
+func _play_ui() -> void:
+	var audio := get_node_or_null("/root/AudioManager")
+	if audio != null:
+		audio.play_ui()

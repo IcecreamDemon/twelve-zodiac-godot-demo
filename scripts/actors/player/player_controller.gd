@@ -433,6 +433,9 @@ func _start_dodge(input_axis: float) -> bool:
 	facing_direction = direction
 	velocity = Vector2(dodge_speed * float(direction), 0.0)
 	state_machine.transition_to(STATE_DODGE)
+	var events := get_node_or_null("/root/GameEvents")
+	if events != null:
+		events.emit_dodge_started(global_position)
 	if behavior_recorder != null:
 		behavior_recorder.record_dodge(direction)
 	return true
@@ -480,6 +483,9 @@ func _start_burrow() -> bool:
 	visual.modulate = Color(1.0, 1.0, 1.0, 0.28)
 	burrow_crack.visible = true
 	state_machine.transition_to(STATE_BURROW)
+	var events := get_node_or_null("/root/GameEvents")
+	if events != null:
+		events.emit_burrow_started(global_position)
 	return true
 
 
@@ -495,6 +501,9 @@ func _exit_burrow(attack_on_exit: bool) -> void:
 
 	if attack_on_exit and _current_weapon().burrow_emerge != null:
 		if _start_attack(_current_weapon().burrow_emerge, ATTACK_BURROW_EMERGE, false):
+			var events := get_node_or_null("/root/GameEvents")
+			if events != null:
+				events.emit_burrow_emerged(global_position)
 			return
 
 	state_machine.transition_to(STATE_IDLE if is_on_floor() else STATE_FALL)
